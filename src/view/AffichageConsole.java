@@ -24,11 +24,11 @@ public class AffichageConsole implements Observer {
     }
 
     public void showVictory() {
-        System.out.println("Joueur :" + getNomJoueur() + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
+        System.out.println("Joueur :" + getNomJoueur() //Sera surement dans Army getNomArmee + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
     }
 
     public void showLose() {
-        System.out.println("Joueur :" + getNomJoueur() + " a perdu !");
+        System.out.println("Joueur :" + getNomJoueur()  //Sera surement dans Army getNomArmee+ " a perdu !");
     }
 
     @Override
