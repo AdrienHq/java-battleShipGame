@@ -8,12 +8,12 @@ public abstract class Navire {
         return this.pos;
     }
     
-    public int getI () {
-        return this.pos.getI();
+    public int getX () {
+        return this.pos.getX();
     }
     
-    public int getJ () {
-        return this.pos.getJ();
+    public int getY () {
+        return this.pos.getY();
     }
     
 //    public void deplace (Direction d) {
