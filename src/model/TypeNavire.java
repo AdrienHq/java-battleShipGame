@@ -1,6 +1,5 @@
 package model;
 
 public enum TypeNavire {
-    PETIT,GRAND;
-    
+    PETIT,GRAND;  
 }
