@@ -59,6 +59,6 @@ public class Position {
                 break;
         }
     }
-    //RAJOUTER LES CAS OU LE D2PLACEMENT FAIT PLUS DE  CASE 
+    //RAJOUTER LES CAS OU LE DEPLACEMENT FAIT PLUS DE  1 CASE 
 
 }
