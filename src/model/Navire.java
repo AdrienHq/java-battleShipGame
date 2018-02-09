@@ -2,15 +2,15 @@ package model;
 
 public abstract class Navire {
     
-    protected Position pos = null;
-    protected int pointVie;
-    protected int resistance;
-    protected int porteeTir;
+    protected final TypeNavire type;
+    protected Position pos = null; 
+    protected int pointVie; //a 100 au début pour tlm
+    protected int resistance;//petit resi = 1 / grand resi = 2 
     
-    protected Navire(int pv, int resi, int porteeTir){ 
+    protected Navire(TypeNavire type, int pv, int resi){ 
+        this.type= type;
         this.pointVie = pv;
         this.resistance = resi;
-        this.porteeTir = porteeTir;
     }
     
     public Position getPosition () {
@@ -24,16 +24,25 @@ public abstract class Navire {
     public int getY () {
         return this.pos.getY();
     }
-    
-     abstract TypeNavire getTypeNavire();
-     
-     @Override
-     public String toString(){
-         
-     }
-    
-    
-    
+
+    public TypeNavire getType() {
+        return type;
+    }
+
+    public int getPointVie() {
+        return pointVie;
+    }
+
+    public int getResistance() {
+        return resistance;
+    }
+
+      
+//     @Override
+//     public String toString(){
+//         
+//     }
+       
 //    public void deplace (Direction d) {
 //        this.pos.move(d);
 //    }
