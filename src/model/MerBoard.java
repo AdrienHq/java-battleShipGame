@@ -17,5 +17,4 @@ public class MerBoard {
     public static final int COLONNE = 5;
     private Case[][] merCase;
     private List<Navire> listNavire;
-
 }
