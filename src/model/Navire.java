@@ -4,13 +4,11 @@ public abstract class Navire {
     
     protected final TypeNavire type;
     protected Position pos = null; 
-    protected int pointVie; //a 100 au début pour tlm
-    protected int resistance;//petit resi = 1 / grand resi = 2 
+    protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
     
-    protected Navire(TypeNavire type, int pv, int resi){ 
+    protected Navire(TypeNavire type, int pv){ 
         this.type= type;
         this.pointVie = pv;
-        this.resistance = resi;
     }
     
     public Position getPosition () {
@@ -31,10 +29,6 @@ public abstract class Navire {
 
     public int getPointVie() {
         return pointVie;
-    }
-
-    public int getResistance() {
-        return resistance;
     }
 
       

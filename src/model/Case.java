@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Case {
 
     private String nom = "";
+    private boolean radioActif = false;
 
     public Case() {
 
@@ -20,8 +21,20 @@ public class Case {
     
     public String getElement() {
         return this.nom;
-
     }
+    
+    public void setRadioActif(boolean radioActif){
+        this.radioActif = radioActif;
+    }
+    
+    public boolean estRadioactif(){
+        return radioActif; 
+    }
+    
+    
+    
+    
+     
 
     @Override
     public boolean equals(Object o) {
