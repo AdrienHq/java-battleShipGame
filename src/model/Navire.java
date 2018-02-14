@@ -36,7 +36,7 @@ public abstract class Navire {
 //     public String toString(){
 //         
 //     }
-       
+          
 //    public void deplace (Direction d) {
 //        this.pos.move(d);
 //    }

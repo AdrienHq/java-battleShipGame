@@ -30,11 +30,6 @@ public class Case {
     public boolean estRadioactif(){
         return radioActif; 
     }
-    
-    
-    
-    
-     
 
     @Override
     public boolean equals(Object o) {
