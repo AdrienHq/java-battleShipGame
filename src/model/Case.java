@@ -8,6 +8,7 @@ public abstract class Case {
     
     abstract public boolean estVide();
     
+    abstract public void switchVide();
 }
 
 //    private String nom = "";

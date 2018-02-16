@@ -38,44 +38,7 @@ public class MerBoard {
         return nbNavire == 0;
     }
 
-    private void filBoats(int id) {
-        filBoat(id, TypeNavire.PETIT);
-        filBoat(id, TypeNavire.GRAND);
-        filBoat(id, TypeNavire.PETIT);
-    }
-
-    private void filBoat(int id, TypeNavire type) { //changer en switch -case ?
-        Position pos = this.getPositionAleatoire();
-        int x = pos.getX();
-        int y = pos.getY();
-
-        if (merCase[x][y] == null) { //estVide
-            if (type == TypeNavire.GRAND) {
-                merCase[x][y] = new Element(new BateauGrand(id));
-            } else if (type == TypeNavire.PETIT) {
-                merCase[x][y] = new Element(new BateauPetit(id));
-            }
-        } else {
-            this.filBoat(id, type);
-        }
-    }
-
-    private void filMines() {
-        for (int x = 0; x < LIGNE; x++) {
-            for (int y = 0; y < COLONNE; y++) {
-                if (merCase[x][y].estVide()) {
-                    Random rand = new Random();
-                    if (rand.nextInt(10) - 1 == 5) {
-                        if (rand.nextInt(1) == 1) {
-                            merCase[x][y] = new Element(new MineAtomique());
-                        } else {
-                            merCase[x][y] = new Element(new MineNormale());
-                        }
-                    }
-                }
-            }
-        }
-    }
+    
 
     private void initMer() {  //initialise la mer avec les paramètre voulu 
         int nbreJoueur = 2;
@@ -87,6 +50,47 @@ public class MerBoard {
         }
         filMines();
 
+    }
+    private void filBoats(int id) {
+        filBoat(id, TypeNavire.PETIT);
+        filBoat(id, TypeNavire.GRAND);
+        filBoat(id, TypeNavire.PETIT);
+    }
+
+    private void filBoat(int id, TypeNavire type) { 
+        Position pos = this.getPositionAleatoire();
+        int x = pos.getX();
+        int y = pos.getY();
+
+        if (merCase[x][y].estVide()) { //estVide
+            if (type == TypeNavire.GRAND) {
+                merCase[x][y] = new Element(new BateauGrand(id));
+            }else if (type == TypeNavire.PETIT) {
+                merCase[x][y] = new Element(new BateauPetit(id));
+            }
+            merCase[x][y].switchVide();    
+        }else {
+            this.filBoat(id, type);
+        }
+    }
+
+     private void filMines(){
+         for (int x = 0; x < LIGNE; x++) {
+            for (int y = 0; y < COLONNE; y++) {
+                if(merCase[x][y].estVide()){
+                    Random rand = new Random();
+                    if(rand.nextInt(10)-1 == 5){
+                        if(rand.nextInt(1)==1){
+                            merCase[x][y] = new Element(new MineAtomique());
+                        }   
+                        else{
+                            merCase[x][y] = new Element(new MineNormale()); 
+                        }    
+                        merCase[x][y].switchVide();
+                    }   
+                }
+            }
+        }
     }
 
     public Position getPositionAleatoire() { //Position elementPos Obtient un position aléatoire sur le tableau pou le placement des elements
