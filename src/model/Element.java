@@ -47,17 +47,20 @@ public class Element extends Case {
         }
         return null;
     }
+    
+    Boolean radioActif = false;
+    Boolean estVide = true;
 
     @Override
     public boolean estRadioactif() {
-        return false;
+        return radioActif;      
+    }   
+
+    @Override
+    public boolean estVide() {
+        return estVide;
     }
     
-//    public Case[][] c = null; 
-//
-//    @Override
-//    public boolean estVide() {
-//        if()
-//    }
+    
 
 }

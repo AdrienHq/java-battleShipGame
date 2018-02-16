@@ -41,16 +41,14 @@ public class MerBoard {
     private void filBoats(int id){
         filBoat(id,TypeNavire.PETIT);
         filBoat(id,TypeNavire.GRAND);
-        filBoat(id,TypeNavire.PETIT);
-        
-       
+        filBoat(id,TypeNavire.PETIT); 
     }
     private void filBoat(int id,TypeNavire type){ //changer en switch -case ?
         Position pos = this.getPositionAleatoire();
         int x = pos.getX();
         int y = pos.getY();
         
-        if(merCase[x][y]== null){
+        if(merCase[x][y]== null){ //estVide
             if(type == TypeNavire.GRAND){
                 merCase[x][y] = new Element(new BateauGrand(id));
             }
@@ -60,14 +58,12 @@ public class MerBoard {
         }
         else {
             this.filBoat(id,type)   ;
-        }    
-        
+        }         
     }
 
     private void initMer() {  //initialise la mer avec les paramètre voulu 
         int nbreJoueur = 2 ;
-        merCase = new Case[LIGNE][COLONNE];
-        
+        merCase = new Case[LIGNE][COLONNE];      
         //place les bateaux
         for(int player = 1;player < nbreJoueur ; ++player){
         filBoats(1);

@@ -3,8 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Army {
-    //nom - nbre bateau dans une liste - score ? 
-    
+    //nom - nbre bateau dans une liste - score ?  
     // id joueur
 
     private String nomJoueurArmee;
