@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Army {
     //nom - nbre bateau dans une liste - scor ? 
+    
+    // id joueur
 
     private String nomJoueurArmee;
     private ArrayList<Navire> listNavire = new ArrayList<>();

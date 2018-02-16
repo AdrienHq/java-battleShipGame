@@ -7,7 +7,7 @@ public class BateauPetit extends Navire{
     private static int porteeTir;
     private static int[] array = {0,0,0,0,0,1,1,1,2,2};
     
-    public BateauPetit(int porteeTir) {
+    public BateauPetit() {
         super(TypeNavire.PETIT, 50);
         this.porteeTir = getPorteeTir();
     }
