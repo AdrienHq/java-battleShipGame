@@ -61,6 +61,14 @@ public class Element extends Case {
         return estVide;
     }
     
+    public void switchVide(){
+        if(this.estVide = false)
+            this.estVide = true;
+        else
+            this.estVide = false;
+    }
     
-
+     public void switchRadioactif(){
+        this.radioActif = this.radioActif = false;
+    }
 }
