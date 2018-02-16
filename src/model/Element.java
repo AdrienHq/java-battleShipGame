@@ -52,10 +52,12 @@ public class Element extends Case {
     public boolean estRadioactif() {
         return false;
     }
-
-    @Override
-    public boolean estVide() {
-        if()
-    }
+    
+//    public Case[][] c = null; 
+//
+//    @Override
+//    public boolean estVide() {
+//        if()
+//    }
 
 }

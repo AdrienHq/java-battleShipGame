@@ -50,7 +50,7 @@ public class Main {
                 ControllerGraphique.main(args);
             case '2':
                 System.exit(0);
-                //Quitte ke programme
+                //Quitte le programme
                 break;
         }
     }

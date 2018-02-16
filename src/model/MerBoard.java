@@ -41,12 +41,24 @@ public class MerBoard {
     private void initMer() {  //initialise la mer avec les paramètre voulu 
         int BateauGrand = 0; //pour deux joueurs 2 bateaux grands 
         int bateauPetit = 0; // et 4 bateaux petits
+        int id = 1 ;
+        int id2 = 2;
         merCase = new Case[LIGNE][COLONNE];
+        
+        //place les bateaux 
+        
+        RAndom 
+                merCase[x][y] = new Element(new BateauGrand(id));
+                        merCase[x][y] = new Element(new BateauPetit(id));
+        
+        
+        
         for (int x = 0; x < LIGNE; x++) {
             for (int y = 0; y < COLONNE; y++) {
                 
                 //compteur pour bateau
                 //random sur case qui donne une valeur égale à un objet 
+                //Bateaux avant bombes
                 //switch - case 
                 //IdJoeurs A FAIRE DANS NAVIRE 
                 
@@ -66,8 +78,7 @@ public class MerBoard {
 
                 switch (tabMer[x][y]) {
                     case 0:
-                        merCase[x][y] = new Element(new BateauGrand());
-                        merCase[x][y] = new Element(new BateauPetit());
+                        
                         merCase[x][y] = new Element(new MineAtomique());
                         merCase[x][y] = new Element(new MineNormale());
 
