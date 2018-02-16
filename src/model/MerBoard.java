@@ -61,48 +61,35 @@ public class MerBoard {
         }         
     }
 
+    private void filMines(){
+         for (int x = 0; x < LIGNE; x++) {
+            for (int y = 0; y < COLONNE; y++) {
+                if(merCase[x][y].estVide()){
+                    Random rand = new Random();
+                    if(rand.nextInt(10)-1 == 5){
+                        if(rand.nextInt(1)==1){
+                            merCase[x][y] = new Element(new MineAtomique());
+                        }   
+                        else
+                            merCase[x][y] = new Element(new MineNormale()); 
+                    }   
+                    
+                }
+            }
+        }
+    }
+    
+
     private void initMer() {  //initialise la mer avec les paramètre voulu 
         int nbreJoueur = 2 ;
-        merCase = new Case[LIGNE][COLONNE];      
+        merCase = new Case[LIGNE][COLONNE];
+        
         //place les bateaux
         for(int player = 1;player < nbreJoueur ; ++player){
         filBoats(1);
         }
+        filMines();
         
-        
-        
-        
-        for (int x = 0; x < LIGNE; x++) {
-            for (int y = 0; y < COLONNE; y++) {
-                
-                //compteur pour bateau
-                //random sur case qui donne une valeur égale à un objet 
-                //Bateaux avant bombes
-                //switch - case 
-                //IdJoeurs A FAIRE DANS NAVIRE 
-                
-                
-                
-                
-                
-                
-               // while (BateauGrand < 1) {
-                //    if(case.caseVide())
-                //    new merCase[][]               
-                //}
-                //while(BateauPetit < 2){
-                //}
-                //then random de 10% pour les mines.
-
-                switch (tabMer[x][y]) {
-                    case 0:
-                        
-                        merCase[x][y] = new Element(new MineAtomique());
-                        merCase[x][y] = new Element(new MineNormale());
-
-                }
-            }
-        }
     }
 
     public Position getPositionAleatoire() { //Position elementPos Obtient un position aléatoire sur le tableau pou le placement des elements
