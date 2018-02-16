@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.Random;
 
+
 public class MerBoard {
 
     private final static int[][] tabMer = { 
@@ -37,19 +38,41 @@ public class MerBoard {
     public boolean zeroNavire() {
         return nbNavire == 0;
     }
+    private void filBoats(int id){
+        filBoat(id,TypeNavire.PETIT);
+        filBoat(id,TypeNavire.GRAND);
+        filBoat(id,TypeNavire.PETIT);
+        
+       
+    }
+    private void filBoat(int id,TypeNavire type){ //changer en switch -case ?
+        Position pos = this.getPositionAleatoire();
+        int x = pos.getX();
+        int y = pos.getY();
+        
+        if(merCase[x][y]== null){
+            if(type == TypeNavire.GRAND){
+                merCase[x][y] = new Element(new BateauGrand(id));
+            }
+            else if(type == TypeNavire.PETIT){
+                merCase[x][y] = new Element(new BateauPetit(id));
+            }
+        }
+        else {
+            this.filBoat(id,type)   ;
+        }    
+        
+    }
 
     private void initMer() {  //initialise la mer avec les paramètre voulu 
-        int BateauGrand = 0; //pour deux joueurs 2 bateaux grands 
-        int bateauPetit = 0; // et 4 bateaux petits
-        int id = 1 ;
-        int id2 = 2;
+        int nbreJoueur = 2 ;
         merCase = new Case[LIGNE][COLONNE];
         
-        //place les bateaux 
+        //place les bateaux
+        for(int player = 1;player < nbreJoueur ; ++player){
+        filBoats(1);
+        }
         
-        //RAndom 
-                merCase[x][y] = new Element(new BateauGrand(id));
-                        merCase[x][y] = new Element(new BateauPetit(id));
         
         
         
@@ -67,13 +90,12 @@ public class MerBoard {
                 
                 
                 
-                while (BateauGrand < 1) {
-                    if(case.caseVide())
-                    new merCase[][]               
-                }
-                while(BateauPetit < 2){
-                    
-                }
+               // while (BateauGrand < 1) {
+                //    if(case.caseVide())
+                //    new merCase[][]               
+                //}
+                //while(BateauPetit < 2){
+                //}
                 //then random de 10% pour les mines.
 
                 switch (tabMer[x][y]) {
@@ -87,7 +109,7 @@ public class MerBoard {
         }
     }
 
-    public Position getPositionAleatoire(Position elementPos) { //Obtient un position aléatoire sur le tableau pou le placement des elements
+    public Position getPositionAleatoire() { //Position elementPos Obtient un position aléatoire sur le tableau pou le placement des elements
         int min = 1;
         int max = merCase[0].length - 1;
         int x, y;
