@@ -2,6 +2,8 @@ package model;
 
 public abstract class Navire {
     
+    //attribut idJoueurs
+    
     protected final TypeNavire type;
     protected Position pos = null; 
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)

@@ -53,4 +53,9 @@ public class Element extends Case {
         return false;
     }
 
+    @Override
+    public boolean estVide() {
+        if()
+    }
+
 }

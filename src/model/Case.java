@@ -6,6 +6,8 @@ public abstract class Case {
     
     abstract public boolean estRadioactif ();
     
+    abstract public boolean estVide();
+    
 }
 
 //    private String nom = "";

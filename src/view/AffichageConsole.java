@@ -2,6 +2,7 @@ package view;
 
 import java.util.Observable;
 import java.util.Observer;
+import model.Army;
 
 public class AffichageConsole implements Observer {
 
@@ -24,7 +25,7 @@ public class AffichageConsole implements Observer {
     }
 
     public void showVictory() {
-        System.out.println("Joueur :" + getNomJoueur() //Sera surement dans Army getNomArmee + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
+        System.out.println("Joueur :" + Army.getNomArmee()); //Sera surement dans Army getNomArmee + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
     }
 
     public void showLose() {
@@ -38,7 +39,6 @@ public class AffichageConsole implements Observer {
     
     public void showGame() {
         afficherGame();
-
     }
 
     public void afficherGame() {
