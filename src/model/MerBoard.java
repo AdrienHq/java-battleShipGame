@@ -48,6 +48,7 @@ public class MerBoard {
                 //compteur pour bateau
                 //random sur case qui donne une valeur égale à un objet 
                 //switch - case 
+                //IdJoeurs A FAIRE DANS NAVIRE 
                 
                 
                 
