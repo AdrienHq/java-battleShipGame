@@ -8,9 +8,12 @@ public abstract class Navire {
     protected Position pos = null; 
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
     
-    protected Navire(TypeNavire type, int pv){ 
+    protected int id  ;
+    
+    protected Navire(TypeNavire type, int pv,int id){ 
         this.type= type;
         this.pointVie = pv;
+        this.id = id ;
     }
     
     public Position getPosition () {

@@ -47,7 +47,7 @@ public class MerBoard {
         
         //place les bateaux 
         
-        RAndom 
+        //RAndom 
                 merCase[x][y] = new Element(new BateauGrand(id));
                         merCase[x][y] = new Element(new BateauPetit(id));
         
