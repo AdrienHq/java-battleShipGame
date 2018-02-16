@@ -16,7 +16,7 @@ public class MerBoard {
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
     private static Case[][] merCase = null;
-    private static List<Army> listArmy = null;
+    private static List<Army> listArmy = null; //Pas sûr dans avoir besoin 
     private static final int nbNavire = 0;
 
     private static MerBoard instance = null;

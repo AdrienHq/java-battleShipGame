@@ -48,4 +48,9 @@ public class Element extends Case {
         return null;
     }
 
+    @Override
+    public boolean estRadioactif() {
+        return false;
+    }
+
 }
