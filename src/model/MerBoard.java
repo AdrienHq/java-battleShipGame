@@ -38,8 +38,6 @@ public class MerBoard {
         return nbNavire == 0;
     }
 
-    
-
     private void initMer() {  //initialise la mer avec les paramètre voulu 
         int nbreJoueur = 2;
         merCase = new Case[LIGNE][COLONNE];
@@ -51,13 +49,14 @@ public class MerBoard {
         filMines();
 
     }
+
     private void filBoats(int id) {
         filBoat(id, TypeNavire.PETIT);
         filBoat(id, TypeNavire.GRAND);
         filBoat(id, TypeNavire.PETIT);
     }
 
-    private void filBoat(int id, TypeNavire type) { 
+    private void filBoat(int id, TypeNavire type) {
         Position pos = this.getPositionAleatoire();
         int x = pos.getX();
         int y = pos.getY();
@@ -65,29 +64,28 @@ public class MerBoard {
         if (merCase[x][y].estVide()) { //estVide
             if (type == TypeNavire.GRAND) {
                 merCase[x][y] = new Element(new BateauGrand(id));
-            }else if (type == TypeNavire.PETIT) {
+            } else if (type == TypeNavire.PETIT) {
                 merCase[x][y] = new Element(new BateauPetit(id));
             }
-            merCase[x][y].switchVide();    
-        }else {
+            merCase[x][y].switchVide();
+        } else {
             this.filBoat(id, type);
         }
     }
 
-     private void filMines(){
-         for (int x = 0; x < LIGNE; x++) {
+    private void filMines() {
+        for (int x = 0; x < LIGNE; x++) {
             for (int y = 0; y < COLONNE; y++) {
-                if(merCase[x][y].estVide()){
+                if (merCase[x][y].estVide()) {
                     Random rand = new Random();
-                    if(rand.nextInt(10)-1 == 5){
-                        if(rand.nextInt(1)==1){
+                    if (rand.nextInt(10) - 1 == 5) {
+                        if (rand.nextInt(1) == 1) {
                             merCase[x][y] = new Element(new MineAtomique());
-                        }   
-                        else{
-                            merCase[x][y] = new Element(new MineNormale()); 
-                        }    
+                        } else {
+                            merCase[x][y] = new Element(new MineNormale());
+                        }
                         merCase[x][y].switchVide();
-                    }   
+                    }
                 }
             }
         }
@@ -103,6 +101,43 @@ public class MerBoard {
         Position pos;
         pos = new Position(x, y);
         return pos;
+    }
+
+    public Case deplacementPossible(Direction d, Position p) { // verifie que la nouvelle position est "viable"
+        Case c = null;
+        int x, y;
+        x = p.getX();
+        y = p.getY();
+        Position p2 = new Position(x, y);
+        p2.déplacer(d);
+        x = p2.getX();
+        y = p2.getY();
+        if (posValide(x, y)) {
+            c = merCase[x][y];
+            if (!c.estVide()) {
+                return null;
+            }
+        }
+        return c;
+    }
+
+    private boolean posValide(int x, int y) {
+        return (y >= 0 && y < COLONNE) && (x >= 0 && x < LIGNE); //vérifie que la nouvelle position est VALIDE
+    }
+
+    public char getCase(int previousX, int previousY) { //Prends une case et en fonction de son contenu, affiche un caractère spécifique.
+        if (merCase[previousX][previousY] instanceof Element) {
+            if (((Element) merCase[previousX][previousY]).getNavire() instanceof BateauGrand) {
+                return 'B';
+            } else if (((Element) merCase[previousX][previousY]).getNavire() instanceof BateauPetit) {
+                return 'b';
+            } else if (((Element) merCase[previousX][previousY]).getFlottant() instanceof MineAtomique) {
+                return 'M';
+            } else if (((Element) merCase[previousX][previousY]).getFlottant() instanceof MineNormale) {
+                return 'm';
+            }
+        }
+        return ' ';
     }
 
 }
