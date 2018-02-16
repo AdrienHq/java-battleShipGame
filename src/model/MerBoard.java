@@ -46,17 +46,17 @@ public class MerBoard {
         for (int player = 1; player < nbreJoueur; ++player) {
             filBoats(1);
         }
-        filMines();
+        fillMines();
 
     }
 
     private void filBoats(int id) {
-        filBoat(id, TypeNavire.PETIT);
-        filBoat(id, TypeNavire.GRAND);
-        filBoat(id, TypeNavire.PETIT);
+        fillBoat(id, TypeNavire.PETIT);
+        fillBoat(id, TypeNavire.GRAND);
+        fillBoat(id, TypeNavire.PETIT);
     }
 
-    private void filBoat(int id, TypeNavire type) {
+    private void fillBoat(int id, TypeNavire type) {
         Position pos = this.getPositionAleatoire();
         int x = pos.getX();
         int y = pos.getY();
@@ -69,11 +69,11 @@ public class MerBoard {
             }
             merCase[x][y].switchVide();
         } else {
-            this.filBoat(id, type);
+            this.fillBoat(id, type);
         }
     }
 
-    private void filMines() {
+    private void fillMines() {
         for (int x = 0; x < LIGNE; x++) {
             for (int y = 0; y < COLONNE; y++) {
                 if (merCase[x][y].estVide()) {
@@ -130,7 +130,7 @@ public class MerBoard {
             if (((Element) merCase[previousX][previousY]).getNavire() instanceof BateauGrand) {
                 return 'B';
             } else if (((Element) merCase[previousX][previousY]).getNavire() instanceof BateauPetit) {
-                return 'b';
+                return 'S';
             } else if (((Element) merCase[previousX][previousY]).getFlottant() instanceof MineAtomique) {
                 return 'M';
             } else if (((Element) merCase[previousX][previousY]).getFlottant() instanceof MineNormale) {
