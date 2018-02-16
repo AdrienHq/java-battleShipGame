@@ -46,17 +46,17 @@ public class MerBoard {
         for (int player = 1; player < nbreJoueur; ++player) {
             filBoats(1);
         }
-        fillMines();
+        filMines();
 
     }
 
     private void filBoats(int id) {
-        fillBoat(id, TypeNavire.PETIT);
-        fillBoat(id, TypeNavire.GRAND);
-        fillBoat(id, TypeNavire.PETIT);
+        filBoat(id, TypeNavire.PETIT);
+        filBoat(id, TypeNavire.GRAND);
+        filBoat(id, TypeNavire.PETIT);
     }
 
-    private void fillBoat(int id, TypeNavire type) {
+    private void filBoat(int id, TypeNavire type) {
         Position pos = this.getPositionAleatoire();
         int x = pos.getX();
         int y = pos.getY();
@@ -69,11 +69,11 @@ public class MerBoard {
             }
             merCase[x][y].switchVide();
         } else {
-            this.fillBoat(id, type);
+            this.filBoat(id, type);
         }
     }
 
-    private void fillMines() {
+    private void filMines() {
         for (int x = 0; x < LIGNE; x++) {
             for (int y = 0; y < COLONNE; y++) {
                 if (merCase[x][y].estVide()) {

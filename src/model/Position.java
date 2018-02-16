@@ -57,6 +57,8 @@ public class Position {
             case DROITE:
                 this.x++;
                 break;
+            case STOP:
+                break;
         }
     }
     //RAJOUTER LES CAS OU LE DEPLACEMENT FAIT PLUS DE  1 CASE 

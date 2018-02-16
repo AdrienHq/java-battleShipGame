@@ -41,11 +41,12 @@ public class ControllerConsole {
     }
     
     private static Direction getDirection (char c) {
-        switch(c) { //Activation en fonction des choix de l'utilisateur
+        switch(c) {                     //Activation en fonction des choix de l'utilisateur
             case 'z' : return Direction.HAUT;
             case 's' : return Direction.BAS;
             case 'q' : return Direction.GAUCHE;
             case 'd' : return Direction.DROITE;
+            case 't' : return Direction.STOP;
             case 'x' : System.exit(1);
             default : return null;
         }
