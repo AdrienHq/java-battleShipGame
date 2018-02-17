@@ -5,7 +5,6 @@ public abstract class Flottant {
 
     protected final TypeFlottant typeflottant;
     protected final int DEGATS;
-
     protected Flottant(int degats, TypeFlottant type) {
         this.DEGATS = degats;
         this.typeflottant = type;

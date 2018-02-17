@@ -6,28 +6,28 @@ import view.AffichageConsole;
 
 public class ControllerConsole {
     public static void main(String[] args) {
-        Game game = Game.getInstance(); //créée une instance de Game 
-        boolean finJeu = false;
-        Direction direction;
-        
+////        Game game = Game.getInstance(); //créée une instance de Game 
+//        boolean finJeu = false;
+//        Direction direction;
+//        
         AffichageConsole affichage = new AffichageConsole(); //Crée un affichatge du jeu
         affichage.afficherGame(); // affiche le jeu 
-        game.addObserver(affichage); //Ajoute l'observer 
-        
-        do {
-            direction = saisieToucheClavier(); //la direction vaut la saisie au clavier
-            if (direction != null) { //tant que la personne joue 
-                finJeu = Game.jouer(direction); 
-                if (finJeu) {
-                    game.notifyObservers(); //Notify l'obs de la fin du jeu 
-                }
-            }
-        } while (!finJeu);
-        if (game.joueurAPerdu()) { //Si il reste encore des bateaux
-            affichage.showLose(); //affiche l'ecran de fin Perdant
-        } else {
-            affichage.showVictory(); //affiche l'ecran de fin Gagnant
-        }  
+//        game.addObserver(affichage); //Ajoute l'observer 
+//        
+//        do {
+//            direction = saisieToucheClavier(); //la direction vaut la saisie au clavier
+//            if (direction != null) { //tant que la personne joue 
+//                finJeu = Game.jouer(direction); 
+//                if (finJeu) {
+//                    game.notifyObservers(); //Notify l'obs de la fin du jeu 
+//                }
+//            }
+//        } while (!finJeu);
+//        if (game.joueurAPerdu()) { //Si il reste encore des bateaux
+//            affichage.showLose(); //affiche l'ecran de fin Perdant
+//        } else {
+//            affichage.showVictory(); //affiche l'ecran de fin Gagnant
+//        }  
     }
     
     

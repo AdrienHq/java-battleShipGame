@@ -35,8 +35,7 @@ public abstract class Navire {
     public int getPointVie() {
         return pointVie;
     }
-
-      
+    
 //     @Override
 //     public String toString(){
 //         

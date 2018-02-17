@@ -6,13 +6,16 @@ import java.util.Random;
 public class MerBoard {
 
     private final static int[][] tabMer = {
+        {1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 4},
+        {0, 1, 0, 0, 0},
         {0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0}
+        {0, 0, 2, 0, 0},
+        {0, 0, 2, 2, 0}
     };
+    //random avec compteur 
+    // 0.0 = 1 
+    // 5.3 = 1 // compteur bateauGrand est au max 
 
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
@@ -47,7 +50,6 @@ public class MerBoard {
             filBoats(1);
         }
         filMines();
-
     }
 
     private void filBoats(int id) {
@@ -60,7 +62,6 @@ public class MerBoard {
         Position pos = this.getPositionAleatoire();
         int x = pos.getX();
         int y = pos.getY();
-
         if (merCase[x][y].estVide()) { //estVide
             if (type == TypeNavire.GRAND) {
                 merCase[x][y] = new Element(new BateauGrand(id));
