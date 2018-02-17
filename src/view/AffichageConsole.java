@@ -7,6 +7,7 @@ import model.Army;
 public class AffichageConsole implements Observer {
 
     private static final Character x = null;
+    private Army Army = null ;
 
     private static final char[][] merAffichage = {
         {x, x, 'A', x, 'B', x, 'C', x, 'D', x, 'E'},
@@ -25,11 +26,12 @@ public class AffichageConsole implements Observer {
     }
 
     public void showVictory() {
+        
         System.out.println("Joueur :" + Army.getNomArmee()); //Sera surement dans Army getNomArmee + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
     }
 
     public void showLose() {
-        System.out.println("Joueur :" + getNomJoueur()  //Sera surement dans Army getNomArmee+ " a perdu !");
+        System.out.println("Joueur :" + Army.getNomArmee());  //Sera surement dans Army getNomArmee+ " a perdu !");
     }
 
     @Override
