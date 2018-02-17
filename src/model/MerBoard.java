@@ -6,12 +6,12 @@ import java.util.Random;
 public class MerBoard {
 
     private final static int[][] tabMer = {
-        {1, 0, 0, 0, 0},
-        {0, 0, 0, 0, 4},
-        {0, 1, 0, 0, 0},
         {0, 0, 0, 0, 0},
-        {0, 0, 2, 0, 0},
-        {0, 0, 2, 2, 0}
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
     };
     //random avec compteur 
     // 0.0 = 1 
