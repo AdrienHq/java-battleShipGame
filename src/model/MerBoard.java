@@ -14,6 +14,7 @@ public class MerBoard {
         {0, 0, 0, 0, 0}
     };
     //random avec compteur 
+    // x.y => coordonnées de la case 
     // 0.0 = 1 
     // 5.3 = 1 // compteur bateauGrand est au max 
 

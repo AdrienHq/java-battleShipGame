@@ -27,8 +27,8 @@ public class Game extends Observable {
     private Game() {
         initialiserNavire();
         initialiserFlottant();
-        placerNavire();
-        placerFlottant();
+//        placerNavire();
+//        placerFlottant();
     }
 
     public static Game getInstance() {
@@ -51,13 +51,13 @@ public class Game extends Observable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void placerNavire() {
-        placerNavires();
-    }
-    
-    public void placerFlottant() {
-        placerFlottants();
-    }
+//    public void placerNavire() {
+//        placerNavires();
+//    }
+//    
+//    public void placerFlottant() {
+//        placerFlottants();
+//    }
 
 //    public void placerNavires() {
 //        for (Navire n : listeNavire) {

@@ -6,10 +6,10 @@ import view.AffichageConsole;
 
 public class ControllerConsole {
     public static void main(String[] args) {
-////        Game game = Game.getInstance(); //créée une instance de Game 
+//        Game game = Game.getInstance(); //créée une instance de Game 
 //        boolean finJeu = false;
 //        Direction direction;
-//        
+        
         AffichageConsole affichage = new AffichageConsole(); //Crée un affichatge du jeu
         affichage.afficherGame(); // affiche le jeu 
 //        game.addObserver(affichage); //Ajoute l'observer 
