@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class Case {
 
-    private Army army;
+    private Navire navire;
     private Flottant flottant;
 
-    public Case(Army army) {
-        this.army = army; 
+    public Case(Navire n) {
+        this.navire = n;
     }
 
     public Case(Flottant f) {
@@ -16,22 +16,32 @@ public class Case {
     }
 
     public Case() {
-        this.army = null;
+        this.navire = null;
         this.flottant = null;
     }
 
-    public Army getArmy() {
-        return this.army;
+    public Navire getNavire() {
+        return this.navire;
     }
 
     public Flottant getFlottant() {
         return this.flottant;
     }
 
+    public void supprimerNavire() {
+        this.navire = null;
+    }
+
     public void supprimerFlottant() {
         this.flottant = null;
     }
 
+    public String getTypeNavire() {
+        if (this.navire != null) {
+            return navire.getType();
+        }
+        return null;
+    }
 
     public String getTypeFlottant() {
         if (this.flottant != null) {
