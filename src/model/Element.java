@@ -34,14 +34,14 @@ public class Element extends Case {
         this.flottant = null;
     }
 
-    public TypeNavire getTypeNavire() {
+    public String getTypeNavire() {
         if (this.navire != null) {
             return navire.getType();
         }
         return null;
     }
 
-    public TypeFlottant getTypeFlottant() {
+    public String getTypeFlottant() {
         if (this.flottant != null) {
             return flottant.getType();
         }

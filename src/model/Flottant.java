@@ -3,9 +3,9 @@ package model;
 public abstract class Flottant {
     //Pour les mines et possiblement autre Case non bateau. 
 
-    protected final TypeFlottant typeflottant;
+    protected final String typeflottant;
     protected final int DEGATS;
-    protected Flottant(int degats, TypeFlottant type) {
+    protected Flottant(int degats, String type) {
         this.DEGATS = degats;
         this.typeflottant = type;
     }
@@ -16,7 +16,7 @@ public abstract class Flottant {
 //    }
     //JE NE SAIS PAS SI ON A BESOIN D'AUTRE CONSTRUCTEUR DONC VOIR SI IL Y A DES D2GATS STATIC
 
-    public TypeFlottant getType() {
+    public String getType() {
         return this.typeflottant;
     }
 
