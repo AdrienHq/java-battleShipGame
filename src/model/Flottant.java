@@ -10,12 +10,6 @@ public abstract class Flottant {
         this.typeflottant = type;
     }
 
-//    public Flottant(TypeFlottant type) {
-//        this.typeflottant = type;
-//        this.DEGATS = 0;
-//    }
-    //JE NE SAIS PAS SI ON A BESOIN D'AUTRE CONSTRUCTEUR DONC VOIR SI IL Y A DES D2GATS STATIC
-
     public String getType() {
         return this.typeflottant;
     }

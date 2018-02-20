@@ -5,23 +5,10 @@ import java.util.Random;
 
 public class MerBoard {
 
-//    private final static int[][] tabMer = {
-//        {0, 0, 0, 0, 0},
-//        {0, 0, 0, 0, 0},
-//        {0, 0, 0, 0, 0},
-//        {0, 0, 0, 0, 0},
-//        {0, 0, 0, 0, 0},
-//        {0, 0, 0, 0, 0}
-//    };
-    //random avec compteur 
-    // x.y => coordonnées de la case 
-    // 0.0 = 1 
-    // 5.3 = 1 // compteur bateauGrand est au max 
-//
-//    public static final int LIGNE = 5;
-//    public static final int COLONNE = 5;
-//    private static Case[][] merCase = null;
-//    private static List<Army> listArmy = null; //Pas sûr dans avoir besoin 
+    private static Case[][] merBoard = null;
+    public static final int LIGNE = 5;
+    public static final int COLONNE = 5;
+
 //    private static final int nbNavire = 0;
 //
 //    private static MerBoard instance = null;
@@ -141,5 +128,4 @@ public class MerBoard {
 //        }
 //        return ' ';
 //    }
-
 }
