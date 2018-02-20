@@ -2,11 +2,9 @@ package model;
 
 public abstract class Navire implements Deplacement{
     
-    protected Army armee; 
     protected final String typeNavire;
     protected Position pos = null; 
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
-    
     protected int id  ;
     
     protected Navire(String type, int pv,int id){ 

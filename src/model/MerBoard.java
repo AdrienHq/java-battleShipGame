@@ -8,25 +8,24 @@ public class MerBoard {
     private static Case[][] merBoard = null;
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
+    
+    private static MerBoard instance = null;
+    
+    private void initMer(){
+        
+    }
+    
+    public static MerBoard getInstance() {
+        
+    }
+    
 
-//    private static final int nbNavire = 0;
-//
-//    private static MerBoard instance = null;
-//
 //    public static MerBoard getInstance() { //return une instance de notre mer
 //        if (instance == null) {
 //            instance = new MerBoard();
 //            instance.initMer();
 //        }
 //        return instance;
-//    }
-//
-//    public int getNbNavire() {
-//        return nbNavire;
-//    }
-//
-//    public boolean zeroNavire() {
-//        return nbNavire == 0;
 //    }
 //
 //    private void initMer() {  //initialise la mer avec les paramètre voulu 
@@ -48,7 +47,7 @@ public class MerBoard {
 //
 //    private void filBoat(int id, TypeNavire type) {
 //        Position pos = this.getPositionAleatoire();
-//        int x = pos.getX();
+//        int x =  deplacer(2)                                                         pos.getX();
 //        int y = pos.getY();
 //        if (merCase[x][y].estVide()) { //estVide
 //            if (type == TypeNavire.GRAND) {
