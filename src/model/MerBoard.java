@@ -5,21 +5,53 @@ import java.util.Random;
 
 public class MerBoard {
 
-    private static Case[][] merBoard = null;
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
-    
-    private static MerBoard instance = null;
-    
-    private void initMer(){
-        
-    }
-    
-    public static MerBoard getInstance() {
-        
-    }
-    
+    private static Case[][] merBoard = null;
+//    private static Navire[] typeBateau = {BIG, SMALL}; 
 
+    private static MerBoard instance = null;
+
+    public static MerBoard getInstance() {
+        if (instance == null) {
+            instance = new MerBoard();
+            instance.initMer();
+        }
+        return instance;
+    }
+
+    private void initMer() { //Création et initialisation du tableau de case.
+        Case[][] merBoard = new Case[COLONNE][LIGNE];
+        for (int y = 0; y < COLONNE; y++) {
+            for (int x = 0; x < LIGNE; x++) {
+                merBoard[x][y] = new Case();
+            }
+        }
+    }
+
+    public Case caseVide(Direction d, Position p) { //Prend la direction et la position de base pour savoir si la case est DISPO pour un déplacement
+        Case c = null; //Une case
+        int x, y; //coordonnées
+        x = p.getX(); //on prends le X de la pos initiale
+        y = p.getY(); //on prends le Y de la pos initiale
+        Position p2 = new Position(x, y); //Nouvelle position créée à partir de la pos de base
+        p2.déplacer(d); //Appel de la fonction déplacer pour dire que l'on veut bouger dans tel ouy tel direction
+        x = p2.getX(); //On redonne les new coordonnées a la pos
+        y = p2.getY();
+        if (posValide(x, y)) { //vérifie que la position voulue est valide
+            c = merBoard[x][y]; //donne à la case ces coordonnées
+            if (!c.estVide) { //si la case voulue n'est pas vide, return null
+                return null;
+            }
+        }
+        return c;
+    }
+
+    private boolean posValide(int x, int y) {
+        return (x >= 0 && x < LIGNE) && (y >= 0 && y < COLONNE);
+    }
+
+}
 //    public static MerBoard getInstance() { //return une instance de notre mer
 //        if (instance == null) {
 //            instance = new MerBoard();
@@ -90,29 +122,7 @@ public class MerBoard {
 //        pos = new Position(x, y);
 //        return pos;
 //    }
-//
-//    public Case deplacementPossible(Direction d, Position p) { // verifie que la nouvelle position est "viable"
-//        Case c = null;
-//        int x, y;
-//        x = p.getX();
-//        y = p.getY();
-//        Position p2 = new Position(x, y);
-//        p2.déplacer(d);
-//        x = p2.getX();
-//        y = p2.getY();
-//        if (posValide(x, y)) {
-//            c = merCase[x][y];
-//            if (!c.estVide()) {
-//                return null;
-//            }
-//        }
-//        return c;
-//    }
-//
-//    private boolean posValide(int x, int y) {
-//        return (y >= 0 && y < COLONNE) && (x >= 0 && x < LIGNE); //vérifie que la nouvelle position est VALIDE
-//    }
-//
+
 //    public char getCase(int previousX, int previousY) { //Prends une case et en fonction de son contenu, affiche un caractère spécifique.
 //        if (merCase[previousX][previousY] instanceof Element) {
 //            if (((Element) merCase[previousX][previousY]).getNavire() instanceof BateauGrand) {
@@ -127,4 +137,4 @@ public class MerBoard {
 //        }
 //        return ' ';
 //    }
-}
+
