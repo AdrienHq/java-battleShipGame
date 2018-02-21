@@ -8,6 +8,8 @@ public class MerBoard {
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
     private static Case[][] merBoard = null;
+//    private Army army = null; //army (nom / arrayList / color) 
+//    private ArrayList<Navire> listNavire;
 //    private static Navire[] typeBateau = {BIG, SMALL}; 
 
     private static MerBoard instance = null;
@@ -20,11 +22,20 @@ public class MerBoard {
         return instance;
     }
 
-    private void initMer() { //Création et initialisation du tableau de case.
+    private void initMer(String nom, String nom2) { //Création et initialisation du tableau de case.
+        //new bateaUGrand
+        //new bateauPetit
+        //new mineNormale
+        //new mineAtomique
+
+//        int id =0;
         Case[][] merBoard = new Case[COLONNE][LIGNE];
         for (int y = 0; y < COLONNE; y++) {
             for (int x = 0; x < LIGNE; x++) {
                 merBoard[x][y] = new Case();
+                //random x et y 
+                // case random  
+                //new navire
             }
         }
     }
@@ -39,16 +50,20 @@ public class MerBoard {
         x = p2.getX(); //On redonne les new coordonnées a la pos
         y = p2.getY();
         if (posValide(x, y)) { //vérifie que la position voulue est valide
-            c = merBoard[x][y]; //donne à la case ces coordonnées
+            c = merBoard[x][y]; //donne à la case ces coordonnées // bateaGrand = c 
             if (!c.estVide) { //si la case voulue n'est pas vide, return null
                 return null;
             }
         }
-        return c;
+        return c; //return null 
     }
 
     private boolean posValide(int x, int y) {
         return (x >= 0 && x < LIGNE) && (y >= 0 && y < COLONNE);
+    }
+
+    public void retirerNavire(Case c) {
+
     }
 
 }
