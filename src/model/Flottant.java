@@ -9,7 +9,7 @@ public abstract class Flottant {
         this.DEGATS = degats;
         this.typeflottant = type;
     }
-
+    
     public String getType() {
         return this.typeflottant;
     }
@@ -17,4 +17,17 @@ public abstract class Flottant {
     public int getDegats() {
         return this.DEGATS;
     }
+    
+//    
+//    public Position getPosition () {
+//        return this.pos;
+//    }
+//    
+//    public int getX () {
+//        return this.pos.getX();
+//    }
+//    
+//    public int getY () {
+//        return this.pos.getY();
+//    }
 }

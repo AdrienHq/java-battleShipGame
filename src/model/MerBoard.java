@@ -65,6 +65,28 @@ public class MerBoard {
     public void retirerNavire(Case c) {
 
     }
+    
+    public Case getPositionCaseElement(){
+        int x = 0;
+        int y = 0;
+        int n = 0;
+        
+        for (int i = 0; i < initTableau.length; i++) {
+            for (int j = 0; j < initTableau[0].length; j++) {
+                if (initTableau[i][j] == 3) {
+                    if (n == id) {
+                        x = i;
+                        y = j;
+                        n++;
+                    } else if (n < id) {
+                        n++;
+                    }
+                }
+            }
+        }
+        return new Position(x, y);
+    }
+
 
 }
 //    public static MerBoard getInstance() { //return une instance de notre mer
