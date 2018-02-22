@@ -1,20 +1,91 @@
 package model;
 
 //import java.util.List;
-//import java.util.Random;
-
+import static java.awt.Color.BLUE;
+import static java.awt.Color.RED;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import java.util.Random;
 import view.AffichageConsole;
 
-public class MerBoard extends Observable{
+public class MerBoard {
 
-    public static final int LIGNE = 5;
-    public static final int COLONNE = 5;
-    private static Case[][] merBoard = null;
-//    private Army army = null; //army (nom / arrayList / color) 
-//    private ArrayList<Navire> listNavire;
-//    private static Navire[] typeBateau = {BIG, SMALL}; 
+    private static final int cote = 5;
+    private Case[][] merBoard;
+    private Army joueur1; //army (nom / arrayList / color) 
+    private Army joueur2;
+    private Random random = new Random();
+
+    private MerBoard(String joueur1, String joueur2) {
+
+        this.merBoard = new Case[cote][cote];
+
+        for (int y = 0; y < cote; y++) {
+            for (int x = 0; x < cote; x++) {
+                char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
+                String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
+                merBoard[x][y] = new Case(name);
+
+            }
+        }
+        this.joueur1 = new Army(joueur1);
+        this.joueur2 = new Army(joueur2);
+
+    }
+
+    public void init() {
+        this.initialiserBateau(getJoueur1());
+        this.initialiserBateau(getJoueur2());
+    }
+
+    private void initialiserBateau(Army army) {
+        List<Navire> delete = new ArrayList<>();
+        List<Navire> add = new ArrayList<>();
+
+        for (Navire n : army.getNavires()) { //A ECRIRE ENCORE (getNavire)
+            boolean valide = false;
+            Position pos = null;
+            while (!valide) {
+                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //getTaille a écrire
+                valide = this.initialiserBateau(n, pos);
+            }
+            delete.add(n);
+            n.setPosition(pos);
+            add.add(n);
+        }
+        army.getNavires().rajouterTout(delete);
+        army.getNavires().ajouterTout(add);
+    }
+    private boolean initialiserBateau(Navire n,Position pos){
+            if(n == null ||pos == null){
+                
+            } else{
+            
+            }
+           
+    }
+
+    public static int getCote() {
+        return cote;
+    }
+    
+
+    public String getNomJoueur1() {
+        return this.joueur1.nom;
+    }
+
+    public String getNomJoueur2() {
+        return this.joueur2.nom;
+    }
+
+    public Army getJoueur1() {
+        return joueur1;
+    }
+
+    public Army getJoueur2() {
+        return joueur2;
+    }
 
     private static MerBoard instance = null;
 
@@ -27,12 +98,12 @@ public class MerBoard extends Observable{
     }
 
     private void initMer() { //Création et initialisation du tableau de case.
-        Case[][] merBoard = new Case[COLONNE][LIGNE];
-        
-        for (int y = 0; y < COLONNE; y++) {
-            for (int x = 0; x < LIGNE; x++) {
-                char Col = (char)(y+65) ;           //Valeur alphabétique de la colonne
-                String name = Col + String.valueOf(x+1) ; //String du nom de la case (exemple : B1)
+        Case[][] merBoard = new Case[cote][cote];
+
+        for (int y = 0; y < cote; y++) {
+            for (int x = 0; x < cote; x++) {
+                char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
+                String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
                 merBoard[x][y] = new Case(name);
                 //random x et y 
                 // case random  
@@ -66,12 +137,12 @@ public class MerBoard extends Observable{
     public void retirerNavire(Case c) {
 
     }
-    
-    public Case getPositionCaseElement(){
+
+    public Case getPositionCaseElement() {
         int x = 0;
         int y = 0;
         int n = 0;
-        
+
         for (int i = 0; i < initTableau.length; i++) {
             for (int j = 0; j < initTableau[0].length; j++) {
                 if (initTableau[i][j] == 3) {
@@ -87,7 +158,6 @@ public class MerBoard extends Observable{
         }
         return new Position(x, y);
     }
-
 
 }
 //    public static MerBoard getInstance() { //return une instance de notre mer

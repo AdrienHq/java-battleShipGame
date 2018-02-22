@@ -11,6 +11,20 @@ public class Case {
     
     Boolean radioActif = false;
     Boolean estVide = true;
+    
+    public Case(Navire n) {
+        this.navire = n;
+    }
+
+    public Case(Flottant f) {
+        this.flottant = f;
+    }
+
+    public Case(String name) {
+        this.name = name ;
+        this.navire = null;
+        this.flottant = null;
+    }
 
     public boolean estRadioactif() {
         return radioActif;
@@ -32,19 +46,7 @@ public class Case {
         this.radioActif = this.radioActif = false;
     } 
 
-    public Case(Navire n) {
-        this.navire = n;
-    }
-
-    public Case(Flottant f) {
-        this.flottant = f;
-    }
-
-    public Case(String name) {
-        this.name = name ;
-        this.navire = null;
-        this.flottant = null;
-    }
+    
 
     public Navire getNavire() {
         return this.navire;

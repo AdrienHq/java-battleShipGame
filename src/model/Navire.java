@@ -5,16 +5,19 @@ public abstract class Navire implements Deplacement{
     protected final String typeNavire;
     protected Position pos = null; 
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
-    protected int id  ;
     
-    protected Navire(String type, int pv,int id){ 
+    
+    protected Navire(String type, int pv){ 
         this.typeNavire= type;
         this.pointVie = pv;
-        this.id = id ;
+        
     }
     
     public Position getPosition () {
         return this.pos;
+    }
+    public void setPosition(Position pos){
+        this.pos = pos ;
     }
     
     public int getX () {

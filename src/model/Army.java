@@ -6,13 +6,23 @@ import java.util.ArrayList;
 public class Army {
 
     public String nom;
-
     public ArrayList<Navire> listNavire = new ArrayList<>();
-    public Color color;
 
-    public Army(String nom, Color color) {
+    public Army(String nom) {
         this.nom = nom;
-        this.color = color; 
+        this.listNavire = fillNavires();
+    }
+
+    public ArrayList<Navire> fillNavires() {
+
+        listNavire.add(new BateauGrand());
+        listNavire.add(new BateauPetit());
+        listNavire.add(new BateauPetit());
+
+        return listNavire;
+    }
+    public ArrayList<Navire> getNavires(){
+        return listNavire ;
     }
 
     public boolean addNavire(Navire n) {
@@ -20,20 +30,10 @@ public class Army {
         return true;
     }
 
-    public boolean deleteNavire(Position pos) { //tir en 0 5 
-        Navire n; 
+    public void deleteNavire(Navire n) { //tir en 0 5 
         if (!listeVide()) {
-            
-            
-            
-            
-            listNavire.remove(n.getPosition());
-            return true;
+            listNavire.remove(n);
         }
-        
-        
-        
-        return false; //VOIR SI LISTE SIZE SE REMET A JOUR OU NON      
     }
 
     public boolean listeVide() {
