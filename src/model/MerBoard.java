@@ -1,9 +1,13 @@
 package model;
 
-import java.util.List;
-import java.util.Random;
+//import java.util.List;
+//import java.util.Random;
 
-public class MerBoard {
+import java.util.ArrayList;
+import java.util.Observable;
+import view.AffichageConsole;
+
+public class MerBoard extends Observable{
 
     public static final int LIGNE = 5;
     public static final int COLONNE = 5;
@@ -22,17 +26,14 @@ public class MerBoard {
         return instance;
     }
 
-    private void initMer(String nom, String nom2) { //Création et initialisation du tableau de case.
-        //new bateaUGrand
-        //new bateauPetit
-        //new mineNormale
-        //new mineAtomique
-
-//        int id =0;
+    private void initMer() { //Création et initialisation du tableau de case.
         Case[][] merBoard = new Case[COLONNE][LIGNE];
+        
         for (int y = 0; y < COLONNE; y++) {
             for (int x = 0; x < LIGNE; x++) {
-                merBoard[x][y] = new Case();
+                char Col = (char)(y+65) ;           //Valeur alphabétique de la colonne
+                String name = Col + String.valueOf(x+1) ; //String du nom de la case (exemple : B1)
+                merBoard[x][y] = new Case(name);
                 //random x et y 
                 // case random  
                 //new navire

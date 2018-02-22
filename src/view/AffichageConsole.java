@@ -6,6 +6,9 @@ import model.Army;
 import model.MerBoard;
 
 public class AffichageConsole implements Observer {
+    
+    public void showEtatArmee()
+            print "position ..."
 //
 //    private static final Character x = null;
 //    private Army Army = null;

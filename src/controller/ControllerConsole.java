@@ -1,10 +1,28 @@
 package controller;
 
+import java.util.Scanner;
 import model.Direction;
 import model.Game;
+import model.MerBoard;
 import view.AffichageConsole;
 
 public class ControllerConsole {
+    public static void main(String[] args) {
+        String Army1 = null ,Army2 = null;
+        Scanner clavier = new Scanner(System.in);
+        System.out.println("Entrer nom Joueur1 suivit de Enter ");
+            if (clavier.hasNext()) {
+                Army1 = clavier.nextLine();           
+                
+            }else ; // ??
+        System.out.println("Entrer nom Joueur2 suivit de Enter ");
+            if (clavier.hasNext()) {
+                Army2 = clavier.nextLine();           
+                
+            }else ;
+        Game game = Game.getInstance(Army1,Army2);
+            
+    }
 //    public static void main(String[] args) {
 //        Game game = Game.getInstance(); //créée une instance de Game 
 //        boolean finJeu = false;

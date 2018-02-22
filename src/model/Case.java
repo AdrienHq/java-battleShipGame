@@ -3,9 +3,34 @@ package model;
 import java.util.Objects;
 
 public class Case {
-
+    
+    private String name ;
+    
     private Navire navire;
     private Flottant flottant;
+    
+    Boolean radioActif = false;
+    Boolean estVide = true;
+
+    public boolean estRadioactif() {
+        return radioActif;
+    }
+
+    public boolean estVide() {
+        return estVide;
+    }
+
+    public void switchVide() {
+        if (this.estVide = false) {
+            this.estVide = true;
+        } else {
+            this.estVide = false;
+        }
+    }
+
+    public void switchRadioactif() {
+        this.radioActif = this.radioActif = false;
+    } 
 
     public Case(Navire n) {
         this.navire = n;
@@ -15,7 +40,8 @@ public class Case {
         this.flottant = f;
     }
 
-    public Case() {
+    public Case(String name) {
+        this.name = name ;
         this.navire = null;
         this.flottant = null;
     }
@@ -50,29 +76,9 @@ public class Case {
         return null;
     }
 
-    Boolean radioActif = false;
-    Boolean estVide = true;
-
+    
     //    public void setRadioActif(boolean radioActif){
 //        this.radioActif = radioActif;
 //    }
-    public boolean estRadioactif() {
-        return radioActif;
-    }
-
-    public boolean estVide() {
-        return estVide;
-    }
-
-    public void switchVide() {
-        if (this.estVide = false) {
-            this.estVide = true;
-        } else {
-            this.estVide = false;
-        }
-    }
-
-    public void switchRadioactif() {
-        this.radioActif = this.radioActif = false;
-    }  
+     
 }
