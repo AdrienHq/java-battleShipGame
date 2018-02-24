@@ -17,6 +17,10 @@ public class MerBoard {
     private Army joueur2;
     private Random random = new Random();
 
+    MerBoard() {
+
+    }
+
     private MerBoard(String joueur1, String joueur2) {
 
         this.merBoard = new Case[cote][cote];
@@ -57,19 +61,19 @@ public class MerBoard {
         army.getNavires().rajouterTout(delete);
         army.getNavires().ajouterTout(add);
     }
-    private boolean initialiserBateau(Navire n,Position pos){
-            if(n == null ||pos == null){
-                
-            } else{
-            
-            }
-           
+
+    private boolean initialiserBateau(Navire n, Position pos) {
+        if (n == null || pos == null) {
+
+        } else {
+
+        }
+
     }
 
     public static int getCote() {
         return cote;
     }
-    
 
     public String getNomJoueur1() {
         return this.joueur1.nom;
@@ -157,6 +161,14 @@ public class MerBoard {
             }
         }
         return new Position(x, y);
+    }
+
+    public Navire getNavire(Position pos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Case getPosCase(Position pos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
