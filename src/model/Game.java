@@ -1,6 +1,5 @@
 package model;
 
-import static java.lang.Math.random;
 import java.util.Observable;
 import java.util.Random;
 
@@ -8,9 +7,13 @@ public class Game extends Observable {
 
     private Random rand = new Random();
     private MerBoard board = new MerBoard();
+    private static MerBoard instance = null;
 
-    public MerBoard getBoard() {
-        return this.board;
+    public static Game getInstance() {
+        if (instance == null) {
+            instance = new Game();
+        }
+        return instance;
     }
 
     public Navire getNavire(Position pos) { //Récupère le navire à une position précise 
@@ -30,7 +33,7 @@ public class Game extends Observable {
             return false; // aussinon on sort de la boucle
         }
         if (armeeTir.estAmi(nav)) {
-            this.cercleDeDegat(armeeTir, armeeDegat, nav,  nav.getPorteeTir());
+            this.cercleDeDegat(armeeTir, armeeDegat, nav, nav.getPorteeTir());
             return true;
         }
         return false;

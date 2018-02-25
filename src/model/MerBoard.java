@@ -1,13 +1,8 @@
 package model;
 
-//import java.util.List;
-import static java.awt.Color.BLUE;
-import static java.awt.Color.RED;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Random;
-import view.AffichageConsole;
 
 public class MerBoard {
 
@@ -16,26 +11,43 @@ public class MerBoard {
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
     private Random random = new Random();
+    private static MerBoard instance = null;
 
-    MerBoard() {
+    private MerBoard() {
 
     }
 
     private MerBoard(String joueur1, String joueur2) {
-
         this.merBoard = new Case[cote][cote];
+        for (int y = 0; y < cote; y++) {
+            for (int x = 0; x < cote; x++) {
+                char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
+                String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
+                merBoard[x][y] = new Case(name);
+            }
+        }
+        this.joueur1 = new Army(joueur1);
+        this.joueur2 = new Army(joueur2);
+    }
+
+    public static MerBoard getInstance(String j1, String j2) {
+        if (instance == null) {
+            instance = new MerBoard(j1,j2);
+            instance.initMer();
+        }
+        return instance;
+    }
+
+    private void initMer() { //Création et initialisation du tableau de case.
+        Case[][] merBoard = new Case[cote][cote];
 
         for (int y = 0; y < cote; y++) {
             for (int x = 0; x < cote; x++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
                 merBoard[x][y] = new Case(name);
-
             }
         }
-        this.joueur1 = new Army(joueur1);
-        this.joueur2 = new Army(joueur2);
-
     }
 
     public void init() {
@@ -43,32 +55,30 @@ public class MerBoard {
         this.initialiserBateau(getJoueur2());
     }
 
-    private void initialiserBateau(Army army) {
-        List<Navire> delete = new ArrayList<>();
-        List<Navire> add = new ArrayList<>();
+    private void initialiserBateau(Army army) { //Donne Armee jouee 1 donc 3 bateaux
+        List<Navire> delete = new ArrayList<>(); //vide
+        List<Navire> add = new ArrayList<>(); //vide
 
-        for (Navire n : army.getNavires()) { //A ECRIRE ENCORE (getNavire)
-            boolean valide = false;
-            Position pos = null;
-            while (!valide) {
-                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //getTaille a écrire
-                valide = this.initialiserBateau(n, pos);
+        for (Navire n : army.getListeNavire()) { //Parcours les navires
+            boolean valide = false; //init boolean a false
+            Position pos = null; // Une pos nulle 
+            while (!valide) { //tant que c'est faux
+                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
+                valide = this.navireEncore(n, pos); //Voir plus bas 
             }
-            delete.add(n);
-            n.setPosition(pos);
-            add.add(n);
+            delete.add(n); //Rajoute dans la liste
+            n.setPosition(pos); //set la position au navire
+            add.add(n); // si la pos est valide le copie dans la seconde liste 
         }
-        army.getNavires().rajouterTout(delete);
-        army.getNavires().ajouterTout(add);
+        army.getNavires().rajouterTout(delete); // ? 
+        army.getNavires().ajouterTout(add); // ? 
     }
 
-    private boolean initialiserBateau(Navire n, Position pos) {
+    private boolean navireEncore(Navire n, Position pos) { //Verifie si la pos est valide KINDA
         if (n == null || pos == null) {
-
-        } else {
-
+            return true;
         }
-
+        return false;
     }
 
     public static int getCote() {
@@ -89,31 +99,6 @@ public class MerBoard {
 
     public Army getJoueur2() {
         return joueur2;
-    }
-
-    private static MerBoard instance = null;
-
-    public static MerBoard getInstance() {
-        if (instance == null) {
-            instance = new MerBoard();
-            instance.initMer();
-        }
-        return instance;
-    }
-
-    private void initMer() { //Création et initialisation du tableau de case.
-        Case[][] merBoard = new Case[cote][cote];
-
-        for (int y = 0; y < cote; y++) {
-            for (int x = 0; x < cote; x++) {
-                char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
-                String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
-                merBoard[x][y] = new Case(name);
-                //random x et y 
-                // case random  
-                //new navire
-            }
-        }
     }
 
     public Case caseVide(Direction d, Position p) { //Prend la direction et la position de base pour savoir si la case est DISPO pour un déplacement
@@ -171,25 +156,10 @@ public class MerBoard {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    void estCirulaire(Position p) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
-//    public static MerBoard getInstance() { //return une instance de notre mer
-//        if (instance == null) {
-//            instance = new MerBoard();
-//            instance.initMer();
-//        }
-//        return instance;
-//    }
-//
-//    private void initMer() {  //initialise la mer avec les paramètre voulu 
-//        int nbreJoueur = 2;
-//        merCase = new Case[LIGNE][COLONNE];
-//
-//        //place les bateaux
-//        for (int player = 1; player < nbreJoueur; ++player) {
-//            filBoats(1);
-//        }
-//        filMines();
-//    }
 //
 //    private void filBoats(int id) {
 //        filBoat(id, TypeNavire.PETIT);

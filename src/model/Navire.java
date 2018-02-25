@@ -40,6 +40,10 @@ public abstract class Navire implements Deplacement {
     public int getPointVie() {
         return pointVie;
     }
+    
+    public String getNom(){
+        return this.nom;
+    }
 
     public void tirDegat(Navire ennemy) {
          ennemy.pointVie -= 50;

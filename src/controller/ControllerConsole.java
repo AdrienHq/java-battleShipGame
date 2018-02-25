@@ -14,7 +14,7 @@ public class ControllerConsole {
             if (clavier.hasNext()) {
                 Army1 = clavier.nextLine();           
                 
-            }else ; // ??
+            }else; // ??
         System.out.println("Entrer nom Joueur2 suivit de Enter ");
             if (clavier.hasNext()) {
                 Army2 = clavier.nextLine();           
@@ -23,7 +23,6 @@ public class ControllerConsole {
         Game game = Game.getInstance(Army1,Army2);
             
     }
-//    public static void main(String[] args) {
 //        Game game = Game.getInstance(); //créée une instance de Game 
 //        boolean finJeu = false;
 //        Direction direction;

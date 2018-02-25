@@ -20,7 +20,7 @@ public class Army {
         return listNavire;
     }
 
-    public ArrayList<Navire> getNavires() {
+    public ArrayList<Navire> getListeNavire() {
         return listNavire;
     }
 
@@ -45,15 +45,17 @@ public class Army {
     public int sizeListe() {
         return listNavire.size();
     }
-    
-    public String getNom(){
+
+    public String getNom() {
         return this.nom;
     }
 
-//    public boolean estAmi(Navire nav) {
-//        if {nav.
-//        
-//    }
+    public boolean estAmi(Navire nav) {
+        if (nav.getNom() == (this.nom)) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public boolean equals(Object o) {
