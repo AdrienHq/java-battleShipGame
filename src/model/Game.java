@@ -30,7 +30,7 @@ public class Game extends Observable {
             return false; // aussinon on sort de la boucle
         }
         if (armeeTir.estAmi(nav)) {
-            this.cercleDeDegat(armeeTir, armeeDegat, nav.getPortee());
+            this.cercleDeDegat(armeeTir, armeeDegat, nav,  nav.getPortee());
             return true;
         }
         return false;
@@ -56,7 +56,7 @@ public class Game extends Observable {
         Position pos = amis.getPosition();
         for (int i = -portee; i <= portee; i++) {
             for (int j = -portee; j <= portee; j++) {
-                Position p = new Position(pos.getX() + k, pos.getY() + 1);
+                Position p = new Position(pos.getX() + i, pos.getY() + j);
                 board.estCirulaire(p);
                 Case c = board.getPosCase(pos);
                 if (c.estNavire() && !army.estAmi(c.getNavire())) {
@@ -74,5 +74,4 @@ public class Game extends Observable {
     private void setChangedAndNotify(MerBoard board) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }

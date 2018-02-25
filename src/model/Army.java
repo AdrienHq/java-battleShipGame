@@ -14,15 +14,14 @@ public class Army {
     }
 
     public ArrayList<Navire> fillNavires() {
-
         listNavire.add(new BateauGrand());
         listNavire.add(new BateauPetit());
         listNavire.add(new BateauPetit());
-
         return listNavire;
     }
-    public ArrayList<Navire> getNavires(){
-        return listNavire ;
+
+    public ArrayList<Navire> getNavires() {
+        return listNavire;
     }
 
     public boolean addNavire(Navire n) {
@@ -46,5 +45,22 @@ public class Army {
     public int sizeListe() {
         return listNavire.size();
     }
+    
+    public String getNom(){
+        return this.nom;
+    }
 
+    public boolean estAmi(Navire nav) {
+        if {nav.
+        
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Army) {
+            Army army = (Army) o;
+            return (army.nom == this.nom);
+        }
+        return false;
+    }
 }
