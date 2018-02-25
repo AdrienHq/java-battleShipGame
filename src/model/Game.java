@@ -22,8 +22,9 @@ public class Game extends Observable {
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
         
-        initialiserBateau(getJoueur1());
-        initialiserBateau(getJoueur2());
+        initialiserBateaux(getJoueur1());
+        initialiserBateaux(getJoueur2());
+        placementFlottants();
         //placer les bateaux 
         //placer les mines ou bien en amont
     }
@@ -40,7 +41,7 @@ public class Game extends Observable {
     
     
     
-    private void initialiserBateau(Army army) { //Donne Armee jouee 1 donc 3 bateaux
+    private void initialiserBateaux(Army army) { //Donne Armee jouee 1 donc 3 bateaux
         //rajouter bateau à notre merboard et une list qui contient l'ensemble des bateaux
         Position pos = null ;
         
@@ -48,15 +49,31 @@ public class Game extends Observable {
             pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
             do{
                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
-            }while(!board.positionPrise(pos));
+            }while(!board.positionVide(pos));
             
             board.placerNavire(pos,n);//place le navire (pos )
            
-          //enregistre la position comme prise ;
+         //enregistre la position comme prise ;
             
         }
         
         
+    }
+    private void placementFlottants(){
+        Position pos = null ;
+        for (int y = 0; y < cote; y++) {
+            for (int x = 0; x < cote; x++) {
+                pos = new Position(x,y);
+                if(board.positionVide(pos) && random.nextInt(9)== 5){ //si positionestprise(
+                    if(random.nextInt(1) == 0){
+                        board.placerFlottant(pos,new MineAtomique());
+                    }else
+                        board.placerFlottant(pos,new MineAtomique());
+                }
+                
+                
+            }
+        }
     }
     
     

@@ -26,7 +26,7 @@ public class MerBoard {
         
     }
     
-    public boolean positionPrise(Position pos ){
+    public boolean positionVide(Position pos ){
         int x =pos.getX();
         int y =pos.getY();
         if(mer[x][y].estVide()){
@@ -40,6 +40,11 @@ public class MerBoard {
             int y =pos.getY();
             mer[x][y].setNavire(n);
             
+    }
+    void placerFlottant(Position pos ,Flottant f){
+            int x =pos.getX();
+            int y =pos.getY();
+            mer[x][y].setFlottant(f);
     }
     
    

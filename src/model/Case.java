@@ -54,7 +54,12 @@ public class Case {
     public Navire getNavire() {
         return this.navire;
     }
-
+    
+    void setFlottant(Flottant f) {
+        this.flottant = f ;
+        this.switchVide();
+    }
+    
     public Flottant getFlottant() {
         return this.flottant;
     }
@@ -66,6 +71,7 @@ public class Case {
 
     public void supprimerFlottant() {
         this.flottant = null;
+        this.switchVide();
     }
 
     public String getTypeNavire() {
@@ -90,5 +96,7 @@ public class Case {
     boolean estNavire() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
      
 }
