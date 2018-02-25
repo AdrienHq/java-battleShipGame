@@ -45,7 +45,7 @@ public abstract class Navire implements Deplacement {
          ennemy.pointVie -= 50;
     }
     
-    public abstract int getPortee();
+    public abstract int getPorteeTir();
 }
 
 //     @Override

@@ -11,7 +11,7 @@ public class Position {
     }
 
     private void setX(int x) {
-        if (x >= 0 && x < MerBoard.COLONNE) {
+        if (x >= 0 && x < MerBoard.getCote()) {
             this.x = x;
         } else {
             throw new IllegalArgumentException("X n'est pas dans le range permis !");
@@ -19,7 +19,7 @@ public class Position {
     }
 
     private void setY(int y) {
-        if (y >= 0 && y < MerBoard.LIGNE) {
+        if (y >= 0 && y < MerBoard.getCote()) {
             this.y = y;
         } else {
             throw new IllegalArgumentException("Y n'est pas dans le range permis !");

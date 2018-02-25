@@ -30,7 +30,7 @@ public class Game extends Observable {
             return false; // aussinon on sort de la boucle
         }
         if (armeeTir.estAmi(nav)) {
-            this.cercleDeDegat(armeeTir, armeeDegat, nav,  nav.getPortee());
+            this.cercleDeDegat(armeeTir, armeeDegat, nav,  nav.getPorteeTir());
             return true;
         }
         return false;

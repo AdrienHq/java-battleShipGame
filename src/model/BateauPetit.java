@@ -11,18 +11,13 @@ public class BateauPetit extends Navire {
         super("SMALL", 50);
     }
 
-    public static int getPorteeTir() {
-        int portee = new Random().nextInt(array.length);
-        return array[portee];
-    }
-
     @Override
     public void move(Direction d) {
         this.pos.déplacer(d);
     }
 
     @Override
-    public int getPortee() {
+    public int getPorteeTir() {
         int portee = new Random().nextInt(array.length);
         return array[portee];
     }
