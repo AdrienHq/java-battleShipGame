@@ -6,18 +6,15 @@ import java.util.Random;
 
 public class MerBoard {
 
-    private static final int cote = 5;
+    private static int cote = 5;
     private Case[][] merBoard;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
     private Random random = new Random();
     private static MerBoard instance = null;
 
-    private MerBoard() {
-
-    }
-
-    private MerBoard(String joueur1, String joueur2) {
+    private MerBoard(int cote) {
+        this.cote = cote ;
         this.merBoard = new Case[cote][cote];
         for (int y = 0; y < cote; y++) {
             for (int x = 0; x < cote; x++) {
@@ -26,13 +23,12 @@ public class MerBoard {
                 merBoard[x][y] = new Case(name);
             }
         }
-        this.joueur1 = new Army(joueur1);
-        this.joueur2 = new Army(joueur2);
+        
     }
 
-    public static MerBoard getInstance(String j1, String j2) {
+    public static MerBoard getInstance(int cote) {
         if (instance == null) {
-            instance = new MerBoard(j1,j2);
+            instance = new MerBoard(cote);
             instance.initMer();
         }
         return instance;
@@ -50,56 +46,7 @@ public class MerBoard {
         }
     }
 
-    public void init() {
-        this.initialiserBateau(getJoueur1());
-        this.initialiserBateau(getJoueur2());
-    }
-
-    private void initialiserBateau(Army army) { //Donne Armee jouee 1 donc 3 bateaux
-        List<Navire> delete = new ArrayList<>(); //vide
-        List<Navire> add = new ArrayList<>(); //vide
-
-        for (Navire n : army.getListeNavire()) { //Parcours les navires
-            boolean valide = false; //init boolean a false
-            Position pos = null; // Une pos nulle 
-            while (!valide) { //tant que c'est faux
-                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
-                valide = this.navireEncore(n, pos); //Voir plus bas 
-            }
-            delete.add(n); //Rajoute dans la liste
-            n.setPosition(pos); //set la position au navire
-            add.add(n); // si la pos est valide le copie dans la seconde liste 
-        }
-        army.getNavires().rajouterTout(delete); // ? 
-        army.getNavires().ajouterTout(add); // ? 
-    }
-
-    private boolean navireEncore(Navire n, Position pos) { //Verifie si la pos est valide KINDA
-        if (n == null || pos == null) {
-            return true;
-        }
-        return false;
-    }
-
-    public static int getCote() {
-        return cote;
-    }
-
-    public String getNomJoueur1() {
-        return this.joueur1.nom;
-    }
-
-    public String getNomJoueur2() {
-        return this.joueur2.nom;
-    }
-
-    public Army getJoueur1() {
-        return joueur1;
-    }
-
-    public Army getJoueur2() {
-        return joueur2;
-    }
+    
 
     public Case caseVide(Direction d, Position p) { //Prend la direction et la position de base pour savoir si la case est DISPO pour un déplacement
         Case c = null; //Une case
@@ -120,7 +67,7 @@ public class MerBoard {
     }
 
     private boolean posValide(int x, int y) {
-        return (x >= 0 && x < LIGNE) && (y >= 0 && y < COLONNE);
+        return (x >= 0 && x < cote) && (y >= 0 && y < cote);
     }
 
     public void retirerNavire(Case c) {
