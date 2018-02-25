@@ -46,7 +46,10 @@ public class Case {
         this.radioActif = this.radioActif = false;
     } 
 
-    
+    public void setNavire(Navire n) {
+        this.navire= n ;
+        this.switchVide();
+    }
 
     public Navire getNavire() {
         return this.navire;
@@ -58,6 +61,7 @@ public class Case {
 
     public void supprimerNavire() {
         this.navire = null;
+        this.switchVide();
     }
 
     public void supprimerFlottant() {

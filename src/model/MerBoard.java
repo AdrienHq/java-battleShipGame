@@ -7,7 +7,7 @@ import java.util.Random;
 public class MerBoard {
 
     private static int cote = 5;
-    private Case[][] merBoard;
+    private Case[][] mer;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
     private Random random = new Random();
@@ -15,17 +15,34 @@ public class MerBoard {
 
     private MerBoard(int cote) {
         this.cote = cote ;
-        this.merBoard = new Case[cote][cote];
+        this.mer = new Case[cote][cote];
         for (int y = 0; y < cote; y++) {
             for (int x = 0; x < cote; x++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
-                merBoard[x][y] = new Case(name);
+                mer[x][y] = new Case(name);
             }
         }
         
     }
-
+    
+    public boolean positionPrise(Position pos ){
+        int x =pos.getX();
+        int y =pos.getY();
+        if(mer[x][y].estVide()){
+            return true ;
+        }
+            return false ;
+    }
+    
+    void placerNavire(Position pos,Navire n) {
+            int x =pos.getX();
+            int y =pos.getY();
+            mer[x][y].setNavire(n);
+            
+    }
+    
+   
     public static MerBoard getInstance(int cote) {
         if (instance == null) {
             instance = new MerBoard(cote);
@@ -35,13 +52,13 @@ public class MerBoard {
     }
 
     private void initMer() { //Création et initialisation du tableau de case.
-        Case[][] merBoard = new Case[cote][cote];
+        Case[][] mer = new Case[cote][cote];
 
         for (int y = 0; y < cote; y++) {
             for (int x = 0; x < cote; x++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
-                merBoard[x][y] = new Case(name);
+                mer[x][y] = new Case(name);
             }
         }
     }
@@ -58,7 +75,7 @@ public class MerBoard {
         x = p2.getX(); //On redonne les new coordonnées a la pos
         y = p2.getY();
         if (posValide(x, y)) { //vérifie que la position voulue est valide
-            c = merBoard[x][y]; //donne à la case ces coordonnées // bateaGrand = c 
+            c = mer[x][y]; //donne à la case ces coordonnées // bateaGrand = c 
             if (!c.estVide) { //si la case voulue n'est pas vide, return null
                 return null;
             }
@@ -106,6 +123,8 @@ public class MerBoard {
     void estCirulaire(Position p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }
 //
 //    private void filBoats(int id) {
