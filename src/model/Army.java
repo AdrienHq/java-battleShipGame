@@ -50,10 +50,10 @@ public class Army {
         return this.nom;
     }
 
-    public boolean estAmi(Navire nav) {
-        if {nav.
-        
-    }
+//    public boolean estAmi(Navire nav) {
+//        if {nav.
+//        
+//    }
 
     @Override
     public boolean equals(Object o) {

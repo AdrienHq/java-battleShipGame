@@ -7,13 +7,13 @@ public abstract class Navire implements Deplacement {
     protected Position pos = null;
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
     protected Army army;
-    protected int portee = 0;
+//    protected int portee = 0;
 
-    protected Navire(String type, int pv, int portee) {
+    protected Navire(String type, int pv) {
         this.nom = army.getNom();
         this.typeNavire = type;
         this.pointVie = pv;
-        this.portee = portee;
+//        this.portee = portee;
 
     }
 
@@ -45,9 +45,7 @@ public abstract class Navire implements Deplacement {
          ennemy.pointVie -= 50;
     }
     
-    public int getPortee(){
-        return 
-    }
+    public abstract int getPortee();
 }
 
 //     @Override
