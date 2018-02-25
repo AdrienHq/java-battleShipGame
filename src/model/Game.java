@@ -26,11 +26,14 @@ public class Game extends Observable {
         Navire nav = null;
         if (c.estNavire()) { //Regarde si la case est un Navire
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
-        }else{
+        } else {
             return false; // aussinon on sort de la boucle
         }
-        if()
-
+        if (armeeTir.estAmi(nav)) {
+            this.cercleDeDegat(armeeTir, armeeDegat, nav.getPortee());
+            return true;
+        }
+        return false;
     }
 
     public boolean tirJoueur1(Position pos) {
@@ -47,6 +50,25 @@ public class Game extends Observable {
             return true;
         }
         return false;
+    }
+
+    private void cercleDeDegat(Army army, Army armeeDegat, Navire amis, int portee) {
+        Position pos = amis.getPosition();
+        for (int i = -portee; i <= portee; i++) {
+            for (int j = -portee; j <= portee; j++) {
+                Position p = new Position(pos.getX() + k, pos.getY() + 1);
+                board.estCirulaire(p);
+                Case c = board.getPosCase(pos);
+                if (c.estNavire() && !army.estAmi(c.getNavire())) {
+                    Navire ennemy = c.getNavire();
+                    amis.tirDegat(ennemy);
+                    if (ennemy.getPointVie() == 0) {
+                        armeeDegat.deleteNavire(ennemy);
+                        c.supprimerNavire();
+                    }
+                }
+            }
+        }
     }
 
     private void setChangedAndNotify(MerBoard board) {
