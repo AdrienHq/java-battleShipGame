@@ -28,16 +28,16 @@ public class ControllerConsole {
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
         Boolean Joueur = true ;
-        do {
-           if(Joueur){
-           
-           }else{
-           
-           } 
-                
-            
-        
-        } while (!finJeu);
+//        do {
+//           if(Joueur){
+//           
+//           }else{
+//           
+//           } 
+//                
+//            
+//        
+//        } while (!finJeu);
         
         
     }

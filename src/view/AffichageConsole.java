@@ -22,9 +22,9 @@ public class AffichageConsole implements Observer {
         Case[][] mer = board.getTab();
         Case c = null ;
         Position pos = null ;
-        Boolean debug = false  ;
+        Boolean debug = true  ;
         
-        System.out.println(" A B C D E");
+        System.out.println("    A   B   C   D   E");
         for (int x = 0; x < game.getCote(); x++) {
             System.out.print((x + 1) + " |"); //Affiche l'entête de la ligne (1 2 3 4 5 ...)
             for (int y = 0; y < game.getCote(); y++) {
@@ -36,34 +36,37 @@ public class AffichageConsole implements Observer {
                         if(c.getTypeNavire() == "BIG"){ //si grand navire 
                             Navire n = c.getNavire();
                             if(game.getNomJoueur1()== n.getNom()  ){       //si nom bateau =
-                                System.out.println(Couleur.RED + "B|");
+                                System.out.print(Couleur.RED + " B " + Couleur.RESET + "|");
                             }else{
-                                System.out.println(Couleur.BLUE + "B|");
+                                System.out.print(Couleur.BLUE + " B " + Couleur.RESET + "|");
                             }
                         
                         
                         }else if(c.getTypeNavire() == "SMALL") {                  //si petit navire
                             Navire n = c.getNavire();
                             if(game.getNomJoueur1()== n.getNom()){       //si nom bateau =
-                                System.out.println(Couleur.RED + "S|");
+                                System.out.print(Couleur.RED + " S " + Couleur.RESET + "|");
                             }else{
-                                System.out.println(Couleur.BLUE + "S|");
+                                System.out.print(Couleur.BLUE + " S " + Couleur.RESET + "|");
                             }
                         }else {
-                            if(debug = true){
+                            if(debug == true){
                                     if(c.getTypeFlottant()== "ATOMIQUE"){
-                                        System.out.println(Couleur.BLACK +"A|");
+                                        System.out.print(Couleur.BLACK +" A " + Couleur.RESET + "|");
                                     }
                                     else{
-                                     System.out.println(Couleur.BLACK +"N|");
+                                     System.out.print(Couleur.BLACK +" N " + Couleur.RESET + "|");
                                     }
+                            }else{
+                                    System.out.print(Couleur.BLACK +"   " + Couleur.RESET + "|");
                             }                
                         }
                     }else{
-                        System.out.print(" |");
+                        System.out.print("   |");
                     }
                       
             }
+            System.out.println(" ");
         }
      }    
      
@@ -72,7 +75,7 @@ public class AffichageConsole implements Observer {
     }
      
     enum Couleur {
-    
+    RESET("\u001B[0m"),
     RED("\u001B[31m"),
     BLUE("\u001B[34m"),
     BLACK("\u001B[30m");
