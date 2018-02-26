@@ -61,8 +61,8 @@ public class Game extends Observable {
     }
     private void placementFlottants(){
         Position pos = null ;
-        for (int y = 0; y < cote; y++) {
-            for (int x = 0; x < cote; x++) {
+        for (int x = 0; x < cote; x++) {
+            for (int y = 0; y < cote; y++) {
                 pos = new Position(x,y);
                 if(board.positionVide(pos) && random.nextInt(9)== 5){ //si positionestprise(
                     if(random.nextInt(1) == 0){
@@ -76,25 +76,6 @@ public class Game extends Observable {
         }
     }
     
-    
-//    private void initialiserBateau(Army army1,Army army2) { //Donne Armee jouee 1 donc 3 bateaux
-//        List<Navire> delete = new ArrayList<>(); //vide
-//        List<Navire> add = new ArrayList<>(); //vide
-//
-//        for (Navire n : army.getListeNavire()) { //Parcours les navires
-//            boolean valide = false; //init boolean a false
-//            Position pos = null; // Une pos nulle 
-//            while (!valide) { //tant que c'est faux
-//                pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
-//                valide = this.navireEncore(n, pos); //Voir plus bas 
-//            }
-//            delete.add(n); //Rajoute dans la liste
-//            n.setPosition(pos); //set la position au navire
-//            add.add(n); // si la pos est valide le copie dans la seconde liste 
-//        }
-//        army.getNavires().rajouterTout(delete); // ? 
-//        army.getNavires().ajouterTout(add); // ? 
-//    }
 
     private boolean navireEncore(Navire n, Position pos) { //Verifie si la pos est valide KINDA
         if (n == null || pos == null) {
@@ -166,6 +147,7 @@ public class Game extends Observable {
             }
         }
     }
+  
     
     public String getNomJoueur1() {
         return this.joueur1.nom;

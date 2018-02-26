@@ -7,6 +7,10 @@ import java.util.Random;
 public class MerBoard {
 
     private static int cote = 5;
+
+    static int getCote() {
+        return cote ; //To change body of generated methods, choose Tools | Templates.
+    }
     private Case[][] mer;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
@@ -16,8 +20,8 @@ public class MerBoard {
     private MerBoard(int cote) {
         this.cote = cote ;
         this.mer = new Case[cote][cote];
-        for (int y = 0; y < cote; y++) {
-            for (int x = 0; x < cote; x++) {
+        for (int x = 0; x < cote; x++) {
+            for (int y = 0; y < cote; y++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
                 mer[x][y] = new Case(name);
@@ -57,10 +61,10 @@ public class MerBoard {
     }
 
     private void initMer() { //Création et initialisation du tableau de case.
-        Case[][] mer = new Case[cote][cote];
+        mer = new Case[cote][cote];
 
-        for (int y = 0; y < cote; y++) {
-            for (int x = 0; x < cote; x++) {
+        for (int x = 0; x < cote; x++) {
+            for (int y = 0; y < cote; y++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
                 mer[x][y] = new Case(name);
