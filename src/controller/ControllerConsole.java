@@ -7,29 +7,43 @@ import model.MerBoard;
 import view.AffichageConsole;
 
 public class ControllerConsole {
+
     public static void main(String[] args) {
-        String Army1 = null ,Army2 = null;
+        AffichageConsole affichage = new AffichageConsole();
+        String army1 = null, army2 = null;
         Scanner clavier = new Scanner(System.in);
-        System.out.println("Entrer nom Joueur1 suivit de Enter ");
-            if (clavier.hasNext()) {
-                Army1 = clavier.nextLine();           
+        affichage.askName1();
+        if (clavier.hasNext()) {
+            army1 = clavier.nextLine();
+
+        } else; // ??
+        affichage.askName2();
+        if (clavier.hasNext()) {
+            army2 = clavier.nextLine();
+
+        } else ;
+
+        Game game = Game.setGame(army1, army2);
+        boolean finJeu = false;
+        affichage.afficherGame(); // affiche le jeu 
+        game.addObserver(affichage);//Ajoute l'observer 
+        Boolean Joueur = true ;
+        do {
+           if(Joueur){
+           
+           }else{
+           
+           } 
                 
-            }else; // ??
-        System.out.println("Entrer nom Joueur2 suivit de Enter ");
-            if (clavier.hasNext()) {
-                Army2 = clavier.nextLine();           
-                
-            }else ;
-        Game game = Game.getInstance(Army1,Army2);
             
+        
+        } while (!finJeu);
+        
+        
     }
-//        Game game = Game.getInstance(); //créée une instance de Game 
-//        boolean finJeu = false;
+
 //        Direction direction;
 //        
-//        AffichageConsole affichage = new AffichageConsole(); //Crée un affichatge du jeu
-//        affichage.afficherGame(); // affiche le jeu 
-//        game.addObserver(affichage); //Ajoute l'observer 
 //        
 //        do {
 //            direction = saisieToucheClavier(); //la direction vaut la saisie au clavier
@@ -40,6 +54,7 @@ public class ControllerConsole {
 //                }
 //            }
 //        } while (!finJeu);
+    
 //        if (game.joueurAPerdu()) { //Si il reste encore des bateaux
 //            affichage.showLose(); //affiche l'ecran de fin Perdant
 //        } else {
@@ -69,10 +84,4 @@ public class ControllerConsole {
 //            default : return null;
 //        }
 //    }
-    
-    
-        
-        
-    
-    
 }

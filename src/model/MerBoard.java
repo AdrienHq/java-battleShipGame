@@ -30,6 +30,12 @@ public class MerBoard {
         
     }
     
+    public Case[][] getTab(){
+        
+        return mer ;
+    }
+       
+    
     public boolean positionVide(Position pos ){
         int x =pos.getX();
         int y =pos.getY();
@@ -72,8 +78,8 @@ public class MerBoard {
         }
     }
 
+  
     
-
     public Case caseVide(Direction d, Position p) { //Prend la direction et la position de base pour savoir si la case est DISPO pour un déplacement
         Case c = null; //Une case
         int x, y; //coordonnées
@@ -100,30 +106,36 @@ public class MerBoard {
 
     }
 
-    public Case getPositionCaseElement() {
-        int x = 0;
-        int y = 0;
-        int n = 0;
-
-        for (int i = 0; i < initTableau.length; i++) {
-            for (int j = 0; j < initTableau[0].length; j++) {
-                if (initTableau[i][j] == 3) {
-                    if (n == id) {
-                        x = i;
-                        y = j;
-                        n++;
-                    } else if (n < id) {
-                        n++;
-                    }
-                }
-            }
-        }
-        return new Position(x, y);
-    }
+//    public Case getPositionCaseElement() {
+//        int x = 0;
+//        int y = 0;
+//        int n = 0;
+//
+//        for (int i = 0; i < initTableau.length; i++) {
+//            for (int j = 0; j < initTableau[0].length; j++) {
+//                if (initTableau[i][j] == 3) {
+//                    if (n == id) {
+//                        x = i;
+//                        y = j;
+//                        n++;
+//                    } else if (n < id) {
+//                        n++;
+//                    }
+//                }
+//            }
+//        }
+//        return new Position(x, y);
+//    }
 
     public Navire getNavire(Position pos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+        int x1 = pos.getX();
+        int y1 = pos.getY();
+        
+        Navire n = mer[x1][y1].getNavire();
+        
+       return n ;
+        
+   }
 
     Case getPosCase(Position pos) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

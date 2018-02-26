@@ -17,7 +17,7 @@ public class Game extends Observable {
     List<Navire> bateauEnMer= new ArrayList<>();
     
     
-    public Game(String joueur1, String joueur2){
+    private Game(String joueur1, String joueur2){
     
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
@@ -25,16 +25,19 @@ public class Game extends Observable {
         initialiserBateaux(getJoueur1());
         initialiserBateaux(getJoueur2());
         placementFlottants();
-        //placer les bateaux 
-        //placer les mines ou bien en amont
+       
     }
 
-    public static Game getInstance(String joueur1, String joueur2) {
+    public static Game setGame(String joueur1, String joueur2) {
         if (instance == null) {
             instance = new Game(joueur1,joueur2);
         }
+        return instance ;
+    }
+    public static Game getInstance() {
         return instance;
     }
+
     public MerBoard getBoard(){
         return this.board ;
     }
@@ -62,7 +65,7 @@ public class Game extends Observable {
     private void placementFlottants(){
         Position pos = null ;
         for (int x = 0; x < cote; x++) {
-            for (int y = 0; y < cote; y++) {
+            for (int y = 0; x < cote; x++) {
                 pos = new Position(x,y);
                 if(board.positionVide(pos) && random.nextInt(9)== 5){ //si positionestprise(
                     if(random.nextInt(1) == 0){
@@ -113,21 +116,21 @@ public class Game extends Observable {
         return false;
     }
 
-    public boolean tirJoueur1(Position pos) {
-        if (this.joueurTir(pos, board.getJoueur1(), board.getJoueur2())) {
-            this.setChangedAndNotify(board);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean tirJoueur2(Position pos) {
-        if (this.joueurTir(pos, board.getJoueur2(), board.getJoueur1())) {
-            this.setChangedAndNotify(board);
-            return true;
-        }
-        return false;
-    }
+//    public boolean tirJoueur1(Position pos) {
+//        if (this.joueurTir(pos, board.getJoueur1(), board.getJoueur2())) {
+//            this.setChangedAndNotify(board);
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    public boolean tirJoueur2(Position pos) {
+//        if (this.joueurTir(pos, board.getJoueur2(), board.getJoueur1())) {
+//            this.setChangedAndNotify(board);
+//            return true;
+//        }
+//        return false;
+//    }
 
     private void cercleDeDegat(Army army, Army armeeDegat, Navire amis, int portee) {
         Position pos = amis.getPosition();
