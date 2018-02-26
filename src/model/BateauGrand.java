@@ -7,8 +7,8 @@ public class BateauGrand extends Navire {
     public static int porteeTir;
     private static int[] array = {0, 0, 1, 1, 1, 2, 2, 2, 2, 2};
 
-    public BateauGrand() {
-        super("BIG", 100);
+    public BateauGrand(String nom) {
+        super(nom,"BIG", 100);
     }
 
     @Override

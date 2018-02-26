@@ -36,31 +36,31 @@ public class AffichageConsole implements Observer {
                         if(c.getTypeNavire() == "BIG"){ //si grand navire 
                             Navire n = c.getNavire();
                             if(game.getNomJoueur1()== n.getNom()  ){       //si nom bateau =
-                                System.out.println(Couleur.RED + "B");
+                                System.out.println(Couleur.RED + "B|");
                             }else{
-                                System.out.println(Couleur.BLUE + "B");
+                                System.out.println(Couleur.BLUE + "B|");
                             }
                         
                         
                         }else if(c.getTypeNavire() == "SMALL") {                  //si petit navire
                             Navire n = c.getNavire();
                             if(game.getNomJoueur1()== n.getNom()){       //si nom bateau =
-                                System.out.println(Couleur.RED + "S");
+                                System.out.println(Couleur.RED + "S|");
                             }else{
-                                System.out.println(Couleur.BLUE + "S");
+                                System.out.println(Couleur.BLUE + "S|");
                             }
                         }else {
                             if(debug = true){
                                     if(c.getTypeFlottant()== "ATOMIQUE"){
-                                        System.out.println(Couleur.BLACK +"A");
+                                        System.out.println(Couleur.BLACK +"A|");
                                     }
                                     else{
-                                     System.out.println(Couleur.BLACK +"N");
+                                     System.out.println(Couleur.BLACK +"N|");
                                     }
                             }                
                         }
                     }else{
-                        System.out.print(" ");
+                        System.out.print(" |");
                     }
                       
             }

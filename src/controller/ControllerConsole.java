@@ -22,7 +22,7 @@ public class ControllerConsole {
             army2 = clavier.nextLine();
 
         } else ;
-
+        System.out.println(army1 + " " + army2);
         Game game = Game.setGame(army1, army2);
         boolean finJeu = false;
         affichage.afficherGame(); // affiche le jeu 

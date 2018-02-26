@@ -14,9 +14,9 @@ public class Army {
     }
 
     public ArrayList<Navire> fillNavires() {
-        listNavire.add(new BateauGrand());
-        listNavire.add(new BateauPetit());
-        listNavire.add(new BateauPetit());
+        listNavire.add(new BateauGrand(nom));
+        listNavire.add(new BateauPetit(nom));
+        listNavire.add(new BateauPetit(nom));
         return listNavire;
     }
 
