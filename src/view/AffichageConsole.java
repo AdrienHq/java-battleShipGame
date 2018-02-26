@@ -1,5 +1,6 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import model.*;
@@ -17,11 +18,12 @@ public class AffichageConsole implements Observer {
         Case c = null;
         Position pos = null;
         Boolean debug = true;
+        int cote = game.getCote();
 
-        System.out.println("    A   B   C   D   E");
-        for (int x = 0; x < game.getCote(); x++) {
+        printCol(cote);
+        for (int x = 0; x < cote; x++) {
             System.out.print((x + 1) + " |"); //Affiche l'entête de la ligne (1 2 3 4 5 ...)
-            for (int y = 0; y < game.getCote(); y++) {
+            for (int y = 0; y < cote; y++) {
 
                 pos = new Position(x, y);
                 c = mer[x][y];
@@ -56,13 +58,45 @@ public class AffichageConsole implements Observer {
             }
             System.out.println(" ");
         }
+        afficheLegende();
+        afficheEtatArmee(game.getJoueur1(),game.getJoueur2());
+            
+        
+        
+    }
+    
+    private void printCol(int cote){
+            System.out.print("    A");
+            for (int x = 1; x < cote; x++) { //game.getCote()
+                char col = (char) (x + 65);
+            System.out.print("   "+ col);
+            } 
+            System.out.println();
+    } 
+    private void afficheLegende(){
         System.out.println(" B: Grand Bateau / S: Petit Bateau");
         System.out.println(" A: Mine Atomique / N: Mine Normale");
     }
-
-    private void detecterNavires(MerBoard mer, int x, int y) {
-
+    
+    private void afficheEtatArmee(Army army1,Army army2) {
+        System.out.println("");
+        System.out.println("Etat des armees");
+        System.out.println("Position   Type   Integrité(%) Armée ");
+        for(Navire n :army1.getListeNavire()){
+            System.out.println(" " + n.getPopo() +  "        "  + n.getType()+  "      " + n.getPointVie() + "       " + army1.getNom() );
+                  
+                               
+        }
+        for(Navire n :army2.getListeNavire()){
+            System.out.println(" " + n.getPopo() +  "        "  + n.getType()+  "      " + n.getPointVie() + "       " + army2.getNom() ); 
+        }
     }
+
+//    private void detecterNavires(MerBoard mer, int x, int y) {
+//
+//    }
+
+    
 
     enum Couleur {
         RESET("\u001B[0m"),

@@ -55,6 +55,7 @@ public class Game extends Observable {
             }while(!board.positionVide(pos));
             
             board.placerNavire(pos,n);//place le navire (pos )
+            
            
          //enregistre la position comme prise ;
             

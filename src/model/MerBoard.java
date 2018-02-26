@@ -22,8 +22,8 @@ public class MerBoard {
         this.mer = new Case[cote][cote];
         for (int x = 0; x < cote; x++) {
             for (int y = 0; y < cote; y++) {
-                char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
-                String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
+                char Col = (char) (x + 65);           //Valeur alphabétique de la colonne
+                String name = Col + String.valueOf(y + 1); //String du nom de la case (exemple : B1)
                 mer[x][y] = new Case(name);
             }
         }
@@ -48,6 +48,9 @@ public class MerBoard {
         int x = pos.getX();
         int y = pos.getY();
         mer[x][y].setNavire(n);
+        char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
+        String popo = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
+        n.setPopo(popo);
 
     }
 

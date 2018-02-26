@@ -8,6 +8,7 @@ public abstract class Navire implements Deplacement {
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
     protected Army army = null;
 //    protected int portee = 0;
+    protected String popo = "" ;
 
     protected Navire(String nom,String type, int pv) {
         this.nom = nom;
@@ -15,6 +16,12 @@ public abstract class Navire implements Deplacement {
         this.pointVie = pv;
 //        this.portee = portee;
 
+    }
+    public void setPopo(String popo){
+        this.popo = popo;
+    }
+    public String getPopo(){
+        return this.popo ;
     }
 
     public Position getPosition() {
