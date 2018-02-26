@@ -12,8 +12,8 @@ public class BateauPetit extends Navire {
     }
 
     @Override
-    public void move(Direction d) {
-        this.pos.déplacer(d);
+    public void move(Position pos) {
+//        this.pos.déplacer(pos);
     }
 
     @Override

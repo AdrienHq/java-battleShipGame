@@ -26,7 +26,6 @@ public class Main {
             System.out.println("Error");
             //créer une classe d'exception ?           
         }
-
         while (c != '1' && c != '2' && c != '0') {
             System.out.println("");
             System.out.println("Choix invalide !");

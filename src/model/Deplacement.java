@@ -2,5 +2,5 @@ package model;
 
 public interface Deplacement {
 
-    void move(Direction d);
+    void move(Position pos);
 }

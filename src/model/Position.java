@@ -42,23 +42,23 @@ public class Position {
     public String toString() {
         return "Abscisse X: " + this.x + "  Ordonnée Y: " + this.y;
     }
-
-    public void déplacer(Direction d) {
-        switch (d) {
-            case HAUT:
-                this.y--;
-                break;
-            case BAS:
-                this.y++;
-                break;
-            case GAUCHE:
-                this.x--;
-                break;
-            case DROITE:
-                this.x++;
-                break;
-        }
-    }
-    //RAJOUTER LES CAS OU LE DEPLACEMENT FAIT PLUS DE  1 CASE 
+//
+//    public void déplacer(Position pos) {
+//        switch (pos) {
+//            case HAUT:
+//                this.y--;
+//                break;
+//            case BAS:
+//                this.y++;
+//                break;
+//            case GAUCHE:
+//                this.x--;
+//                break;
+//            case DROITE:
+//                this.x++;
+//                break;
+//        }
+//    }
+//    //RAJOUTER LES CAS OU LE DEPLACEMENT FAIT PLUS DE  1 CASE 
 
 }

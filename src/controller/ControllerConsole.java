@@ -1,9 +1,7 @@
 package controller;
 
 import java.util.Scanner;
-import model.Direction;
 import model.Game;
-import model.MerBoard;
 import view.AffichageConsole;
 
 public class ControllerConsole {
@@ -29,14 +27,9 @@ public class ControllerConsole {
         game.addObserver(affichage);//Ajoute l'observer 
         Boolean Joueur = true ;
 //        do {
-//           if(Joueur){
-//           
-//           }else{
-//           
+//           if(Joueur){          
+//           }else{           
 //           } 
-//                
-//            
-//        
 //        } while (!finJeu);
         
         

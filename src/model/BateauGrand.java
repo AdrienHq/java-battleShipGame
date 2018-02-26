@@ -8,14 +8,14 @@ public class BateauGrand extends Navire {
     private static int[] array = {0, 0, 1, 1, 1, 2, 2, 2, 2, 2};
 
     public BateauGrand(String nom) {
-        super(nom,"BIG", 100);
+        super(nom, "BIG", 100);
     }
 
     @Override
-    public void move(Direction d) {
-        this.pos.déplacer(d);
-
+    public void move(Position pos) {
+//        this.pos.déplacer(pos);
     }
+
     @Override
     public int getPorteeTir() {
         int portee = new Random().nextInt(array.length);
