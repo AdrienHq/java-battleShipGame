@@ -59,45 +59,40 @@ public class AffichageConsole implements Observer {
             System.out.println(" ");
         }
         afficheLegende();
-        afficheEtatArmee(game.getJoueur1(),game.getJoueur2());
-            
-        
-        
+        afficheEtatArmee(game.getJoueur1(), game.getJoueur2());
+
     }
-    
-    private void printCol(int cote){
-            System.out.print("    A");
-            for (int x = 1; x < cote; x++) { //game.getCote()
-                char col = (char) (x + 65);
-            System.out.print("   "+ col);
-            } 
-            System.out.println();
-    } 
-    private void afficheLegende(){
+
+    private void printCol(int cote) {
+        System.out.print("    A");
+        for (int x = 1; x < cote; x++) { //game.getCote()
+            char col = (char) (x + 65);
+            System.out.print("   " + col);
+        }
+        System.out.println();
+    }
+
+    private void afficheLegende() {
         System.out.println(" B: Grand Bateau / S: Petit Bateau");
         System.out.println(" A: Mine Atomique / N: Mine Normale");
     }
-    
-    private void afficheEtatArmee(Army army1,Army army2) {
+
+    private void afficheEtatArmee(Army army1, Army army2) {
         System.out.println("");
         System.out.println("Etat des armees");
         System.out.println("Position   Type   Integrité(%) Armée ");
-        for(Navire n :army1.getListeNavire()){
-            System.out.println(" " + n.getPopo() +  "        "  + n.getType()+  "      " + n.getPointVie() + "       " + army1.getNom() );
-                  
-                               
+        for (Navire n : army1.getListeNavire()) {
+            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
+
         }
-        for(Navire n :army2.getListeNavire()){
-            System.out.println(" " + n.getPopo() +  "        "  + n.getType()+  "      " + n.getPointVie() + "       " + army2.getNom() ); 
+        for (Navire n : army2.getListeNavire()) {
+            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army2.getNom());
         }
     }
 
 //    private void detecterNavires(MerBoard mer, int x, int y) {
 //
 //    }
-
-    
-
     enum Couleur {
         RESET("\u001B[0m"),
         RED("\u001B[31m"),
@@ -134,11 +129,35 @@ public class AffichageConsole implements Observer {
         System.out.println("Entrer nom Joueur2 suivit de Enter ");
     }
 
-//    public void showVictory() {
-//        Army m = m.;
-//
-//        System.out.println("Joueur :" + m.getNom()); //Sera surement dans Army getNomArmee + " a gagné !"); //AJOUTER GETNOM POUR PRENDRE LE NOM DU JOUEUR / ARMEE
-//    }
+    public void askPermissionDeplacement() {
+        System.out.println("Voulez vous déplacer un navire ? 1 pour se déplacer / 2 pour ne pas se déplacer.");
+    }
+
+    public void askDeplacement() {
+        System.out.println("Vers quel postition voulez vous déplacer le navire (Ex : B5) ? ");
+    }
+
+    public void showVictory() {
+        Army joueur1 = null;
+        Army joueur2 = null;
+        if (joueur1.listeVide()) {
+            System.out.println(joueur1.nom + "vous avez gagnez !!! BRAVO !");
+        } else if (joueur2.listeVide()) {
+            System.out.println(joueur2.nom + "vous avez gagnez !!! BRAVO !");
+        }
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        showGame();
+    }
+
+    public void showGame() {
+        afficherGame();
+    }
+
+}
+
 //
 //    public void showLose() {
 //        System.out.println("Joueur :" + Army.getNomArmee());  //Sera surement dans Army getNomArmee+ " a perdu !");
@@ -150,13 +169,3 @@ public class AffichageConsole implements Observer {
 //        System.out.println("");
 //    }
 //
-    @Override
-    public void update(Observable o, Object o1) {
-        showGame();
-    }
-
-    public void showGame() {
-        afficherGame();
-    }
-
-}

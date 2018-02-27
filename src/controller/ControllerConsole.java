@@ -1,13 +1,17 @@
 package controller;
 
 import java.util.Scanner;
+import model.Army;
 import model.Game;
+import model.Position;
 import view.AffichageConsole;
 
 public class ControllerConsole {
 
     public static void main(String[] args) {
         AffichageConsole affichage = new AffichageConsole();
+        boolean gameOver = false;
+        Army joueur1 = null; Army joueur2 = null; 
         String army1 = null, army2 = null;
         Scanner clavier = new Scanner(System.in);
         affichage.askName1();
@@ -20,19 +24,45 @@ public class ControllerConsole {
             army2 = clavier.nextLine();
 
         } else ;
-        
+
         Game game = Game.setGame(army1, army2);
         boolean finJeu = false;
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
-        Boolean Joueur = true ;
-//        do {
-//           if(Joueur){          
-//           }else{           
-//           } 
-//        } while (!finJeu);
-        
-        
+        Boolean Joueur = true;
+
+        do {
+            int res = toucheClavier(); //prends le int taper par l'user 
+            do {
+                affichage.askPermissionDeplacement(); //demande si il veut un déplacement 1 = OUI et 2 = NON 
+                Position pos = null;
+                game.jouer(pos);:
+
+                if (res == 1) {
+
+                }
+            } while (res != 1 || res != 2);
+
+        } while (!gameOver); 
+        if(joueur1.listeVide()){
+            affichage.showVictory();
+        }else if(joueur2.listeVide()){
+            affichage.showVictory();
+        }      
+    }
+
+    public static int toucheClavier() {
+        int clavier = 0;
+        try {
+            clavier = (int) System.in.read();
+        } catch (Exception e) {
+            System.out.println("Problème lors de la saisie");
+        }
+        return clavier;
+    }
+
+    public static void getDirection(Position pos) {
+
     }
 
 //        Direction direction;
@@ -47,7 +77,6 @@ public class ControllerConsole {
 //                }
 //            }
 //        } while (!finJeu);
-    
 //        if (game.joueurAPerdu()) { //Si il reste encore des bateaux
 //            affichage.showLose(); //affiche l'ecran de fin Perdant
 //        } else {
