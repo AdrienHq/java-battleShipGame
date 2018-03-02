@@ -8,9 +8,14 @@ public class MerBoard {
 
     private static int cote = 5;
 
-    static int getCote() {
+    public static int getCote() {
         return cote; //To change body of generated methods, choose Tools | Templates.
     }
+
+    public static void setCote(int cote) {
+        MerBoard.cote = cote;
+    }
+
     private Case[][] mer;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
@@ -27,11 +32,9 @@ public class MerBoard {
                 mer[x][y] = new Case(name);
             }
         }
-
     }
 
     public Case[][] getTab() {
-
         return mer;
     }
 
@@ -51,7 +54,6 @@ public class MerBoard {
         char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
         String popo = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
         n.setPopo(popo);
-
     }
 
     void placerFlottant(Position pos, Flottant f) {
@@ -95,7 +97,6 @@ public class MerBoard {
         Navire n = mer[x1][y1].getNavire();
 
         return n;
-
     }
 
     Case getPosCase(Position pos) {
@@ -106,5 +107,3 @@ public class MerBoard {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
-
-

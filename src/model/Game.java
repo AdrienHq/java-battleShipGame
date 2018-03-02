@@ -8,7 +8,7 @@ import java.util.Random;
 public class Game extends Observable {
 
     private Random rand = new Random();
-    private static final int cote = 5;
+    private int cote = 5;
     private MerBoard board = MerBoard.getInstance(cote);
     private static Game instance = null;
     private Army joueur1; //army (nom / arrayList / color) 
@@ -80,8 +80,12 @@ public class Game extends Observable {
         }
         return false;
     }
+    
+    public void setCote(int cote){
+        this.cote = cote;
+    }
 
-    public static int getCote() {
+    public int getCote() {
         return cote;
     }
 

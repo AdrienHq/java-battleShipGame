@@ -114,9 +114,6 @@ public class AffichageConsole implements Observer {
 //    public void showEtatArmee()
 //            print "position ..."
 //
-//    
-//    
-//    
 //    public static char[][] getMerAffichage() {
 //        return merAffichage;
 //    }
@@ -127,6 +124,10 @@ public class AffichageConsole implements Observer {
 
     public void askName2() {
         System.out.println("Entrer nom Joueur2 suivit de Enter ");
+    }
+    
+    public void askTailleCote(){
+        System.out.println("De quelle taille voulez vous votre plateau de jeu (taille du côté) ? ");
     }
 
     public void askPermissionDeplacement() {
