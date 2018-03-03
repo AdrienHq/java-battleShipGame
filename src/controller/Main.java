@@ -1,57 +1,57 @@
 package controller;
 
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
-public class Main {
-
-    public static int modeDeJeu = 0;
+public class Main extends Application {
 
     public static void main(String[] args) {
-        char c = ' ';
-
-        System.out.println("");
-        System.out.println("Que voulez vous faire ? Tapez le chiffre affiché !");
-        System.out.println("Jouer au mode console => 1");
-        System.out.println("Jouer au mode graphique => 2");
-        System.out.println("Quitter => 0");
-        System.out.println("");
-
-        try {
-            Scanner clavier = new Scanner(System.in);
-            if (clavier.hasNext()) {
-                c = clavier.nextLine().charAt(0);
-                //Caractère touver à la position 0, première position de la ligne d'écriture.
-            }
-        } catch (Exception e) {
-            System.out.println("Error");
-            //créer une classe d'exception ?           
-        }
-        while (c != '1' && c != '2' && c != '0') {
-            System.out.println("");
-            System.out.println("Choix invalide !");
-            System.out.println("Choisissez une option valide ( 1 - 2 - 0");
-            System.out.println("");
-
-            try {
-                Scanner clavier = new Scanner(System.in);
-                if (clavier.hasNext()) {
-                    c = clavier.nextLine().charAt(0);
-                }
-            } catch (Exception e) {
-                System.out.println("Error");     
-            }
-        }
-
-        switch (c) {
-            case '0':
-                ControllerConsole.main(args);
-            case '1':
-                ControllerGraphique.main(args);
-            case '2':
-                System.exit(0);
-                //Quitte le programme
-                break;
-        }
+        launch(args);
     }
 
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Choix Controller");
+        Button btn = new Button();
+        Button btn2 = new Button();
+        Button btn3 = new Button();
+        btn.setText("Controller Console");
+        btn2.setText("Controller Graphique");
+        btn3.setText("Quitter");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            private String[] args;
+
+            @Override
+            public void handle(ActionEvent event) {
+                ControllerConsole.main(args);
+            }
+        });
+        btn2.setOnAction(new EventHandler<ActionEvent>() {
+            private String[] args;
+
+            @Override
+            public void handle(ActionEvent event) {
+                ControllerGraphique.main(args);
+            }
+        });
+        btn3.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+               System.exit(0);
+            }
+        });
+
+        GridPane root = new GridPane();
+        root.add(btn, 0, 1);
+        root.add(btn2, 2, 1);
+        root.add(btn3, 3, 1);
+        primaryStage.setScene(new Scene(root, 300, 25));
+        primaryStage.show();
+    }
 }
