@@ -20,21 +20,23 @@ public class AffichageSetup extends VBox {
         control = ctrl;
         setup();
         stage.setTitle("Entrez les noms des deux joueurs.");
-        stage.setScene(new Scene(this, 500, 300));        
+        stage.setScene(new Scene(this, 500, 300));
         stage.show();
     }
+
+    TextField tf = new InputText();
+    TextField tf2 = new InputText();
 
     private void setup() {
         FlowPane root = new FlowPane();
         Label labelJ1 = new Label("Joueur1");
         Label labelJ2 = new Label("Joueur2");
-        TextField tf = new InputText();
-        TextField tf2 = new InputText();
+
         Button btOk = new Button("Accepter");
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
-            if (!tf.getText().isEmpty()) {
-                switchToMainWindow(String.valueOf(tf.getText()), tf2.getText());
+            if (!tf.getText().isEmpty() && !tf2.getText().isEmpty()) {
+                switchToMainWindow(tf.getText(), tf2.getText());
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
@@ -55,6 +57,7 @@ public class AffichageSetup extends VBox {
     }
 
     private class InputText extends TextField {
+
         InputText() {
             super("");
             setAlignment(Pos.TOP_CENTER);
@@ -68,12 +71,12 @@ public class AffichageSetup extends VBox {
                     setText(oldValue);
                 }
             });
-            setOnKeyPressed(ke -> {
-                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
-                    switchToMainWindow(String.copyValueOf(chars), String.copyValueOf(chars));
-//                            Integer.valueOf(getText()));
-                }
-            });
+//            setOnKeyPressed(ke -> {
+//                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
+//                    switchToMainWindow(String.copyValueOf(chars), String.copyValueOf(chars));
+////                            Integer.valueOf(getText()));
+//                }
+//            });
         }
     }
 //    private class InputNumber extends TextField { //Pour la taille après

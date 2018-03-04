@@ -28,7 +28,7 @@ public class Main extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                ControllerConsole.main(args);
+                ControllerConsole.main(args);     
             }
         });
         btn2.setOnAction(new EventHandler<ActionEvent>() {
