@@ -51,7 +51,7 @@ public class Main extends Application {
         root.add(btn, 0, 1);
         root.add(btn2, 2, 1);
         root.add(btn3, 3, 1);
-        primaryStage.setScene(new Scene(root, 300, 25));
+        primaryStage.setScene(new Scene(root, 375, 35));
         primaryStage.show();
     }
 }
