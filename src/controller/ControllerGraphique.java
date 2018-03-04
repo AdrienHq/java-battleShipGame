@@ -24,7 +24,7 @@ public class ControllerGraphique extends Application{
     }
     
      // fait apparaître la fenêtre principale de l'application
-    public void switchToMainWindow(int size) {
+    public void switchToMainWindow(String army1, String army2) {
         AffichageGraphique affGraphique = new AffichageGraphique(stage, size, this); 
         Game game = Game.setGame(army1, army2);
         game.addObserver(affGraphique);

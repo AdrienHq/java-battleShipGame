@@ -5,8 +5,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,54 +19,85 @@ public class AffichageSetup extends VBox {
     public AffichageSetup(Stage stage, ControllerGraphique ctrl) {
         control = ctrl;
         setup();
-        stage.setTitle("Choose Size");
-        stage.setScene(new Scene(this, 300, 120));
+        stage.setTitle("Entrez les noms des deux joueurs.");
+        stage.setScene(new Scene(this, 500, 300));        
         stage.show();
     }
 
     private void setup() {
-        TextField tf = new InputNumber();
-        Button bt = new Button("OK");
-        bt.setOnAction(e -> {
+        FlowPane root = new FlowPane();
+        Label labelJ1 = new Label("Joueur1");
+        Label labelJ2 = new Label("Joueur2");
+        TextField tf = new InputText();
+        TextField tf2 = new InputText();
+        Button btOk = new Button("Accepter");
+        Button btReset = new Button("Reset");
+        btOk.setOnAction(e -> {
             if (!tf.getText().isEmpty()) {
-                switchToMainWindow(Integer.valueOf(tf.getText()));
+                switchToMainWindow(String.valueOf(tf.getText()), tf2.getText());
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
         });
-        getChildren().addAll(tf, bt);
+        btReset.setOnAction(e -> {
+            tf.setText(null);
+            tf2.setText(null);
+        });
+        getChildren().addAll(tf, tf2, btOk, btReset);
 
         setAlignment(Pos.CENTER);
         setPadding(new Insets(20));
         setSpacing(20);
     }
 
-    private void switchToMainWindow(int size) {
-        control.switchToMainWindow(size);
+    private void switchToMainWindow(String joueur1, String joueur2) {
+        control.switchToMainWindow(joueur1, joueur2);
     }
 
-    private class InputNumber extends TextField {
-
-        InputNumber() {
-            super("5");
-            setAlignment(Pos.CENTER);
+    private class InputText extends TextField {
+        InputText() {
+            super("");
+            setAlignment(Pos.TOP_CENTER);
             setMaxWidth(150);
             installListeners();
         }
 
         private void installListeners() {
-            // N'accepte que les chiffres
             textProperty().addListener((obs, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*")) {
+                if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
                     setText(oldValue);
                 }
             });
-            // Capture du Enter pour valider saisie
             setOnKeyPressed(ke -> {
                 if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
-                    switchToMainWindow(Integer.valueOf(getText()));
+                    switchToMainWindow(String.copyValueOf(chars), String.copyValueOf(chars));
+//                            Integer.valueOf(getText()));
                 }
             });
         }
     }
+//    private class InputNumber extends TextField { //Pour la taille après
+//
+//        InputNumber() {
+//            super("5");
+//            setAlignment(Pos.CENTER);
+//            setMaxWidth(150);
+//            installListeners();
+//        }
+//
+//        private void installListeners() {
+//            // N'accepte que les chiffres
+//            textProperty().addListener((obs, oldValue, newValue) -> {
+//                if (!newValue.matches("\\d*")) {
+//                    setText(oldValue);
+//                }
+//            });
+//            // Capture du Enter pour valider saisie
+//            setOnKeyPressed(ke -> {
+//                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
+//                    switchToMainWindow(Integer.valueOf(getText()));
+//                }
+//            });
+//        }
+//    }
 }
