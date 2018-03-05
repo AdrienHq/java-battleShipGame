@@ -8,8 +8,8 @@ import java.util.Random;
 public class Game extends Observable {
 
     private Random rand = new Random();
-    private int cote = 5;
-    private MerBoard board = MerBoard.getInstance(cote);
+    private int cote ;
+    private MerBoard board ;
     private static Game instance = null;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
@@ -17,20 +17,22 @@ public class Game extends Observable {
     private static boolean gameOver = false;
     List<Navire> bateauEnMer = new ArrayList<>();
 
-    private Game(String joueur1, String joueur2) {
+    private Game(String joueur1, String joueur2,int cote) {
 
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
-
+        this.cote = cote ;    
+        this.board = MerBoard.getInstance(cote);
+        
         initialiserBateaux(getJoueur1());
         initialiserBateaux(getJoueur2());
         placementFlottants();
 
     }
 
-    public static Game setGame(String joueur1, String joueur2) {
+    public static Game setGame(String joueur1, String joueur2,int cote) {
         if (instance == null) {
-            instance = new Game(joueur1, joueur2);
+            instance = new Game(joueur1, joueur2,cote);
         }
         return instance;
     }

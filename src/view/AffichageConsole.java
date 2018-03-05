@@ -22,6 +22,9 @@ public class AffichageConsole implements Observer {
 
         printCol(cote);
         for (int x = 0; x < cote; x++) {
+            if(cote>= 10 && x < 9){        // Si tableau >= 10colonne alors on décalle les 9premiere colonne pour alligner le tout
+                System.out.print(" ");
+            }
             System.out.print((x + 1) + " |"); //Affiche l'entête de la ligne (1 2 3 4 5 ...)
             for (int y = 0; y < cote; y++) {
 
@@ -64,7 +67,7 @@ public class AffichageConsole implements Observer {
     }
 
     private void printCol(int cote) {
-        System.out.print("    A");
+        System.out.print("     A");
         for (int x = 1; x < cote; x++) { //game.getCote()
             char col = (char) (x + 65);
             System.out.print("   " + col);

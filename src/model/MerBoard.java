@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class MerBoard {
 
-    private static int cote = 5;
+    private static int cote ;
 
     public static int getCote() {
         return cote; //To change body of generated methods, choose Tools | Templates.

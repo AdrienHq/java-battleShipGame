@@ -28,9 +28,9 @@ public class ControllerConsole {
         } else ;
         affichage.askTailleCote();
         if (clavier.hasNext()) {
-            MerBoard.setCote(clavier.nextInt());                                     //ICI CHANGEMENT A CONTINUER 
+            cote = clavier.nextInt();                                     //ICI CHANGEMENT A CONTINUER 
         } else ;
-        Game game = Game.setGame(army1, army2);
+        Game game = Game.setGame(army1, army2,cote);
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
         Boolean Joueur = true;
