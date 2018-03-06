@@ -133,22 +133,23 @@ public class AffichageConsole implements Observer {
         System.out.println("De quelle taille voulez vous votre plateau de jeu (taille du côté) ? ");
     }
 
-    public void askPermissionDeplacement() {
-        System.out.println("Voulez vous déplacer un navire ? 1 pour se déplacer / 2 pour ne pas se déplacer.");
+    public void choixBateauTireur(String army){
+        System.out.println(army +", à vous de tirer .Selectionnez position du bateau tireur([A-Z][1-26]) : ");
+    }
+    public void portee(int portee){
+        System.out.println("Portée du tir : "+ portee);
+        
+    }
+    public void choixBateauDeplacement(String army){
+        System.out.println(army +", sélectionnez bateau à déplacer ([A-Z][1-26]) : ");
+    }
+    
+    public void choixCaseDeplacement(){
+        System.out.println("Choix case où se déplacer (saisir case actuelle pour y rester) : "); //ou rajouter la saisie de enter pour passer outre le dépacement
     }
 
-    public void askDeplacement() {
-        System.out.println("Vers quel postition voulez vous déplacer le navire (Ex : B5) ? ");
-    }
-
-    public void showVictory() {
-        Army joueur1 = null;
-        Army joueur2 = null;
-        if (joueur1.listeVide()) {
-            System.out.println(joueur1.nom + "vous avez gagnez !!! BRAVO !");
-        } else if (joueur2.listeVide()) {
-            System.out.println(joueur2.nom + "vous avez gagnez !!! BRAVO !");
-        }
+    public void showVictory(String army) {
+        System.out.println("L'armée de "+ army +"est victorieuse");
     }
 
     @Override

@@ -34,6 +34,42 @@ public class ControllerConsole {
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
         Boolean Joueur = true;
+        
+        do {
+            if(Joueur){ //si c'est au tour du joueur 1
+                affichage.choixBateauTireur(army1)  ;  
+                // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
+                //return la portee
+                affichage.portee(portee); //print la portee
+                //applique le tir (qui met à jour la board et la reprint auto
+                
+                affichage.choixBateauDeplacement(army1);
+                //tant que choix invalide demander la saisie du bateau( String nom de la case ) 
+                affichage.choixCaseDeplacement();
+                //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
+                //appliquer le déplacement(maj board et reprint auto
+                Joueur=false ; // On donne la main à l'autre joueur   
+            
+            }else{      //si c'est au tour du joueur 2
+                affichage.choixBateauTireur(army2)  ; 
+                // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
+                //return la portee
+                affichage.portee(portee); //print la portee
+                //applique le tir (qui met à jour la board et la reprint auto
+                
+                affichage.choixBateauDeplacement(army2);
+                //tant que choix invalide demander la saisie du bateau( String nom de la case ) 
+                affichage.choixCaseDeplacement();
+                //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
+                //appliquer le déplacement(maj board et reprint auto
+                Joueur = true ; //On donne la main à l'autre joueur
+            }
+            //si joueur1.listeVide() 
+                affichage.showVictory(army1);
+            //si joueur2.listeVide()){
+                affichage.showVictory(army2);
+        } while (!gameOver); 
+        
 
 //        do {
 //            int res = toucheClavier(); //prends le int taper par l'user 
