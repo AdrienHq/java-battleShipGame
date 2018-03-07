@@ -3,6 +3,8 @@ package model;
 import java.util.Objects;
 
 public class Case {
+
+   
     
     private String name ;
     
@@ -24,6 +26,10 @@ public class Case {
         this.name = name ;
         this.navire = null;
         this.flottant = null;
+    }
+    
+     public String getName() {
+        return name;
     }
 
     public boolean estRadioactif() {

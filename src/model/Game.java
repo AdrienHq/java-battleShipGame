@@ -98,6 +98,39 @@ public class Game extends Observable {
     public boolean randomTour() { //Outil pour avoir un rand true ou false
         return rand.nextBoolean();
     }
+    
+    public boolean getPorteeBatTireur(String army, String pos,int portee) {
+        Case c = board.getCaseInPos(pos);
+        Navire nav = null;
+        
+        if (c.estNavire()) { //Regarde si la case est un Navire
+            nav = c.getNavire(); //Si oui, on conserve cette donnée 
+        } else {
+            return false; // aussinon on sort de la boucle
+        }
+        if(army == joueur1.getNom()){
+            if (joueur1.estAmi(nav)) {
+                portee = nav.getPorteeTir();
+                if(portee != 0){
+                    this.degatZone(joueur1,  pos, portee);
+                }
+                return true;
+            }
+        }else{
+            if (joueur2.estAmi(nav)) {
+                portee = nav.getPorteeTir();
+                if(portee != 0){
+                    this.degatZone(joueur2,  pos, portee);
+                }
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    private void degatZone(Army joueur2, String pos, int portee) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private boolean joueurTir(Position pos, Army armeeTir, Army armeeDegat) {
         Case c = board.getPosCase(pos);
@@ -181,4 +214,6 @@ public class Game extends Observable {
     private void setChangedAndNotify(MerBoard board) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
 }

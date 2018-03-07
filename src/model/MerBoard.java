@@ -106,4 +106,16 @@ public class MerBoard {
     void estCirulaire(Position p) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    Case getCaseInPos(String pos) {
+        int x = getNumberFromAZ(pos.charAt(0)) ;
+        int y = pos.charAt(1) ;
+        return mer[x][y] ;
+        
+    }
+
+    private int getNumberFromAZ(char charAt) {
+        return (int)(charAt-65) ;
+    }
+    
 }

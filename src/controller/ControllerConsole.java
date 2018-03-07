@@ -37,11 +37,20 @@ public class ControllerConsole {
         
         do {
             if(Joueur){ //si c'est au tour du joueur 1
-                affichage.choixBateauTireur(army1)  ;  
-                // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
-                //return la portee
+                 
+                Boolean entreeCorrecte = false ;
+                String pos ;
+                int portee = 0;
+                do{
+                    affichage.choixBateauTireur(army1)  ;
+                    pos = clavier.nextLine();
+                    entreeCorrecte = game.getPorteeBatTireur(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
+                }
+                while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
+                
                 affichage.portee(portee); //print la portee
-                //applique le tir (qui met à jour la board et la reprint auto
+                
+                
                 
                 affichage.choixBateauDeplacement(army1);
                 //tant que choix invalide demander la saisie du bateau( String nom de la case ) 
@@ -65,9 +74,11 @@ public class ControllerConsole {
                 Joueur = true ; //On donne la main à l'autre joueur
             }
             //si joueur1.listeVide() 
-                affichage.showVictory(army1);
+                affichage.showVictory(army1); 
+                gameOver = false ;
             //si joueur2.listeVide()){
                 affichage.showVictory(army2);
+                gameOver = false ;
         } while (!gameOver); 
         
 
