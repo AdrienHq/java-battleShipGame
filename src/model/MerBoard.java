@@ -86,8 +86,10 @@ public class MerBoard {
         return (x >= 0 && x < cote) && (y >= 0 && y < cote);
     }
 
-    public void retirerNavire(Case c) {
-
+    public void supprimerNavire(Position pos) {
+        int x = pos.getX();
+        int y = pos.getY();
+        mer[x][y].supprimerNavire();
     }
 
     public Navire getNavire(Position pos) {
@@ -99,23 +101,44 @@ public class MerBoard {
         return n;
     }
 
-    Case getPosCase(Position pos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    Case getCaseInPos(Position p) {
+        int x = p.getX();
+        int y = p.getY();
+        return mer[x][y] ;
     }
-
-    void estCirulaire(Position p) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     Case getCaseInPos(String pos) {
         int x = getNumberFromAZ(pos.charAt(0)) ;
         int y = pos.charAt(1) ;
         return mer[x][y] ;
         
     }
+    void tirDegat(Position p) {
+        int x = p.getX();
+        int y = p.getY();
+        mer[x][y].tirDegat();
+    }
 
+
+    void getRealPosition(Position p) {
+        int x = p.getX();
+        int y = p.getY();
+        if(x>cote){
+            p.setX(x-cote);
+        }
+        else if(y>cote){
+            p.setY(y-cote);
+        }
+        
+    }
+
+    
     private int getNumberFromAZ(char charAt) {
         return (int)(charAt-65) ;
     }
+
+    
+
+    
     
 }

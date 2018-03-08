@@ -10,7 +10,7 @@ public class Position {
         setY(y);
     }
 
-    private void setX(int x) {
+    public void setX(int x) {
         if (x >= 0 && x < MerBoard.getCote()) {
             this.x = x;
         } else {
@@ -18,7 +18,7 @@ public class Position {
         }
     }
 
-    private void setY(int y) {
+    public void setY(int y) {
         if (y >= 0 && y < MerBoard.getCote()) {
             this.y = y;
         } else {

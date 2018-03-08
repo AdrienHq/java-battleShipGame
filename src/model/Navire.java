@@ -9,14 +9,21 @@ public abstract class Navire implements Deplacement {
     protected Army army = null;
 //    protected int portee = 0;
     protected String popo = "" ;
+    protected int deplacementMax ;
 
-    protected Navire(String nom,String type, int pv) {
+    
+
+    protected Navire(String nom,String type, int pv,int deplacementMax) {
         this.nom = nom;
         this.typeNavire = type;
         this.pointVie = pv;
-//        this.portee = portee;
+        this.deplacementMax = deplacementMax ;
 
     }
+    public int getDeplacementMax() {
+        return deplacementMax;
+    }
+    
     public void setPopo(String popo){
         this.popo = popo;
     }
@@ -52,8 +59,8 @@ public abstract class Navire implements Deplacement {
         return this.nom;
     }
 
-    public void tirDegat(Navire ennemy) {
-         ennemy.pointVie -= 50;
+    public void tirDegat() {
+         this.pointVie -= 50;
     }
     
     public abstract int getPorteeTir();

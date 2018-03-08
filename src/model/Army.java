@@ -27,6 +27,12 @@ public class Army {
         listNavire.add(n);
         return true;
     }
+    public void tirDegat(Navire n) {
+        Navire temp = n ;
+        this.deleteNavire(n);
+        temp.tirDegat();
+        listNavire.add(temp);
+    }
 
     public void deleteNavire(Navire n) { //tir en 0 5 
         if (!listeVide()) {
@@ -64,4 +70,6 @@ public class Army {
         }
         return false;
     }
+
+    
 }

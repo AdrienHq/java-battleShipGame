@@ -51,6 +51,9 @@ public class Case {
     public void switchRadioactif() {
         this.radioActif = this.radioActif = false;
     } 
+    public void tirDegat(){
+        this.navire.tirDegat();
+    }
 
     public void setNavire(Navire n) {
         this.navire= n ;
