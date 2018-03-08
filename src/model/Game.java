@@ -46,7 +46,6 @@ public class Game extends Observable {
     }
 
     private void initialiserBateaux(Army army) { //Donne Armee jouee 1 donc 3 bateaux
-        //rajouter bateau à notre merboard et une list qui contient l'ensemble des bateaux
         Position pos = null;
 
         for (Navire n : army.getListeNavire()) {
@@ -54,9 +53,10 @@ public class Game extends Observable {
             do {
                 pos = new Position(random.nextInt(this.getCote()), random.nextInt(this.getCote())); //pos prends x = random contenu dans un carré de cote * cote
             } while (!board.positionVide(pos));
-
-            board.placerNavire(pos, n);//place le navire (pos )          
-            //enregistre la position comme prise ;          
+            n.setPosition(pos); // lui attribue sa position .
+            board.placerNavire(pos, n);//place le navire (pos ) et enregistre la position comme prise ;          
+                     
+            
         }
     }
 
@@ -116,6 +116,7 @@ public class Game extends Observable {
                 this.getCasePossible(deplacement,listPositionPossible); //complete la liste des déplacements possible
                 //met les case concernée en choixDeplacement = true (créer cette variable)
                 //dans l'affichage console ,si case est choixdeplacement print un x orange ) 
+                
                 setChanged();
                 notifyObservers();
                 return true;
@@ -136,31 +137,14 @@ public class Game extends Observable {
     }
     
     private void getCasePossible(int deplacement, ArrayList<Position> listPositionPossible) {
-        Position pos = n.getPosition();
-        for (int i = -portee; i <= portee; i++) {
-            for (int j = -portee; j <= portee; j++) {
-                Position p = new Position(pos.getX() + i, pos.getY() + j);
-                board.getRealPosition(p); //renvoie la position réelle de la case demandée 
-                
-                Case c = board.getCaseInPos(pos); //crée une copie de la case pour les vérif .
-                if (c.estNavire() && joueur.estAmi(c.getNavire())) {//si contient un bateau et qu'il appartien a l'armée enemie
-                    Navire ennemy = c.getNavire();
-                    ennemy.tirDegat();
-                    
-                    if (ennemy.getPointVie() == 0) {
-                        joueur.deleteNavire(ennemy);
-                        board.supprimerNavire(pos);
-                        
-                    }else if (ennemy.getPointVie() == 50) {
-                        joueur.tirDegat(ennemy);
-                        board.tirDegat(pos);
-                        
-                    }
-                }
-            }
-        }     
+        //boucle qui retourne les differents position possible selon la position et le deplacement
+        //si case vide et pos valide -> à modifier:case contenant flottant n'est pas vide .
+            //->cette case.setchoixDeplacement = true 
+            
+    }     
 
-    }
+   
+    
     
     
     public boolean tire(String army, String pos,int portee) {
