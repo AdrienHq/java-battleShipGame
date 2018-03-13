@@ -31,6 +31,9 @@ public class Case {
      public String getName() {
         return name;
     }
+//     public boolean getCas(String name){
+//     
+//     }
 
     public boolean estRadioactif() {
         return radioActif;
@@ -41,7 +44,7 @@ public class Case {
     }
 
     public void switchVide() {
-        if (this.estVide = false) {
+        if (this.estVide == false) {
             this.estVide = true;
         } else {
             this.estVide = false;
@@ -96,6 +99,9 @@ public class Case {
         }
         return null;
     }
+    public boolean estFlottant(){
+        return this.getFlottant() != null ;
+    }
 
     
     //    public void setRadioActif(boolean radioActif){
@@ -103,7 +109,7 @@ public class Case {
 //    }
 
     boolean estNavire() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getNavire() != null ;
     }
 
     

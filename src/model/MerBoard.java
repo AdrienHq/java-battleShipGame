@@ -107,9 +107,10 @@ public class MerBoard {
         return mer[x][y] ;
     }
     
-    Case getCaseInPos(String pos) {
-        int x = getNumberFromAZ(pos.charAt(0)) ;
-        int y = pos.charAt(1) ;
+    Case getCaseInPos(String pos) { //x et y à inverser ,reinverser toute les autres insertions ds tableau
+        int x = ((int)(pos.charAt(1)))-49 ;
+        int y = (int)getNumberFromAZ(pos.charAt(0)) ;
+        System.out.println(x +" "+ y);
         return mer[x][y] ;
         
     }
@@ -123,18 +124,23 @@ public class MerBoard {
     void getRealPosition(Position p) {
         int x = p.getX();
         int y = p.getY();
-        if(x>cote){
+        if(x>=cote){
             p.setX(x-cote);
+        }else if(x<0){
+        p.setX(x+cote);
         }
-        else if(y>cote){
+        else if(y>=cote){
             p.setY(y-cote);
+        }else if(y<0){
+        p.setY(y+cote);
         }
         
     }
 
     
     private int getNumberFromAZ(char charAt) {
-        return (int)(charAt-65) ;
+        int x = (int)(charAt-65) ;
+        return x ;
     }
 
     

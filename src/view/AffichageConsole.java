@@ -49,7 +49,7 @@ public class AffichageConsole implements Observer {
                     } else if (debug == true) {
                         if (c.getTypeFlottant() == "ATOMIQUE") {
                             System.out.print(Couleur.BLACK + " A " + Couleur.RESET + "|");
-                        } else {
+                        } else if (c.getTypeFlottant() == "NORMALE"){
                             System.out.print(Couleur.BLACK + " N " + Couleur.RESET + "|");
                         }
                     } else {
@@ -67,7 +67,11 @@ public class AffichageConsole implements Observer {
     }
 
     private void printCol(int cote) {
-        System.out.print("     A");
+        if(cote>10){
+            System.out.print(" ");
+        }
+        
+        System.out.print("    A");
         for (int x = 1; x < cote; x++) { //game.getCote()
             char col = (char) (x + 65);
             System.out.print("   " + col);
