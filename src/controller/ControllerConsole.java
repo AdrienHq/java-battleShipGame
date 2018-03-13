@@ -37,9 +37,9 @@ public class ControllerConsole {
         
         do {
             if(Joueur){ //si c'est au tour du joueur 1
-                 
+      
                 Boolean entreeCorrecte = false ;
-                String pos ;
+                String pos ="" ;
                 int portee = 0;
                 do{
                     affichage.choixBateauTireur(army1)  ;
@@ -117,46 +117,4 @@ public class ControllerConsole {
     public static void getDirection(Position pos) {
 
     }
-
-//        Direction direction;
-//        
-//        
-//        do {
-//            direction = saisieToucheClavier(); //la direction vaut la saisie au clavier
-//            if (direction != null) { //tant que la personne joue 
-//                finJeu = Game.jouer(direction); 
-//                if (finJeu) {
-//                    game.notifyObservers(); //Notify l'obs de la fin du jeu 
-//                }
-//            }
-//        } while (!finJeu);
-//        if (game.joueurAPerdu()) { //Si il reste encore des bateaux
-//            affichage.showLose(); //affiche l'ecran de fin Perdant
-//        } else {
-//            affichage.showVictory(); //affiche l'ecran de fin Gagnant
-//        }  
-//    }
-//    
-//    
-//    public static Direction saisieToucheClavier() {
-//        char c = '1'; // un character pour conserver les choix utilisateur
-//        try {
-//            c = (char)System.in.read();
-//        } catch (Exception e) {
-//            System.out.println("Error");
-//        }
-//        return getDirection(c);                        
-//    }
-//    
-//    private static Direction getDirection (char c) {
-//        switch(c) {                     //Activation en fonction des choix de l'utilisateur
-//            case 'z' : return Direction.HAUT;
-//            case 's' : return Direction.BAS;
-//            case 'q' : return Direction.GAUCHE;
-//            case 'd' : return Direction.DROITE;
-//            case 't' : return Direction.STOP;
-//            case 'x' : System.exit(1);
-//            default : return null;
-//        }
-//    }
 }

@@ -2,36 +2,31 @@ package controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Army;
 import model.Game;
 import view.AffichageGraphique;
 import view.AffichageSetup;
 
-public class ControllerGraphique extends Application{
+public class ControllerGraphique extends Application {
     private Stage stage;
     private Game game;
-    Army joueur1 = null; Army joueur2 = null; 
-    String army1 = null, army2 = null;
-    
+
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        new AffichageSetup(stage, this); // Fenêtre initiale (saisie taille)
+        stage = AffichageSetup(stage, this);     
     }
-    
-    public void afficheAffichageGraphiQUE(Army joueur1, Army joueur2) {
-            
-    }
-    
-     // fait apparaître la fenêtre principale de l'application
-    public void switchToMainWindow(String army1, String army2, int taille) {
-        AffichageGraphique affGraphique = new AffichageGraphique(stage, size, this); 
-        Game game = Game.setGame(army1, army2,taille);
-        game.addObserver(affGraphique);
-        affGraphique.afficherGame(); 
+
+    public void switchToMainWindow(String army1, String army2, int cote) {
+        AffichageGraphique affG = new AffichageGraphique(stage, cote, this);
+        Game game = Game.setGame(army1, army2,cote);
+        game.addObserver(affG);
+        game.setChangedAndNotify(); // Provoque un 1er affichage
     }
     
     public static void main(String[] args) {
         launch(args);
     }
+
+    
+
 }
