@@ -66,25 +66,25 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public EmptyBoxView(int x, int y) {
             getStyleClass().add("mer");
-            setOnMouseClicked(e -> control.emptyBoxClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.emptyBoxClicked(x, y));
         }
     }
 
     // La vue d'un bateau
     private class NavireEquipe1 extends BoxView {
 
-        public BoatView(int x, int y) {
+        public NavireEquipe1(int x, int y) {
             getStyleClass().add("bateauEquipe1");
-            setOnMouseClicked(e -> control.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 
     // La vue d'un bateau
     private class NavireEquipe2 extends BoxView {
 
-        public BoatView(int x, int y) {
+        public NavireEquipe2(int x, int y) {
             getStyleClass().add("bateauEquipe2");
-            setOnMouseClicked(e -> control.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 }
