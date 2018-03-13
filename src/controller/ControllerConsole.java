@@ -37,17 +37,21 @@ public class ControllerConsole {
         
         do {
             if(Joueur){ //si c'est au tour du joueur 1
-      
+                 
                 Boolean entreeCorrecte = false ;
-                String pos ="" ;
+                String pos = "" ;
                 int portee = 0;
                 do{
                     affichage.choixBateauTireur(army1)  ;
-                    pos = clavier.nextLine();
+                    if (clavier.hasNext()) {
+                        clavier.nextLine();
+                        pos = clavier.nextLine();
+                    } else;
+                    System.out.println("entrée ok = "+pos);
                     entreeCorrecte = game.tire(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
-                affichage.portee(portee); //print la portee
+                System.out.println("");//affichage.portee(portee); //print la portee
                 entreeCorrecte = false ;
                 pos = "";
                 
@@ -114,7 +118,5 @@ public class ControllerConsole {
         return clavier;
     }
 
-    public static void getDirection(Position pos) {
-
-    }
+   
 }
