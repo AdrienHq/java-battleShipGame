@@ -16,7 +16,7 @@ public class Game extends Observable {
     private Random random = new Random();
     private static boolean gameOver = false;
     List<Navire> bateauEnMer = new ArrayList<>();
-
+    public ArrayList<Position> listPositionPossible = new ArrayList<>();
     private Game(String joueur1, String joueur2, int cote) {
 
         this.joueur1 = new Army(joueur1);
@@ -97,8 +97,30 @@ public class Game extends Observable {
     public boolean randomTour() { //Outil pour avoir un rand true ou false
         return rand.nextBoolean();
     }
-    public ArrayList<Position> listPositionPossible = new ArrayList<>();
-
+    
+    public boolean deplacebateau(String army1, String oldPos,String newPos, int portee) {
+        
+        Case c = board.getCaseInPos(oldPos);
+        Case f = board.getCaseInPos(newPos);
+        Position future = f.getPosition();
+            if(f.choixPossible == true){
+                Navire n =c.getNavire();
+                c.supprimerNavire();
+                f.setNavire(n);
+                n.setPosition(future);
+                n.setPopo(f.getName());
+                for(Position p : listPositionPossible){
+                    Case x = board.getCaseInPos(p);
+                    x.switchChoixPossible();
+                }
+                setChangedAndNotify();
+                return true ;
+            }else{
+                return false;
+             }
+            
+    }
+    
     public Boolean choixBateauDeplacement(String army, String pos, int portee) {
         Case c = board.getCaseInPos(pos);
         Navire nav = null;
@@ -111,29 +133,53 @@ public class Game extends Observable {
         if (army == joueur1.getNom()) {
             if (joueur1.estAmi(nav)) {
                 deplacement = nav.getDeplacementMax();
-                //vide la liste des deplacements possible ;
-                this.getCasePossible(deplacement, listPositionPossible); //complete la liste des déplacements possible
+                listPositionPossible = new ArrayList<>();
+                this.getCasePossible(deplacement,nav); //complete la liste des déplacements possible
                 //met les case concernée en choixDeplacement = true (créer cette variable)
                 //dans l'affichage console ,si case est choixdeplacement print un x orange ) 
 
-                setChanged();
-                notifyObservers();
+                setChangedAndNotify();
                 return true;
+            }else{
+                return false ;
             }
-        } else if (joueur2.estAmi(nav)) {
-            portee = nav.getPorteeTir();
-            if (portee != 0) {
-                //this.degatZone(joueur2, nav, portee);
-            }
-            setChanged();
-            notifyObservers();
-            return true;
-        }
+        } else{
+               if (joueur2.estAmi(nav)) {
+                deplacement = nav.getDeplacementMax();
+                listPositionPossible = new ArrayList<>();
+                this.getCasePossible(deplacement,nav); //complete la liste des déplacements possible
+                //met les case concernée en choixDeplacement = true (créer cette variable)
+                //dans l'affichage console ,si case est choixdeplacement print un x orange ) 
 
-        return false;
+                setChangedAndNotify();
+                return true;
+            }else{
+                return false ;
+            }
+        }
     }
 
-    private void getCasePossible(int deplacement, ArrayList<Position> listPositionPossible) {
+    private void getCasePossible(int deplacement,Navire n) {
+        Position pos = n.getPosition();
+        for (int i = -deplacement; i <= deplacement; i++) {
+            for (int j = -deplacement; j <= deplacement; j++) {
+                Position p = new Position(pos.getX() + i, pos.getY() + j);
+                
+                board.getRealPosition(p); //renvoie la position réelle de la case demandée (mer circulaire)
+                
+                Case c = board.getCaseInPos(p); //récupere la case 
+                if(c.estVide()){
+                    System.out.println("position atteignable"+p);//debug à retirer
+                    this.listPositionPossible.add(p);
+//                    for(Position x : listPositionPossible){
+//                        System.out.println(x);
+//                    }
+                    board.voirChoixDeplacement(p);
+                    //c.switchChoixPossible();
+                }
+            }
+        }
+
         //boucle qui retourne les differents position possible selon la position et le deplacement
         //si case vide et pos valide -> à modifier:case contenant flottant n'est pas vide .
         //->cette case.setchoixDeplacement = true 
@@ -148,20 +194,17 @@ public class Game extends Observable {
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
         
         } else {
-            System.out.println("sortie 1");
             return false; // aussinon on sort de la boucle
         }
         if(army == joueur1.getNom()){
             if (joueur1.estAmi(nav)) {
-                System.out.println("on est la");
                 portee = nav.getPorteeTir();
                 System.out.println("portée = " + portee);
                 if(portee != 0){
                     
                     this.degatZone(joueur1,joueur2, nav, portee);
                 }
-                setChanged();
-                notifyObservers();
+                setChangedAndNotify();
                 return true;
             }
         }else{
@@ -170,58 +213,13 @@ public class Game extends Observable {
                 if(portee != 0){
                     this.degatZone(joueur2,joueur1, nav, portee);
                 }
-                setChanged();
-                notifyObservers();
+                setChangedAndNotify();
                 return true;
             }
         }
-        System.out.println("sortie 2");
         return false;
     }
 
-//    private boolean joueurTir(Position pos, Army armeeTir, Army armeeDegat) {
-//        Case c = board.getPosCase(pos);
-//        Navire nav = null;
-//        if (c.estNavire()) { //Regarde si la case est un Navire
-//            nav = c.getNavire(); //Si oui, on conserve cette donnée 
-//        } else {
-//            return false; // aussinon on sort de la boucle
-//        }
-//        if (armeeTir.estAmi(nav)) {
-//            this.cercleDeDegat(armeeTir, armeeDegat, nav, nav.getPorteeTir());
-//            return true;
-//        }
-//        return false;
-//    }
-    public boolean jouer(Position pos) {
-        if (pos != null) {
-            //faire le déplacement
-
-            //Il faut une réinitilisation du plateau de jeu
-            if (joueur1.getListeNavire().isEmpty() || joueur2.getListeNavire().isEmpty()) {
-                gameOver = true;
-            }
-            setChanged();
-            notifyObservers();
-        }
-        return gameOver;
-    }
-
-//    public boolean tirJoueur1(Position pos) {
-//        if (this.joueurTir(pos, board.getJoueur1(), board.getJoueur2())) {
-//            this.setChangedAndNotify(board);
-//            return true;
-//        }
-//        return false;
-//    }
-//
-//    public boolean tirJoueur2(Position pos) {
-//        if (this.joueurTir(pos, board.getJoueur2(), board.getJoueur1())) {
-//            this.setChangedAndNotify(board);
-//            return true;
-//        }
-//        return false;
-//    }
     private void degatZone(Army joueur,Army adverse ,Navire n, int portee) {
         Position pos = n.getPosition();
         for (int i = -portee; i <= portee; i++) {
@@ -245,26 +243,20 @@ public class Game extends Observable {
         }
         
     }
+    
+    public boolean jouer(Position pos) {
+        if (pos != null) {
+            //faire le déplacement
 
-//    private void cercleDeDegat(Army army, Army armeeDegat, Navire amis, int portee) {
-//        Position pos = amis.getPosition();
-//        for (int i = -portee; i <= portee; i++) {
-//            for (int j = -portee; j <= portee; j++) {
-//                Position p = new Position(pos.getX() + i, pos.getY() + j);
-//                board.getRealPosition(p); //renvoie la position réelle de la case demandée 
-//                
-//                Case c = board.getPosCase(pos);
-//                if (c.estNavire() && !army.estAmi(c.getNavire())) {
-//                    Navire ennemy = c.getNavire();
-//                    ennemy.tirDegat();
-//                    if (ennemy.getPointVie() == 0) {
-//                        armeeDegat.deleteNavire(ennemy);
-//                        c.supprimerNavire();
-//                    }
-//                }
-//            }
-//        }
-//    }
+            //Il faut une réinitilisation du plateau de jeu
+            if (joueur1.getListeNavire().isEmpty() || joueur2.getListeNavire().isEmpty()) {
+                gameOver = true;
+            }
+            setChangedAndNotify();
+        }
+        return gameOver;
+    }
+
     public String getNomJoueur1() {
         return this.joueur1.nom;
     }
@@ -281,13 +273,12 @@ public class Game extends Observable {
         return joueur2;
     }
 
-    private void setChangedAndNotify(MerBoard board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     public void setChangedAndNotify() {
         setChanged();
         notifyObservers();
     }
+
+    
 
 }

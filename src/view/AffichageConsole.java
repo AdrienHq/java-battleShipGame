@@ -32,7 +32,8 @@ public class AffichageConsole implements Observer {
                 c = mer[x][y];
 
                 if (!c.estVide()) {//si contient qqch
-                    if (c.getTypeNavire() == "BIG") { //si grand navire 
+                     
+                        if (c.getTypeNavire() == "BIG") { //si grand navire 
                         Navire n = c.getNavire();
                         if (game.getNomJoueur1() == n.getNom()) {       //si nom bateau =
                             System.out.print(Couleur.RED + " B " + Couleur.RESET + "|");
@@ -46,16 +47,20 @@ public class AffichageConsole implements Observer {
                         } else {
                             System.out.print(Couleur.BLUE + " S " + Couleur.RESET + "|");
                         }
-                    } else if (debug == true) {
+                    }              
+                    else {
+                        System.out.print(Couleur.BLACK + "   " + Couleur.RESET + "|");
+                    }
+                } else if(c.estchoixPossible()){
+                        System.out.print(Couleur.GREEN + " X " + Couleur.RESET + "|");
+                }
+                else if (c.estFlottant() && debug == true) {
                         if (c.getTypeFlottant() == "ATOMIQUE") {
                             System.out.print(Couleur.BLACK + " A " + Couleur.RESET + "|");
                         } else if (c.getTypeFlottant() == "NORMALE"){
                             System.out.print(Couleur.BLACK + " N " + Couleur.RESET + "|");
                         }
-                    } else {
-                        System.out.print(Couleur.BLACK + "   " + Couleur.RESET + "|");
-                    }
-                } else {
+                    }else {
                     System.out.print("   |");
                 }
             }
@@ -104,6 +109,7 @@ public class AffichageConsole implements Observer {
         RESET("\u001B[0m"),
         RED("\u001B[31m"),
         BLUE("\u001B[34m"),
+        GREEN("\u001B[32m"),
         BLACK("\u001B[30m");
 
         private final String code;

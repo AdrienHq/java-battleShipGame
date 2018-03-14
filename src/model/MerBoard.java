@@ -29,7 +29,8 @@ public class MerBoard {
             for (int y = 0; y < cote; y++) {
                 char Col = (char) (x + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(y + 1); //String du nom de la case (exemple : B1)
-                mer[x][y] = new Case(name);
+                Position p = new Position(x,y);
+                mer[x][y] = new Case(name,p);
             }
         }
     }
@@ -51,8 +52,10 @@ public class MerBoard {
         int x = pos.getX();
         int y = pos.getY();
         mer[x][y].setNavire(n);
-        char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
+       char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
         String popo = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
+        Position p = new Position(x,y);
+        n.setPosition(p);
         n.setPopo(popo);
     }
 
@@ -77,7 +80,8 @@ public class MerBoard {
             for (int y = 0; y < cote; y++) {
                 char Col = (char) (y + 65);           //Valeur alphabétique de la colonne
                 String name = Col + String.valueOf(x + 1); //String du nom de la case (exemple : B1)
-                mer[x][y] = new Case(name);
+                Position p = new Position(x,y);
+                mer[x][y] = new Case(name,p);
             }
         }
     }
@@ -89,9 +93,15 @@ public class MerBoard {
     public void supprimerNavire(Position pos) {
         int x = pos.getX();
         int y = pos.getY();
-        mer[x][y].supprimerNavire();
+        this.mer[x][y].supprimerNavire();
     }
-
+    
+    void voirChoixDeplacement(Position pos) {
+        int x = pos.getX();
+        int y = pos.getY();
+        this.mer[x][y].switchChoixPossible();
+    }
+    
     public Navire getNavire(Position pos) {
         int x1 = pos.getX();
         int y1 = pos.getY();
@@ -129,7 +139,7 @@ public class MerBoard {
         }else if(x<0){
         p.setX(x+cote);
         }
-        else if(y>=cote){
+        if(y>=cote){
             p.setY(y-cote);
         }else if(y<0){
         p.setY(y+cote);
@@ -142,6 +152,8 @@ public class MerBoard {
         int x = (int)(charAt-65) ;
         return x ;
     }
+
+    
 
     
 

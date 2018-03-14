@@ -7,10 +7,12 @@ public class Case {
    
     
     private String name ;
+    Position p ;
     
     private Navire navire;
     private Flottant flottant;
     
+    Boolean choixPossible = false ;
     Boolean radioActif = false;
     Boolean estVide = true;
     
@@ -22,19 +24,31 @@ public class Case {
         this.flottant = f;
     }
 
-    public Case(String name) {
+    public Case(String name,Position p) {
         this.name = name ;
+        this.p = p;
         this.navire = null;
         this.flottant = null;
     }
     
+    
      public String getName() {
         return name;
     }
+     
+     public Position getPosition() {
+        return p;
+    } 
 //     public boolean getCas(String name){
 //     
 //     }
-
+    public boolean estchoixPossible(){
+        return choixPossible ;
+    }
+    public void switchChoixPossible(){
+        
+        this.choixPossible = this.choixPossible != true;
+    }
     public boolean estRadioactif() {
         return radioActif;
     }
@@ -44,15 +58,11 @@ public class Case {
     }
 
     public void switchVide() {
-        if (this.estVide == false) {
-            this.estVide = true;
-        } else {
-            this.estVide = false;
-        }
+        this.estVide = this.estVide == false;
     }
 
     public void switchRadioactif() {
-        this.radioActif = this.radioActif = false;
+        this.radioActif = this.radioActif == false;
     } 
     public void tirDegat(){
         this.navire.tirDegat();
@@ -69,7 +79,7 @@ public class Case {
     
     void setFlottant(Flottant f) {
         this.flottant = f ;
-        this.switchVide();
+        //this.switchVide();
     }
     
     public Flottant getFlottant() {
