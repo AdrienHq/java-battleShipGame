@@ -1,10 +1,27 @@
-.bateauEquipe1 {
+.bateauGrandEquipe1 {
     -fx-background-image: url("file:src/image/battleship_1 Cropped.png");
 }
 
-.bateauEquipe2 {
+.bateauGrandEquipe2 {
     -fx-background-image: url("file:src/image/battleship_2 Cropped.png");
 }
+
+.bateauPetitEquipe1 {
+    -fx-background-image: url("file:src/image/cruiser_1 Cropped.png");
+}
+
+.bateauPetitEquipe2 {
+    -fx-background-image: url("file:src/image/cruiser_2 Cropped.png");
+}
+
+.atomique {
+    -fx-background-image: url("file:src/image/atomique.png");
+}
+
+.normale {
+    -fx-background-image: url("file:src/image/normale.png");
+}
+
 
 .mer{
     -fx-background-image: url("file:src/image/Mer_gif.gif");

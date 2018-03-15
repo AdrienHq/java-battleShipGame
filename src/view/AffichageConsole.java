@@ -1,6 +1,5 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import model.*;
@@ -68,7 +67,6 @@ public class AffichageConsole implements Observer {
         }
         afficheLegende();
         afficheEtatArmee(game.getJoueur1(), game.getJoueur2());
-
     }
 
     private void printCol(int cote) {

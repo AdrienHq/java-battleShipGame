@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Game;
+import model.Navire;
 import view.AffichageGraphique;
 import view.AffichageSetup;
 
@@ -31,17 +32,18 @@ public class ControllerGraphique extends Application {
         game.setChangedAndNotify(); // Provoque un 1er affichage
     }
 
-    // Quand l'utilisateur clique sur une case vide
-    public void emptyBoxClicked(int x, int y) {
-        if (bateauBouge) {
-            model.setXY(x, y); // Déplace le bateau SET POSITION DU BATEAU 
-            bateauBouge = false;
-        }
-    }
-
-    // Quand l'utilisateur clique sur un bateau
-    public void boatClicked(int x, int y) {
-        bateauBouge = true;
-    }
+//    // Quand l'utilisateur clique sur une case vide
+//    public void emptyBoxClicked(int x, int y) {
+//        if (bateauBouge) {
+//            Navire.setPosition(x,y); // Déplace le bateau SET POSITION DU BATEAU
+////            model.setXY(x, y); // Déplace le bateau SET POSITION DU BATEAU 
+//            bateauBouge = false;
+//        }
+//    }
+//
+//    // Quand l'utilisateur clique sur un bateau
+//    public void boatClicked(int x, int y) {
+//        bateauBouge = true;
+//    }
 
 }

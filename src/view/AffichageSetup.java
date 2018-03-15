@@ -18,26 +18,26 @@ public class AffichageSetup extends VBox {
     public AffichageSetup(Stage stage, ControllerGraphique ctrl) {
         control = ctrl;
         setup();
-        stage.setTitle("Entrez les noms des deux joueurs.");
+        stage.setTitle("Entrez les noms des deux joueurs et la taille.");
         stage.setScene(new Scene(this, 500, 300));
         stage.show();
     }
 
-    TextField tf = new InputText();
-    TextField tf2 = new InputText();
+    TextField tf = new InputText1();
+    TextField tf2 = new InputText2();
     TextField tfTaille = new InputNumber();
 
     private void setup() {
-        FlowPane root = new FlowPane();
-        Label labelJ1 = new Label("Joueur1");
-        Label labelJ2 = new Label("Joueur2");
-        Label labelTaille = new Label("Taille");
+//        FlowPane root = new FlowPane();
+//        Label labelJ1 = new Label("Joueur1");
+//        Label labelJ2 = new Label("Joueur2");
+//        Label labelTaille = new Label("Taille");
 
         Button btOk = new Button("Accepter");
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
             if (!tf.getText().isEmpty() && !tf2.getText().isEmpty()) {
-                switchToMainWindow(tf.getText(), tf2.getText(),Integer.valueOf(tfTaille.getText()));
+                switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
@@ -54,14 +54,14 @@ public class AffichageSetup extends VBox {
         setSpacing(20);
     }
 
-    private void switchToMainWindow(String joueur1, String joueur2,int taille) {
+    private void switchToMainWindow(String joueur1, String joueur2, int taille) {
         control.switchToMainWindow(joueur1, joueur2, taille);
     }
 
-    private class InputText extends TextField {
+    private class InputText1 extends TextField {
 
-        InputText() {
-            super("Nom du Joueur");
+        InputText1() {
+            super("Nom du Joueur 1");
             setAlignment(Pos.TOP_CENTER);
             setMaxWidth(150);
             installListeners();
@@ -69,7 +69,7 @@ public class AffichageSetup extends VBox {
 
         private void installListeners() {
             textProperty().addListener((obs, oldValue, newValue) -> {
-                if (!newValue.matches("\\[A-Za-z]")) { //regex pour que seulement des lettres soient acceptée
+                if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
                     setText(oldValue);
                 }
             });
@@ -81,7 +81,25 @@ public class AffichageSetup extends VBox {
 //            });
         }
     }
-    
+
+    private class InputText2 extends TextField {
+
+        InputText2() {
+            super("Nom du Joueur 2");
+            setAlignment(Pos.TOP_CENTER);
+            setMaxWidth(150);
+            installListeners();
+        }
+
+        private void installListeners() {
+            textProperty().addListener((obs, oldValue, newValue) -> {
+                if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
+                    setText(oldValue);
+                }
+            });
+        }
+    }
+
     private class InputNumber extends TextField { //Pour la taille après
 
         InputNumber() {

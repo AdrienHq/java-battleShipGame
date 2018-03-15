@@ -9,8 +9,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import model.Game;
-
 import javafx.stage.Stage;
+import model.Case;
+import model.MerBoard;
+import model.Navire;
+import model.Position;
 
 public class AffichageGraphique extends GridPane implements Observer {
 
@@ -30,14 +33,52 @@ public class AffichageGraphique extends GridPane implements Observer {
     public void update(Observable o, Object arg) {
         Game game = (Game) o;
         getChildren().clear();
-        for (int c = 0; c < COTE; ++c) {
-            for (int l = 0; l < COTE; ++l) {
-                if (game.getCote() == c && game.getCote() == l) {
-                    add(new BoatView(c, l), c, l);
+        MerBoard board = game.getBoard();
+        Case[][] mer = board.getTab();
+        Case c = null;
+        Position pos = null;
+        Boolean debug = true;
+
+        for (int x = 0; x < COTE; x++) {
+            if (COTE >= 10 && x < 9) {        // Si tableau >= 10colonne alors on décalle les 9premiere colonne pour alligner le tout
+                System.out.print(" ");
+            }
+            System.out.print((x + 1) + " |"); //Affiche l'entête de la ligne (1 2 3 4 5 ...)
+            for (int y = 0; y < COTE; y++) {
+                pos = new Position(x, y);
+                c = mer[x][y];
+                if (!c.estVide()) {//si contient qqch
+                    if (c.getTypeNavire() == "BIG") { //si grand navire 
+                        Navire n = c.getNavire();
+                        if (game.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+                            add(new NavireGrandEquipe1(x, y), x, y);
+                        } else {
+                            add(new NavireGrandEquipe2(x, y), x, y);
+                        }
+
+                    } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
+                        Navire n = c.getNavire();
+                        if (game.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+                            add(new NavirePetitEquipe1(x, y), x, y);
+                        } else {
+                            add(new NavirePetitEquipe2(x, y), x, y);
+                        }
+                    } else {
+                        System.out.print(AffichageConsole.Couleur.BLACK + "   " + AffichageConsole.Couleur.RESET + "|");
+                    }
+                } else if (c.estchoixPossible()) {
+                    System.out.print(AffichageConsole.Couleur.GREEN + " X " + AffichageConsole.Couleur.RESET + "|");
+                } else if (c.estFlottant() && debug == true) {
+                    if (c.getTypeFlottant() == "ATOMIQUE") {
+                        add(new Atomique(x, y), x, y);
+                    } else if (c.getTypeFlottant() == "NORMALE") {
+                        add(new Normale(x, y), x, y);
+                    }
                 } else {
-                    add(new EmptyBoxView(c, l), c, l);
+                    add(new EmptyBoxView(x, y), x, y);
                 }
             }
+            System.out.println(" ");
         }
     }
 
@@ -66,25 +107,56 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public EmptyBoxView(int x, int y) {
             getStyleClass().add("mer");
-            setOnMouseClicked(e -> ctrlG.emptyBoxClicked(x, y));
+//            setOnMouseClicked(e -> ctrlG.emptyBoxClicked(x, y));
         }
     }
 
     // La vue d'un bateau
-    private class NavireEquipe1 extends BoxView {
+    private class NavireGrandEquipe1 extends BoxView {
 
-        public NavireEquipe1(int x, int y) {
-            getStyleClass().add("bateauEquipe1");
-            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        public NavireGrandEquipe1(int x, int y) {
+            getStyleClass().add("bateauGrandEquipe1 ");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 
-    // La vue d'un bateau
-    private class NavireEquipe2 extends BoxView {
+    private class NavireGrandEquipe2 extends BoxView {
 
-        public NavireEquipe2(int x, int y) {
-            getStyleClass().add("bateauEquipe2");
-            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        public NavireGrandEquipe2(int x, int y) {
+            getStyleClass().add("bateauGrandEquipe2");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        }
+    }
+
+    private class NavirePetitEquipe1 extends BoxView {
+
+        public NavirePetitEquipe1(int x, int y) {
+            getStyleClass().add("bateauPetitEquipe1");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        }
+    }
+
+    private class NavirePetitEquipe2 extends BoxView {
+
+        public NavirePetitEquipe2(int x, int y) {
+            getStyleClass().add("bateauPetitEquipe2");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        }
+    }
+
+    private class Atomique extends BoxView {
+
+        public Atomique(int x, int y) {
+            getStyleClass().add("mineAtomique");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+        }
+    }
+
+    private class Normale extends BoxView {
+
+        public Normale(int x, int y) {
+            getStyleClass().add("mineNormale");
+//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 }
