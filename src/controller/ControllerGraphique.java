@@ -23,6 +23,7 @@ public class ControllerGraphique extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        
     }
 
     public void switchToMainWindow(String army1, String army2, int cote) {
