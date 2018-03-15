@@ -93,8 +93,9 @@ public class AffichageConsole implements Observer {
         System.out.println("Position   Type   Integrité(%) Armée ");
         for (Navire n : army1.getListeNavire()) {
             System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
-
+        
         }
+        System.out.println("");
         for (Navire n : army2.getListeNavire()) {
             System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army2.getNom());
         }

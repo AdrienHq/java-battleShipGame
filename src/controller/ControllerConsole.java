@@ -34,7 +34,7 @@ public class ControllerConsole {
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
         Boolean Joueur = true;
-        
+        clavier.nextLine();
         do {
             if(Joueur){ //si c'est au tour du joueur 1
                  
@@ -44,7 +44,7 @@ public class ControllerConsole {
                 do{
                     affichage.choixBateauTireur(army1)  ;
                     if (clavier.hasNext()) {
-                        clavier.nextLine();
+                        //clavier.nextLine();
                         pos = clavier.nextLine();
                     } else;
                     System.out.println("entrée ok = "+pos);
@@ -84,7 +84,7 @@ public class ControllerConsole {
                 do{
                     affichage.choixBateauTireur(army2)  ;
                     if (clavier.hasNext()) {
-                        clavier.nextLine();
+                        //clavier.nextLine();
                         pos = clavier.nextLine();
                     } else;
                     System.out.println("entrée ok = "+pos);

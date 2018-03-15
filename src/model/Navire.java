@@ -10,11 +10,13 @@ public abstract class Navire implements Deplacement {
 //    protected int portee = 0;
     protected String popo = "" ;
     protected int deplacementMax ;
+    protected int id = 0;
 
     
 
-    protected Navire(String nom,String type, int pv,int deplacementMax) {
+    protected Navire(String nom,int id ,String type, int pv,int deplacementMax) {
         this.nom = nom;
+        this.id = id;
         this.typeNavire = type;
         this.pointVie = pv;
         this.deplacementMax = deplacementMax ;

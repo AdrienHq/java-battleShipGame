@@ -36,7 +36,7 @@ public class AffichageSetup extends VBox {
         Button btOk = new Button("Accepter");
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
-            if (!tf.getText().isEmpty() && !tf2.getText().isEmpty()) {
+            if (!tf.getText().isEmpty() && !tf2.getText().isEmpty() && !tf.getText().isEmpty()){
                 switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField

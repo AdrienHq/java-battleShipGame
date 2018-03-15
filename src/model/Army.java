@@ -13,9 +13,9 @@ public class Army {
     }
 
     public ArrayList<Navire> fillNavires() {
-        listNavire.add(new BateauGrand(nom));
-        listNavire.add(new BateauPetit(nom));
-        listNavire.add(new BateauPetit(nom));
+        listNavire.add(new BateauGrand(nom,1));
+        listNavire.add(new BateauPetit(nom,2));
+        listNavire.add(new BateauPetit(nom,3));
         return listNavire;
     }
 
@@ -28,15 +28,25 @@ public class Army {
         return true;
     }
     public void tirDegat(Navire n) {
-        Navire temp = n ;
-        this.deleteNavire(n);
-        temp.tirDegat();
-        listNavire.add(temp);
+        n.tirDegat();
+//        if(n.pointVie == 0){
+//            this.deleteNavire(n);
+//        }
+        
+//        Navire temp = n ;
+//        this.deleteNavire(n);
+//        temp.tirDegat();
+//        listNavire.add(temp);
+//        if(n.pointVie == 0){
+//            this.deleteNavire(n);
+//        }
     }
 
-    public void deleteNavire(Navire n) { //tir en 0 5 
-        if (!listeVide()) {
-            listNavire.remove(n);
+    public void deleteNavire() { //tir en 0 5 
+        for (Navire x : listNavire){
+            if(x.pointVie == 0){
+                listNavire.remove(x);
+            }  
         }
     }
 

@@ -118,8 +118,20 @@ public class MerBoard {
     }
     
     Case getCaseInPos(String pos) { //x et y à inverser ,reinverser toute les autres insertions ds tableau
-        int x = ((int)(pos.charAt(1)))-49 ;
-        int y = (int)getNumberFromAZ(pos.charAt(0)) ;
+        
+        int y = (int)getNumberFromAZ(pos.charAt(0)) ; //la lettre
+        int x ;
+         
+        if(pos.length()== 3){
+            x = ((int)(pos.charAt(1)))-48 ;
+            x*= 10 ;
+            x+= ((int)(pos.charAt(2)))-49 ;
+        }else{
+            x = ((int)(pos.charAt(1)))-49 ;
+            
+        }
+        
+        
         System.out.println(x +" "+ y);
         return mer[x][y] ;
         

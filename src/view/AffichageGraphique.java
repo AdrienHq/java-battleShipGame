@@ -39,11 +39,21 @@ public class AffichageGraphique extends GridPane implements Observer {
         Position pos = null;
         Boolean debug = true;
 
+//        for (int x = 0; x < COTE; x++) {
+//            
+//             //Affiche l'entête de la ligne (1 2 3 4 5 ...)
+//            for (int y = 0; y < COTE; y++) {
+//                
+//                    add(new EmptyBoxView(x, y), x, y);
+//                
+//            }
+//            
+//        }
+        
+        
         for (int x = 0; x < COTE; x++) {
-            if (COTE >= 10 && x < 9) {        // Si tableau >= 10colonne alors on décalle les 9premiere colonne pour alligner le tout
-                System.out.print(" ");
-            }
-            System.out.print((x + 1) + " |"); //Affiche l'entête de la ligne (1 2 3 4 5 ...)
+            
+             //Affiche l'entête de la ligne (1 2 3 4 5 ...)
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
                 c = mer[x][y];
@@ -63,11 +73,9 @@ public class AffichageGraphique extends GridPane implements Observer {
                         } else {
                             add(new NavirePetitEquipe2(x, y), x, y);
                         }
-                    } else {
-                        System.out.print(AffichageConsole.Couleur.BLACK + "   " + AffichageConsole.Couleur.RESET + "|");
-                    }
+                    } 
                 } else if (c.estchoixPossible()) {
-                    System.out.print(AffichageConsole.Couleur.GREEN + " X " + AffichageConsole.Couleur.RESET + "|");
+                        add(new EmptyBoxView(x, y), x, y);   //mettre image eau verte .
                 } else if (c.estFlottant() && debug == true) {
                     if (c.getTypeFlottant() == "ATOMIQUE") {
                         add(new Atomique(x, y), x, y);
@@ -78,7 +86,7 @@ public class AffichageGraphique extends GridPane implements Observer {
                     add(new EmptyBoxView(x, y), x, y);
                 }
             }
-            System.out.println(" ");
+            
         }
     }
 
@@ -98,7 +106,7 @@ public class AffichageGraphique extends GridPane implements Observer {
     private abstract class BoxView extends Pane {
 
         public BoxView() {
-            getStylesheets().add("mer");
+            getStylesheets().add("view/Image.css");
         }
     }
 
@@ -115,7 +123,7 @@ public class AffichageGraphique extends GridPane implements Observer {
     private class NavireGrandEquipe1 extends BoxView {
 
         public NavireGrandEquipe1(int x, int y) {
-            getStyleClass().add("bateauGrandEquipe1 ");
+            getStyleClass().add("bateauGrandEquipe1");
 //            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
@@ -147,7 +155,7 @@ public class AffichageGraphique extends GridPane implements Observer {
     private class Atomique extends BoxView {
 
         public Atomique(int x, int y) {
-            getStyleClass().add("mineAtomique");
+            getStyleClass().add("atomique");
 //            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
@@ -155,7 +163,7 @@ public class AffichageGraphique extends GridPane implements Observer {
     private class Normale extends BoxView {
 
         public Normale(int x, int y) {
-            getStyleClass().add("mineNormale");
+            getStyleClass().add("normale");
 //            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }

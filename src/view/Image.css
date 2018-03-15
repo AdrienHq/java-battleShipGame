@@ -1,17 +1,29 @@
 .bateauGrandEquipe1 {
-    -fx-background-image: url("file:src/image/battleship_1 Cropped.png");
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-background-image: url("file:src/image/battleship1Cropped.jpg");
 }
 
 .bateauGrandEquipe2 {
-    -fx-background-image: url("file:src/image/battleship_2 Cropped.png");
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-background-image: url("file:src/image/battleship2Cropped.png");
 }
 
 .bateauPetitEquipe1 {
-    -fx-background-image: url("file:src/image/cruiser_1 Cropped.png");
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-background-image: url("file:src/image/cruiser1Cropped.png");
 }
 
 .bateauPetitEquipe2 {
-    -fx-background-image: url("file:src/image/cruiser_2 Cropped.png");
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
+    -fx-background-image: url("file:src/image/cruiser2Cropped.png");
 }
 
 .atomique {
@@ -24,16 +36,11 @@
 
 
 .mer{
+    -fx-background-position: center;
+    -fx-background-size: stretch;
+    -fx-border-color: black;
     -fx-background-image: url("file:src/image/Mer_gif.gif");
 }
 
-.mineAtomique{
-    -fx-background-image: url("file:src/image/Mer_gif.gif");
-}
-
-
-.mineNormale{
-    -fx-background-image: url("file:src/image/Mer_gif.gif");
-}
 
 

@@ -14,7 +14,6 @@ public class Game extends Observable {
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
     private Random random = new Random();
-    private static boolean gameOver = false;
     List<Navire> bateauEnMer = new ArrayList<>();
     public ArrayList<Position> listPositionPossible = new ArrayList<>();
     private Game(String joueur1, String joueur2, int cote) {
@@ -74,6 +73,20 @@ public class Game extends Observable {
             }
         }
     }
+    
+    public String finDePartie(String joueurGagnant ,Boolean gameOver) {
+        
+        if(joueur1.listeVide()){
+            gameOver = true ;
+            return joueurGagnant = joueur2.getNom();
+            
+        }
+        else if (joueur2.listeVide()){
+            gameOver = true ;
+            return joueurGagnant = joueur1.getNom();
+        }
+        return joueurGagnant ;
+    }
 
     private boolean navireEncore(Navire n, Position pos) { //Verifie si la pos est valide KINDA
         if (n == null || pos == null) {
@@ -111,6 +124,9 @@ public class Game extends Observable {
                 n.setPopo(f.getName());
                 for(Position p : listPositionPossible){
                     Case x = board.getCaseInPos(p);
+                    if(x.estFlottant()){
+                    
+                    }
                     x.switchChoixPossible();
                 }
                 setChangedAndNotify();
@@ -210,6 +226,7 @@ public class Game extends Observable {
         }else{
             if (joueur2.estAmi(nav)) {
                 portee = nav.getPorteeTir();
+                System.out.println("portée = " + portee);
                 if(portee != 0){
                     this.degatZone(joueur2,joueur1, nav, portee);
                 }
@@ -225,9 +242,9 @@ public class Game extends Observable {
         for (int i = -portee; i <= portee; i++) {
             for (int j = -portee; j <= portee; j++) {
                 Position p = new Position(pos.getX() + i, pos.getY() + j);
-                System.out.println(" position de tire : "+ p);//debug à retirer
+                
                 board.getRealPosition(p); //renvoie la position réelle de la case demandée (mer circulaire)
-                System.out.println(" vrai position de tire : "+ p);//debug à retirer
+                
                 Case c = board.getCaseInPos(p); //récupere la case 
                 if (c.estNavire() && adverse.estAmi(c.getNavire())) {//si contient un bateau et qu'il appartien a l'armée enemie
                     System.out.println("position de bateau touchable"+p);//debug à retirer
@@ -237,25 +254,15 @@ public class Game extends Observable {
                     if (ennemy.getPointVie() == 0) {
                         
                         board.supprimerNavire(p);
+                        
                     }
                 }
             }
         }
-        
+        adverse.deleteNavire();
     }
     
-    public boolean jouer(Position pos) {
-        if (pos != null) {
-            //faire le déplacement
-
-            //Il faut une réinitilisation du plateau de jeu
-            if (joueur1.getListeNavire().isEmpty() || joueur2.getListeNavire().isEmpty()) {
-                gameOver = true;
-            }
-            setChangedAndNotify();
-        }
-        return gameOver;
-    }
+  
 
     public String getNomJoueur1() {
         return this.joueur1.nom;
@@ -279,6 +286,6 @@ public class Game extends Observable {
         notifyObservers();
     }
 
-    
+        
 
 }
