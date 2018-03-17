@@ -64,10 +64,6 @@ public class Case {
     public void switchRadioactif() {
         this.radioActif = this.radioActif == false;
     } 
-    public void tirDegat(){
-        this.navire.tirDegat();
-    }
-
     public void setNavire(Navire n) {
         this.navire= n ;
         this.switchVide();
@@ -93,7 +89,7 @@ public class Case {
 
     public void supprimerFlottant() {
         this.flottant = null;
-        this.switchVide();
+        //this.switchVide();
     }
 
     public String getTypeNavire() {

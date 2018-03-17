@@ -24,7 +24,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         ctrlG = ctrl;
         COTE = cote;
         setSizeConstraints();
-        stage.setScene(new Scene(this, 600, 400));
+        stage.setScene(new Scene(this, 600, 600));
         stage.setTitle("Plateau de jeu");
         stage.show();
     }

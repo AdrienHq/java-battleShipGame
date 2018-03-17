@@ -96,7 +96,7 @@ public class MerBoard {
         this.mer[x][y].supprimerNavire();
     }
     
-    void voirChoixDeplacement(Position pos) {
+    void mettreCaseEnDeplacementPossible(Position pos) {
         int x = pos.getX();
         int y = pos.getY();
         this.mer[x][y].switchChoixPossible();
@@ -136,13 +136,7 @@ public class MerBoard {
         return mer[x][y] ;
         
     }
-    void tirDegat(Position p) {
-        int x = p.getX();
-        int y = p.getY();
-        mer[x][y].tirDegat();
-    }
-
-
+    
     void getRealPosition(Position p) {
         int x = p.getX();
         int y = p.getY();

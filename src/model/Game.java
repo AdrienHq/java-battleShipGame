@@ -119,14 +119,23 @@ public class Game extends Observable {
             if(f.choixPossible == true){
                 Navire n =c.getNavire();
                 c.supprimerNavire();
-                f.setNavire(n);
+                if(f.getTypeFlottant() == "ATOMIQUE"){
+                    n.degat(100);
+                    
+                    
+                }else if(f.getTypeFlottant() == "NORMALE"){
+                    n.degat(50);
+                    f.supprimerFlottant();
+                    
+                }
+                if(n.pointVie > 0){
+                    f.setNavire(n);
+                }
+                
                 n.setPosition(future);
                 n.setPopo(f.getName());
                 for(Position p : listPositionPossible){
                     Case x = board.getCaseInPos(p);
-                    if(x.estFlottant()){
-                    
-                    }
                     x.switchChoixPossible();
                 }
                 setChangedAndNotify();
@@ -180,19 +189,17 @@ public class Game extends Observable {
         for (int i = -deplacement; i <= deplacement; i++) {
             for (int j = -deplacement; j <= deplacement; j++) {
                 Position p = new Position(pos.getX() + i, pos.getY() + j);
-                
-                board.getRealPosition(p); //renvoie la position réelle de la case demandée (mer circulaire)
-                
-                Case c = board.getCaseInPos(p); //récupere la case 
-                if(c.estVide()){
-                    System.out.println("position atteignable"+p);//debug à retirer
-                    this.listPositionPossible.add(p);
-//                    for(Position x : listPositionPossible){
-//                        System.out.println(x);
-//                    }
-                    board.voirChoixDeplacement(p);
-                    //c.switchChoixPossible();
+                if(pos.getX()== p.getX() || pos.getY() == p.getY()){ //permet de ne bouger que de haut en bas et gauche droite
+                    board.getRealPosition(p); //renvoie la position réelle de la case demandée (mer circulaire)
+                    Case c = board.getCaseInPos(p); //récupere la case 
+                    if(c.estVide()){
+                        //System.out.println("position atteignable"+p);//debug à retirer
+                        this.listPositionPossible.add(p);
+                        board.mettreCaseEnDeplacementPossible(p);
                 }
+                    
+                }
+                
             }
         }
 
@@ -249,7 +256,7 @@ public class Game extends Observable {
                 if (c.estNavire() && adverse.estAmi(c.getNavire())) {//si contient un bateau et qu'il appartien a l'armée enemie
                     System.out.println("position de bateau touchable"+p);//debug à retirer
                     Navire ennemy = c.getNavire();
-                    ennemy.tirDegat();
+                    ennemy.degat(50);
                     
                     if (ennemy.getPointVie() == 0) {
                         

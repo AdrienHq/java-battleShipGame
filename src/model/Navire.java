@@ -61,8 +61,11 @@ public abstract class Navire implements Deplacement {
         return this.nom;
     }
 
-    public void tirDegat() {
-         this.pointVie -= 50;
+    public void degat(int degat) {
+        this.pointVie -= degat;
+        if(this.pointVie < 0){ // Pv à zero minimum
+            this.pointVie = 0 ;    
+        }
     }
     
     public abstract int getPorteeTir();

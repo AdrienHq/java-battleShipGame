@@ -28,7 +28,7 @@ public class Army {
         return true;
     }
     public void tirDegat(Navire n) {
-        n.tirDegat();
+        n.degat(50);
 //        if(n.pointVie == 0){
 //            this.deleteNavire(n);
 //        }
