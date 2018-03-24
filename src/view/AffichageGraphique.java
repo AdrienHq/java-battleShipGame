@@ -35,8 +35,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.setTitle("Plateau de jeu");
         stage.show();
     }
-    
-    private void afficherJeu(Observable o, Object arg) {
+
+    private void afficherJeu(Observable o) {
         Game game = (Game) o;
         getChildren().clear();
         MerBoard board = game.getBoard();
@@ -45,7 +45,6 @@ public class AffichageGraphique extends GridPane implements Observer {
         Position pos = null;
         Boolean debug = true;
         for (int x = 0; x < COTE; x++) {
-            //Affiche l'entête de la ligne (1 2 3 4 5 ...)
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
                 c = mer[x][y];
@@ -79,12 +78,12 @@ public class AffichageGraphique extends GridPane implements Observer {
                 }
             }
 
-        }   
+        }
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        afficherJeu(o, arg);  
+        afficherJeu(o);
     }
 
 // Pour que chaque ligne et chaque colonne soit dimensionnée
@@ -112,7 +111,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public EmptyBoxView(int x, int y) {
             getStyleClass().add("mer");
-//            setOnMouseClicked(e -> ctrlG.emptyBoxClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
 
@@ -121,7 +120,8 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickAutreBateauPourTir(x, y));
         }
     }
 
@@ -129,7 +129,8 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavireGrandEquipe2(int x, int y) {
             getStyleClass().add("bateauGrandEquipe2");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickAutreBateauPourTir(x, y));
         }
     }
 
@@ -137,7 +138,8 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavirePetitEquipe1(int x, int y) {
             getStyleClass().add("bateauPetitEquipe1");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickAutreBateauPourTir(x, y));;
         }
     }
 
@@ -145,7 +147,8 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavirePetitEquipe2(int x, int y) {
             getStyleClass().add("bateauPetitEquipe2");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickAutreBateauPourTir(x, y));
         }
     }
 
@@ -153,7 +156,6 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public Atomique(int x, int y) {
             getStyleClass().add("atomique");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 
@@ -161,7 +163,6 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public Normale(int x, int y) {
             getStyleClass().add("normale");
-//            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
 

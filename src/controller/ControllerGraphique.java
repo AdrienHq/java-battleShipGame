@@ -14,6 +14,7 @@ public class ControllerGraphique extends Application {
 
     // Vrai si on a cliqué sur un bateau pour le déplacer
     private boolean bateauBouge = false;
+    private boolean bateauTir = false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -33,18 +34,26 @@ public class ControllerGraphique extends Application {
         game.setChangedAndNotify(); // Provoque un 1er affichage
     }
 
-//    // Quand l'utilisateur clique sur une case vide
-//    public void emptyBoxClicked(int x, int y) {
-//        if (bateauBouge) {
+    // Quand l'utilisateur clique sur une case vide
+    public void clickCaseVide(int x, int y) {
+        if (bateauBouge) {
 //            Navire.setPosition(x,y); // Déplace le bateau SET POSITION DU BATEAU
-////            model.setXY(x, y); // Déplace le bateau SET POSITION DU BATEAU 
-//            bateauBouge = false;
-//        }
-//    }
-//
-//    // Quand l'utilisateur clique sur un bateau
-//    public void boatClicked(int x, int y) {
-//        bateauBouge = true;
-//    }
+//game.deplacebateau(army1,pos,newPos,portee)
+            bateauBouge = false;
+        }
+    }
+    
+    public void clickAutreBateauPourTir(int x, int y) {
+        if (bateauTir) {
+//            game.tire(army1,pos,portee);
+            bateauTir = false;
+        }
+    }
+
+    // Quand l'utilisateur clique sur un bateau
+    public void clickBateau(int x, int y) {
+        bateauBouge = true;
+        bateauTir = true;
+    }
 
 }
