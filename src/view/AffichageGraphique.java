@@ -3,13 +3,20 @@ package view;
 import controller.ControllerGraphique;
 import java.util.Observable;
 import java.util.Observer;
+import javafx.geometry.Orientation;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import model.Game;
 import javafx.stage.Stage;
+import model.Army;
 import model.Case;
 import model.MerBoard;
 import model.Navire;
@@ -28,9 +35,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.setTitle("Plateau de jeu");
         stage.show();
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
+    
+    private void afficherJeu(Observable o, Object arg) {
         Game game = (Game) o;
         getChildren().clear();
         MerBoard board = game.getBoard();
@@ -38,22 +44,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         Case c = null;
         Position pos = null;
         Boolean debug = true;
-
-//        for (int x = 0; x < COTE; x++) {
-//            
-//             //Affiche l'entête de la ligne (1 2 3 4 5 ...)
-//            for (int y = 0; y < COTE; y++) {
-//                
-//                    add(new EmptyBoxView(x, y), x, y);
-//                
-//            }
-//            
-//        }
-        
-        
         for (int x = 0; x < COTE; x++) {
-            
-             //Affiche l'entête de la ligne (1 2 3 4 5 ...)
+            //Affiche l'entête de la ligne (1 2 3 4 5 ...)
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
                 c = mer[x][y];
@@ -73,9 +65,9 @@ public class AffichageGraphique extends GridPane implements Observer {
                         } else {
                             add(new NavirePetitEquipe2(x, y), x, y);
                         }
-                    } 
+                    }
                 } else if (c.estchoixPossible()) {
-                        add(new EmptyBoxView(x, y), x, y);   //mettre image eau verte .
+                    add(new EmptyBoxView(x, y), x, y);   //mettre image eau verte .
                 } else if (c.estFlottant() && debug == true) {
                     if (c.getTypeFlottant() == "ATOMIQUE") {
                         add(new Atomique(x, y), x, y);
@@ -86,8 +78,13 @@ public class AffichageGraphique extends GridPane implements Observer {
                     add(new EmptyBoxView(x, y), x, y);
                 }
             }
-            
-        }
+
+        }   
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        afficherJeu(o, arg);  
     }
 
 // Pour que chaque ligne et chaque colonne soit dimensionnée
@@ -167,4 +164,30 @@ public class AffichageGraphique extends GridPane implements Observer {
 //            setOnMouseClicked(e -> ctrlG.boatClicked(x, y));
         }
     }
+
+    private void afficheLegende() {
+        System.out.println(" B: Grand Bateau / S: Petit Bateau");
+        System.out.println(" A: Mine Atomique / N: Mine Normale");
+    }
+
+    private void afficheEtatArmeeEquipe1(Army army1) {
+        System.out.println("");
+        System.out.println("Etat des armees");
+        System.out.println("Position   Type   Integrité(%) Armée ");
+        for (Navire n : army1.getListeNavire()) {
+            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
+        }
+    }
+
+    private void afficheEtatArmeeEquipe2(Army army2) {
+        System.out.println("");
+        System.out.println("Etat des armees");
+        System.out.println("Position   Type   Integrité(%) Armée ");
+        for (Navire n : army2.getListeNavire()) {
+            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army2.getNom());
+
+        }
+
+    }
+
 }
