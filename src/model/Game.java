@@ -15,6 +15,7 @@ public class Game extends Observable {
     private Army joueur2;
     private Random random = new Random();
     List<Navire> bateauEnMer = new ArrayList<>();
+    
     public ArrayList<Position> listPositionPossible = new ArrayList<>();
     private Game(String joueur1, String joueur2, int cote) {
 
@@ -94,6 +95,8 @@ public class Game extends Observable {
         }
         return false;
     }
+    
+    
 
     public void setCote(int cote) {
         this.cote = cote;
@@ -105,6 +108,22 @@ public class Game extends Observable {
 
     public Navire getNavire(Position pos) { //Récupère le navire à une position précise 
         return board.getNavire(pos);
+    }
+    
+    
+    public String getStringPosByPos(Position pX) {
+        System.out.println(pX.getX());
+        System.out.println(pX.getY());
+        String x = String.valueOf(pX.getX()); //chiffre 
+        char y = getAZfromNumber(pX.getY());
+        String posString = y+x ;
+        return "B1";//posString ;     
+    }
+    private char getAZfromNumber(int y) {
+        
+        char result = (char)(y+65);
+        
+        return result ;
     }
 
     public boolean randomTour() { //Outil pour avoir un rand true ou false
@@ -292,6 +311,10 @@ public class Game extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    
+
+    
 
         
 

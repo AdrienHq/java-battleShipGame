@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -28,16 +29,20 @@ public class AffichageGraphique extends GridPane implements Observer {
 
     private final int COTE;
     private final ControllerGraphique ctrlG;
-
+    private Position positionClicked ;
+    int x = 0 ;
+    public int getX(){
+        return x ;
+    }
 //    TableView etatArmee1 = new TableView();
 //    TableView etatArmee2 = new TableView();
     GridPane etatArmee1 = new GridPane();
     GridPane etatArmee2 = new GridPane();
 
-    GridPane merPane = new GridPane();
+    private static GridPane merPane = new GridPane();
 
     Text action = new Text("Action");
-
+    Text debugText = new Text("Debug");   
     public AffichageGraphique(Stage stage, int cote, ControllerGraphique ctrl) {
         ctrlG = ctrl;
         COTE = cote;
@@ -46,6 +51,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         VBox centre = new VBox();
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
+        centre.getChildren().add(debugText);
 
         Insets insets = new Insets(20);
 
@@ -71,14 +77,34 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.setTitle("Bataille Navale");
         stage.setScene(scene);
         stage.show();
+        merPane.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+            double tmp = e.getY()/60;
+            x = (int)(e.getX()/60);
+            System.out.println(x);
+            int y = (int)tmp;
+            System.out.println(y);
+            setPositionClicked(new Position(x,y));
+            
+            });
 
     }
+    
+    public Position getPositionClicked() {
+        return this.positionClicked;
+    }
 
+    public void setPositionClicked(Position position) {
+        this.positionClicked = position ;
+        //setChangedAndNotify();
+    }    
+    
     private void afficherJeu(Observable o) {
 
         Game game = (Game) o;
 
         etatArmee(game.getJoueur1(), game.getJoueur2());
+        
+        
 
         getChildren().clear();
         MerBoard board = game.getBoard();
@@ -220,6 +246,17 @@ public class AffichageGraphique extends GridPane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         afficherJeu(o);
+    }
+
+    public void choixBateauTireur(String army) {
+        action.setText(army+",Veuillez sélectionner le bateau tireur(Tire Direct)");
+    }
+
+    public void ChoixBateauADeplacer(String army) {
+        action.setText(army+",Veuillez sélectionner le bateau à déplacer");    }
+
+    public void afficherPosition(String pos) {
+        debugText.setText(pos);
     }
 
     // La vue d'une "case"

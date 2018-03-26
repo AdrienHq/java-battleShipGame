@@ -33,6 +33,7 @@ public class ControllerConsole {
         Game game = Game.setGame(army1, army2,cote);
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
+        
         Boolean Joueur = true;
         clavier.nextLine();
         do {
@@ -132,24 +133,7 @@ public class ControllerConsole {
         } while (!gameOver); 
         System.out.println("partie finie"); //à deplacer
 
-//        do {
-//            int res = toucheClavier(); //prends le int taper par l'user 
-//            do {
-//                affichage.askPermissionDeplacement(); //demande si il veut un déplacement 1 = OUI et 2 = NON 
-//                Position pos = null;
-//                game.jouer(pos);:
-//
-//                if (res == 1) {
-//
-//                }
-//            } while (res != 1 || res != 2);
-//
-//        } while (!gameOver); 
-//        if(joueur1.listeVide()){
-//            affichage.showVictory();
-//        }else if(joueur2.listeVide()){
-//            affichage.showVictory();
-//        }      
+    
     }
 
     public static int toucheClavier() {
