@@ -4,27 +4,18 @@ import controller.ControllerGraphique;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import model.Game;
 import javafx.stage.Stage;
 import model.Army;
@@ -37,12 +28,12 @@ public class AffichageGraphique extends GridPane implements Observer {
 
     private final int COTE;
     private final ControllerGraphique ctrlG;
-    
+
 //    TableView etatArmee1 = new TableView();
 //    TableView etatArmee2 = new TableView();
     GridPane etatArmee1 = new GridPane();
     GridPane etatArmee2 = new GridPane();
-    
+
     GridPane merPane = new GridPane();
 
     Text action = new Text("Action");
@@ -51,19 +42,21 @@ public class AffichageGraphique extends GridPane implements Observer {
         ctrlG = ctrl;
         COTE = cote;
 
-       // nomArmee1.setPrefHeight(30);
-        
-        
+        // nomArmee1.setPrefHeight(30);
         VBox centre = new VBox();
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
-        
+
+        Insets insets = new Insets(20);
+
         BorderPane bp = new BorderPane();
-        //bp.setPadding(new Insets(20,0, 100,0));
         bp.setLeft(etatArmee1);
+        bp.setMargin(etatArmee1, insets);
         bp.setCenter(centre);
+        bp.setMargin(centre, insets);
         centre.setAlignment(Pos.CENTER);
         bp.setRight(etatArmee2);
+        bp.setMargin(etatArmee2, insets);
 
         for (int i = 0; i < COTE; i++) {
             ColumnConstraints column = new ColumnConstraints(60);
@@ -74,22 +67,19 @@ public class AffichageGraphique extends GridPane implements Observer {
         //etatArmee1.getColumnConstraints()
         //for
 
-        Scene scene = new Scene(bp,265+(COTE*60), 120+(COTE*60));
+        Scene scene = new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60));
         stage.setTitle("Bataille Navale");
         stage.setScene(scene);
         stage.show();
-        
 
     }
-    
 
     private void afficherJeu(Observable o) {
-        
-        
+
         Game game = (Game) o;
-        
-        etatArmee(game.getJoueur1(),game.getJoueur2());
-                
+
+        etatArmee(game.getJoueur1(), game.getJoueur2());
+
         getChildren().clear();
         MerBoard board = game.getBoard();
         Case[][] mer = board.getTab();
@@ -133,75 +123,104 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         }
     }
-    private void etatArmee(Army army1,Army army2) {
+
+    private void etatArmee(Army army1, Army army2) {
         //nomArmee1 = new Text(army.getNom());
-        Text a1 = new Text(army1.getNom());
-        Text a2 = new Text(army2.getNom());
-        
+
+        Label a1 = new Label(army1.getNom());
+        a1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
+        a1.setFont(Font.font("Verdana", 20));
+        Label a2 = new Label(army2.getNom());
+        a2.setStyle("-fx-background-color: green; -fx-padding: 10px;");
+        a2.setFont(Font.font("Verdana", 20));
+
         Text pos = new Text("Position");
         Text type = new Text("Type");
         Text etat = new Text("Etat");
-        
+        pos.setFont(Font.font("Verdana", 20));
+        pos.setFill(Color.RED);
+        type.setFont(Font.font("Verdana", 20));
+        type.setFill(Color.RED);
+        etat.setFont(Font.font("Verdana", 20));
+        etat.setFill(Color.RED);
+
         etatArmee1.setHgap(10);
         etatArmee1.setVgap(10);
         etatArmee1.add(a1, 1, 0, 1, 1);
         etatArmee1.add(pos, 0, 1, 1, 1);
         etatArmee1.add(type, 1, 1, 1, 1);
         etatArmee1.add(etat, 2, 1, 1, 1);
-        
+
+        Text pos2 = new Text("Position");
+        Text type2 = new Text("Type");
+        Text etat2 = new Text("Etat");
+        pos2.setFont(Font.font("Verdana", 20));
+        pos2.setFill(Color.GREEN);
+        type2.setFont(Font.font("Verdana", 20));
+        type2.setFill(Color.GREEN);
+        etat2.setFont(Font.font("Verdana", 20));
+        etat2.setFill(Color.GREEN);
+
         etatArmee2.setHgap(10);
         etatArmee2.setVgap(10);
         etatArmee2.add(a2, 1, 0, 1, 1);
-        etatArmee2.add(pos, 0, 1, 1, 1);
-        etatArmee2.add(type, 1, 1, 1, 1);
-        etatArmee2.add(etat, 2, 1, 1, 1);
-        
-        
-        
-        int x = 0 ;
-        int y = 2 ;
+        etatArmee2.add(pos2, 0, 1, 1, 1);
+        etatArmee2.add(type2, 1, 1, 1, 1);
+        etatArmee2.add(etat2, 2, 1, 1, 1);
+
+        int x = 0;
+        int y = 2;
         for (Navire n : army1.getListeNavire()) {
-            
-             // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
+
+            // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
             Text posX = new Text(n.getPopo());
-            
+            posX.setFont(Font.font("Verdana", 20));
+            posX.setFill(Color.RED);
+
             etatArmee1.add(posX, x, y, 1, 1);
             ++x;
-            Text typeX = new Text( n.getType());
+            Text typeX = new Text(n.getType());
+            typeX.setFont(Font.font("Verdana", 20));
+            typeX.setFill(Color.RED);
             etatArmee1.add(typeX, x, y, 1, 1);
             ++x;
             Text etatX = new Text(String.valueOf(n.getPointVie()));
+            etatX.setFont(Font.font("Verdana", 20));
+            etatX.setFill(Color.RED);
             etatArmee1.add(etatX, x, y, 1, 1);
-             x =  0;
-             ++y;
+            x = 0;
+            ++y;
         }
-        x = 0 ;
-        y = 2 ;
+        x = 0;
+        y = 2;
         for (Navire n2 : army2.getListeNavire()) {
-            
-             // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
+
+            // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
             Text posX2 = new Text(n2.getPopo());
+            posX2.setFont(Font.font("Verdana", 20));
+            posX2.setFill(Color.GREEN);
             etatArmee2.add(posX2, x, y, 1, 1);
             ++x;
-            Text typeX2 = new Text( n2.getType());
+            Text typeX2 = new Text(n2.getType());
+            typeX2.setFont(Font.font("Verdana", 20));
+            typeX2.setFill(Color.GREEN);
             etatArmee2.add(typeX2, x, y, 1, 1);
             ++x;
             Text etatX2 = new Text(String.valueOf(n2.getPointVie()));
+            etatX2.setFont(Font.font("Verdana", 20));
+            etatX2.setFill(Color.GREEN);
             etatArmee2.add(etatX2, x, y, 1, 1);
-             x =  0;
-             ++y;            
-        
+            x = 0;
+            ++y;
+
         }
-       
-        
+
     }
 
     @Override
     public void update(Observable o, Object arg) {
         afficherJeu(o);
     }
-
-
 
     // La vue d'une "case"
     private abstract class BoxView extends Pane {
@@ -270,30 +289,4 @@ public class AffichageGraphique extends GridPane implements Observer {
             getStyleClass().add("normale");
         }
     }
-
-    private void afficheLegende() {
-        System.out.println(" B: Grand Bateau / S: Petit Bateau");
-        System.out.println(" A: Mine Atomique / N: Mine Normale");
-    }
-
-    private void afficheEtatArmeeEquipe1(Army army1) {
-        System.out.println("");
-        System.out.println("Etat des armees");
-        System.out.println("Position   Type   Integrité(%) Armée ");
-        for (Navire n : army1.getListeNavire()) {
-            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
-        }
-    }
-
-    private void afficheEtatArmeeEquipe2(Army army2) {
-        System.out.println("");
-        System.out.println("Etat des armees");
-        System.out.println("Position   Type   Integrité(%) Armée ");
-        for (Navire n : army2.getListeNavire()) {
-            System.out.println(" " + n.getPopo() + "        " + n.getType() + "      " + n.getPointVie() + "       " + army2.getNom());
-
-        }
-
-    }
-
 }
