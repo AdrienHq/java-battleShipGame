@@ -131,7 +131,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         a1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
         a1.setFont(Font.font("Verdana", 20));
         Label a2 = new Label(army2.getNom());
-        a2.setStyle("-fx-background-color: green; -fx-padding: 10px;");
+        a2.setStyle("-fx-background-color: blue; -fx-padding: 10px;");
         a2.setFont(Font.font("Verdana", 20));
 
         Text pos = new Text("Position");
@@ -155,11 +155,11 @@ public class AffichageGraphique extends GridPane implements Observer {
         Text type2 = new Text("Type");
         Text etat2 = new Text("Etat");
         pos2.setFont(Font.font("Verdana", 20));
-        pos2.setFill(Color.GREEN);
+        pos2.setFill(Color.BLUE);
         type2.setFont(Font.font("Verdana", 20));
-        type2.setFill(Color.GREEN);
+        type2.setFill(Color.BLUE);
         etat2.setFont(Font.font("Verdana", 20));
-        etat2.setFill(Color.GREEN);
+        etat2.setFill(Color.BLUE);
 
         etatArmee2.setHgap(10);
         etatArmee2.setVgap(10);
@@ -198,17 +198,17 @@ public class AffichageGraphique extends GridPane implements Observer {
             // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
             Text posX2 = new Text(n2.getPopo());
             posX2.setFont(Font.font("Verdana", 20));
-            posX2.setFill(Color.GREEN);
+            posX2.setFill(Color.BLUE);
             etatArmee2.add(posX2, x, y, 1, 1);
             ++x;
             Text typeX2 = new Text(n2.getType());
             typeX2.setFont(Font.font("Verdana", 20));
-            typeX2.setFill(Color.GREEN);
+            typeX2.setFill(Color.BLUE);
             etatArmee2.add(typeX2, x, y, 1, 1);
             ++x;
             Text etatX2 = new Text(String.valueOf(n2.getPointVie()));
             etatX2.setFont(Font.font("Verdana", 20));
-            etatX2.setFill(Color.GREEN);
+            etatX2.setFill(Color.BLUE);
             etatArmee2.add(etatX2, x, y, 1, 1);
             x = 0;
             ++y;
