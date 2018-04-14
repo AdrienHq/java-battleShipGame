@@ -71,12 +71,4 @@ public abstract class Navire implements Deplacement {
     public abstract int getPorteeTir();
 }
 
-//     @Override
-//     public String toString(){
-//         
-//     }
-//    public void deplace (Direction d) {
-//        this.pos.move(d);
-//    }
-//PEUT ETRE POUR UNE PROCHAINE ITERATION
 

@@ -99,13 +99,8 @@ public class AffichageGraphique extends GridPane implements Observer {
     }    
     
     private void afficherJeu(Observable o) {
-
         Game game = (Game) o;
-
-        etatArmee(game.getJoueur1(), game.getJoueur2());
-        
-        
-
+        etatArmee(game.getJoueur1(), game.getJoueur2());      
         getChildren().clear();
         MerBoard board = game.getBoard();
         Case[][] mer = board.getTab();

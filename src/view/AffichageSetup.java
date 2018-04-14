@@ -5,27 +5,29 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Game;
 
 public class AffichageSetup extends VBox {
 
-    private final ControllerGraphique control;
+    private final ControllerGraphique control;;
 
     public AffichageSetup(Stage stage, ControllerGraphique ctrl) {
         control = ctrl;
         setup();
-        stage.setTitle("Entrez les noms des deux joueurs et la taille.");
-        stage.setScene(new Scene(this, 500, 300));
+        stage.setTitle("Initialisation");
+        stage.setScene(new Scene(this, 300, 350));
         stage.show();
     }
 
     TextField tf = new InputText1();
     TextField tf2 = new InputText2();
     TextField tfTaille = new InputNumber();
+    CheckBox switchBateau = new CheckBox("Placement aléatoire");
+    private boolean switchBat = false;
 
     private void setup() {
 //        FlowPane root = new FlowPane();
@@ -36,10 +38,13 @@ public class AffichageSetup extends VBox {
         Button btOk = new Button("Accepter");
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
-            if (!tf.getText().isEmpty() && !tf2.getText().isEmpty() && !tf.getText().isEmpty()){
+            if (!tf.getText().isEmpty() && !tf2.getText().isEmpty() && !tf.getText().isEmpty()) {
                 switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
+            }
+            if(switchBateau.isSelected()){
+                this.switchBat = true;        
             }
         });
         btReset.setOnAction(e -> {
@@ -47,11 +52,15 @@ public class AffichageSetup extends VBox {
             tf2.setText(null);
             tfTaille.setText(null);
         });
-        getChildren().addAll(tf, tf2, tfTaille, btOk, btReset);
+        getChildren().addAll(tf, tf2, tfTaille, btOk, btReset, switchBateau);
 
         setAlignment(Pos.CENTER);
         setPadding(new Insets(20));
         setSpacing(20);
+    }
+    
+    private boolean getCheckBox(){
+        return this.switchBat;
     }
 
     private void switchToMainWindow(String joueur1, String joueur2, int taille) {
@@ -122,6 +131,7 @@ public class AffichageSetup extends VBox {
 //                    switchToMainWindow(Integer.valueOf(getText()));
 //                }
 //            });
+
         }
     }
 }
