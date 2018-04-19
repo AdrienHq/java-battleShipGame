@@ -108,7 +108,7 @@ public class Game extends Observable {
         String x = String.valueOf(pX.getX()); //chiffre 
         char y = getAZfromNumber(pX.getY());
         String posString = y + x;
-        return "B1";//posString ;     
+        return posString ;     
     }
 
     private char getAZfromNumber(int y) {

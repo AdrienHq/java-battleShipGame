@@ -36,107 +36,58 @@ public class ControllerGraphique extends Application {
         jouer(affG, army1, army2);
     }
 
-    private void jouer(AffichageGraphique affG, String army1, String army2) {
-        Boolean Joueur = true;
+private void jouer(AffichageGraphique affG, String army1, String army2) {
 
-//        do {
-        if (Joueur) { //si c'est au tour du joueur 1
-            String pos = "";
-            int portee = 0;
+        Boolean entreeCorrecte = false;
+        String armyCourante = army1;
+        String pos = "";
+        Position pX = null ;
+        int portee = 0;
+        do {
+            //tire ::
+            affG.choixBateauTireur(armyCourante);
             do {
-                affG.afficherPosition("debug testttt");
-                System.out.println("on sort la0");
-                affG.ChoixBateauADeplacer(army1);
-                System.out.println("on sort la1");
-                Position pX = affG.getPositionClicked();
-                System.out.println(affG.getX());
-//                    System.out.println("on sort la2");
-//                    pos = game.getStringPosByPos(pX);
-                System.out.println("on sort la3");
+                System.out.println("on est la 1");
+                
+//                do{pX = affG.getPositionClicked();
+//                }while(pX == null);
+                System.out.println("on est la 2");
+                pos = game.getStringPosByPos(pX);
+                System.out.println("on est la 3");
                 affG.afficherPosition(pos);
-                System.out.println("on sort la4");
-                //game.choixBateauDeplacement(army1,pos,portee) ;
-                bateauBouge = true;
-            } while (bateauBouge == false);
+                System.out.println("on est la 4");
+                entreeCorrecte = game.tire(armyCourante, pos, portee);   //tirer 
+            } while (!entreeCorrecte);
+            entreeCorrecte = false;
 
-//                do{
-//                    affG.choixBateauTireur(army1);
-//                    
-//                    game.tire(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while( bateauTir == false );  
-        }
+            //choixbateaudéplacement ::
+            affG.choixBateauADeplacer(armyCourante);
+            do {
+                pX = affG.getPositionClicked();
+                pos = game.getStringPosByPos(pX);
+                entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos, portee);
+
+            } while (!entreeCorrecte);
+            entreeCorrecte = false;
+            
+            //deplacement ::
+            do {
+                pX = affG.getPositionClicked();
+                String newPos = game.getStringPosByPos(pX);
+                entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos, portee);
+            } while (!entreeCorrecte);
+
+            //switch army
+            if (armyCourante == army1) {
+                armyCourante = army2;
+            } else {
+                armyCourante = army1;
+            }
+
+        } while (!gameOver);
+        //afficher victoire joueur
 
     }
-
-//                System.out.println("");//affichage.portee(portee); //print la portee
-//                entreeCorrecte = false ;
-//                pos = "";
-//                
-//                do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-//                    affichage.choixBateauDeplacement(army1);
-//                    //clavier.nextLine();
-//                    pos = clavier.nextLine();
-//                    entreeCorrecte = game.choixBateauDeplacement(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while(!entreeCorrecte);
-//                entreeCorrecte = false ;
-//                //pos = "";
-//                String newPos = "";
-//                
-//                do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-//                    affichage.choixCaseDeplacement();
-//                    newPos = clavier.nextLine();
-//                    entreeCorrecte = game.deplacebateau(army1,pos,newPos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while(!entreeCorrecte);
-//                //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
-//                //appliquer le déplacement(maj board et reprint auto
-//                
-//                Joueur=false ; // On donne la main à l'autre joueur   
-//            
-//            }else{      //si c'est au tour du joueur 2
-//                Boolean entreeCorrecte = false ;
-//                String pos = "" ;
-//                int portee = 0;
-//                do{
-//                    affichage.choixBateauTireur(army2)  ;
-//                    if (clavier.hasNext()) {
-//                        //clavier.nextLine();
-//                        pos = clavier.nextLine();
-//                    } else;
-//                    System.out.println("entrée ok = "+pos);
-//                    entreeCorrecte = game.tire(army2,pos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
-//                System.out.println("");//affichage.portee(portee); //print la portee
-//                entreeCorrecte = false ;
-//                pos = "";
-//                
-//                do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-//                    affichage.choixBateauDeplacement(army2);
-//                    //clavier.nextLine();
-//                    pos = clavier.nextLine();
-//                    entreeCorrecte = game.choixBateauDeplacement(army2,pos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while(!entreeCorrecte);
-//                entreeCorrecte = false ;
-//                //pos = "";
-//                String newPos = "";
-//                
-//                do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-//                    affichage.choixCaseDeplacement();
-//                    newPos = clavier.nextLine();
-//                    entreeCorrecte = game.deplacebateau(army2,pos,newPos,portee) ; //verifie la position ,tire et renvoie la portée
-//                }
-//                while(!entreeCorrecte);
-//                //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
-//                //appliquer le déplacement(maj board et reprint auto
-//                
-//                Joueur=true ; // On donne la main à l'autre joueur   
-//            
-//                //meme chose que joueur1 à copier 
-//            }
 ////            if(joueur1.listeVide()){ 
 ////                affichage.showVictory(army1); 
 ////                gameOver = true ;
@@ -150,6 +101,7 @@ public class ControllerGraphique extends Application {
 //        System.out.println("partie finie"); //à deplacer
 //
 //    }
+    
     // Quand l'utilisateur clique sur une case vide
     public void clickCaseVide(int x, int y) {
         if (bateauBouge) {

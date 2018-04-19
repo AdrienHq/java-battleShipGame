@@ -247,7 +247,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         action.setText(army+",Veuillez sélectionner le bateau tireur(Tire Direct)");
     }
 
-    public void ChoixBateauADeplacer(String army) {
+    public void choixBateauADeplacer(String army) {
         action.setText(army+",Veuillez sélectionner le bateau à déplacer");    }
 
     public void afficherPosition(String pos) {
