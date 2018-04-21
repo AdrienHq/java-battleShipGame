@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Random;
+import view.AffichageSetup;
 
 public class Game extends Observable {
 
     private Random rand = new Random();
     private int cote;
     private MerBoard board;
+    private MerBuilder boardBuilder;
     private static Game instance = null;
     private Army joueur1; //army (nom / arrayList / color) 
     private Army joueur2;
@@ -20,16 +22,20 @@ public class Game extends Observable {
     public ArrayList<Position> listPositionPossible = new ArrayList<>();
 
     private Game(String joueur1, String joueur2, int cote) {
+        boolean switchBat = AffichageSetup.getCheckBox();
 
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
         this.cote = cote;
-        this.board = MerBoard.getInstance(cote);
+        if (switchBat == true) {
+            this.boardBuilder = MerBuilder.getInstance(cote);
+        } else if (switchBat == false) {
+            this.board = MerBoard.getInstance(cote);
 
-        initialiserBateaux(getJoueur1());
-        initialiserBateaux(getJoueur2());
-        placementFlottants();
-
+            initialiserBateaux(getJoueur1());
+            initialiserBateaux(getJoueur2());
+            placementFlottants();
+        }
     }
 
     public static Game setGame(String joueur1, String joueur2, int cote) {
@@ -108,7 +114,7 @@ public class Game extends Observable {
         String x = String.valueOf(pX.getX()); //chiffre 
         char y = getAZfromNumber(pX.getY());
         String posString = y + x;
-        return posString ;     
+        return posString;
     }
 
     private char getAZfromNumber(int y) {

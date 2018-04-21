@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.application.Application;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Game;
 import model.Position;
@@ -36,19 +37,19 @@ public class ControllerGraphique extends Application {
         jouer(affG, army1, army2);
     }
 
-private void jouer(AffichageGraphique affG, String army1, String army2) {
+    private void jouer(AffichageGraphique affG, String army1, String army2) {
 
         Boolean entreeCorrecte = false;
         String armyCourante = army1;
         String pos = "";
-        Position pX = null ;
+        Position pX = null;
         int portee = 0;
         do {
             //tire ::
             affG.choixBateauTireur(armyCourante);
             do {
                 System.out.println("on est la 1");
-                
+
 //                do{pX = affG.getPositionClicked();
 //                }while(pX == null);
                 System.out.println("on est la 2");
@@ -69,7 +70,7 @@ private void jouer(AffichageGraphique affG, String army1, String army2) {
 
             } while (!entreeCorrecte);
             entreeCorrecte = false;
-            
+
             //deplacement ::
             do {
                 pX = affG.getPositionClicked();
@@ -101,7 +102,7 @@ private void jouer(AffichageGraphique affG, String army1, String army2) {
 //        System.out.println("partie finie"); //à deplacer
 //
 //    }
-    
+
     // Quand l'utilisateur clique sur une case vide
     public void clickCaseVide(int x, int y) {
         if (bateauBouge) {
@@ -123,5 +124,18 @@ private void jouer(AffichageGraphique affG, String army1, String army2) {
         bateauBouge = true;
         bateauTir = true;
     }
-
-}
+    
+//    boolean hasclicked1=false;
+//
+//    public void mouseClicked(MouseEvent me) {
+//        if (!hasclicked1) { //click le bateau
+//            hasclicked1 = true;
+//            
+//            
+//        } else { //click la mer
+//            hasclicked1 = false;
+//            
+//        }
+//
+//    }
+ }

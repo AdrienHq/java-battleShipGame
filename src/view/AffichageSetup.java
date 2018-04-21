@@ -27,7 +27,7 @@ public class AffichageSetup extends VBox {
     TextField tf2 = new InputText2();
     TextField tfTaille = new InputNumber();
     CheckBox switchBateau = new CheckBox("Placement aléatoire");
-    private boolean switchBat = false;
+    private static boolean switchBat = false;
 
     private void setup() {
 //        FlowPane root = new FlowPane();
@@ -59,8 +59,8 @@ public class AffichageSetup extends VBox {
         setSpacing(20);
     }
     
-    private boolean getCheckBox(){
-        return this.switchBat;
+    public static boolean getCheckBox(){
+        return AffichageSetup.switchBat;
     }
 
     private void switchToMainWindow(String joueur1, String joueur2, int taille) {
