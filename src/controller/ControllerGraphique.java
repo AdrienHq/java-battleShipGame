@@ -38,7 +38,6 @@ public class ControllerGraphique extends Application {
     boolean choixPositionDeplacement = true;
 
     private void jouer(AffichageGraphique affG, String army1, String army2) {
-
         Boolean entreeCorrecte = false;
         String armyCourante = army1;
         String pos = "";
@@ -134,30 +133,5 @@ public class ControllerGraphique extends Application {
             //fonction deplacement
             deplacementBateau = false;
         }
-//        if (choixPositionDeplacement) {
-//            //fonction deplacement
-//        }
     }
-
-    // Quand l'utilisateur clique sur une case vide
-//    public void clickCaseVide(int x, int y) {
-//        if (bateauBouge) {
-////            Navire.setPosition(x,y); // Déplace le bateau SET POSITION DU BATEAU
-////game.deplacebateau(army1,pos,newPos,portee)
-//            bateauBouge = true;
-//        }
-//    }
-//
-//    public void clickAutreBateauPourTir(int x, int y) {
-//        if (bateauTir) {
-////            game.tire(army1,pos,portee);
-//            bateauTir = false;
-//        }
-//    }
-//
-//    // Quand l'utilisateur clique sur un bateau
-//    public void clickBateau(int x, int y) {
-//        bateauBouge = true;
-//        bateauTir = true;
-//    }
 }
