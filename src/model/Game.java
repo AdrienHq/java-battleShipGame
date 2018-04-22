@@ -52,6 +52,10 @@ public class Game extends Observable {
     public MerBoard getBoard() {
         return this.board;
     }
+    
+    public MerBuilder getBuilder(){
+        return this.boardBuilder;
+    }
 
     private void initialiserBateaux(Army army) { //Donne Armee jouee 1 donc 3 bateaux
         Position pos = null;

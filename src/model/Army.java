@@ -27,12 +27,13 @@ public class Army {
         listNavire.add(n);
         return true;
     }
+
     public void tirDegat(Navire n) {
         n.degat(50);
 //        if(n.pointVie == 0){
 //            this.deleteNavire(n);
 //        }
-        
+
 //        Navire temp = n ;
 //        this.deleteNavire(n);
 //        temp.tirDegat();
@@ -43,10 +44,10 @@ public class Army {
     }
 
     public void deleteNavire() { //tir en 0 5 
-        for (Navire x : listNavire){
-            if(x.pointVie == 0){
+        for (Navire x : listNavire) {
+            if (x.pointVie == 0) {
                 listNavire.remove(x);
-            }  
+            }
         }
     }
 
@@ -81,5 +82,4 @@ public class Army {
         return false;
     }
 
-    
 }

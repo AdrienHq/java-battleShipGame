@@ -39,5 +39,11 @@ public class MerBuilder {
             }
         }
     }
+    
+    public void ajouterBateau(){
+        
+    }
+    
+    
 
 }

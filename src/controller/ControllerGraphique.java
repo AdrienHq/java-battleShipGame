@@ -14,10 +14,6 @@ public class ControllerGraphique extends Application {
     private Game game;
     Boolean gameOver = false;
 
-    // Vrai si on a cliqué sur un bateau pour le déplacer
-    private boolean bateauBouge = false;
-    private boolean bateauTir = false;
-
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -36,6 +32,10 @@ public class ControllerGraphique extends Application {
         game.setChangedAndNotify(); // Provoque un 1er affichage
         jouer(affG, army1, army2);
     }
+
+    boolean deplacementBateau = true;
+    boolean tirBateau = true;
+    boolean choixPositionDeplacement = true;
 
     private void jouer(AffichageGraphique affG, String army1, String army2) {
 
@@ -77,6 +77,9 @@ public class ControllerGraphique extends Application {
                 String newPos = game.getStringPosByPos(pX);
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos, portee);
             } while (!entreeCorrecte);
+            choixPositionDeplacement = true;
+            tirBateau = true;
+            deplacementBateau = true;
 
             //switch army
             if (armyCourante == army1) {
@@ -102,40 +105,54 @@ public class ControllerGraphique extends Application {
 //        System.out.println("partie finie"); //à deplacer
 //
 //    }
+    private AffichageGraphique affG;
+
+    public void clickBateau(int x, int y, MouseEvent e) {
+        if (choixPositionDeplacement) {
+            //fonction recupere pos
+            double tmp = e.getY() / 60;
+            x = (int) (e.getX() / 60);
+//            System.out.println(x);
+            y = (int) tmp;
+//            System.out.println(y);
+            affG.setPositionClicked(new Position(x, y));
+            choixPositionDeplacement = false;
+        }
+        if (tirBateau) {
+            //fonction tir; 
+            tirBateau = false;
+        }
+    }
+
+    public void clickCaseVide(int x, int y, MouseEvent e, AffichageGraphique affG) {
+        if (deplacementBateau) {
+            //fonction deplacement
+            deplacementBateau = false;
+        }
+//        if (choixPositionDeplacement) {
+//            //fonction deplacement
+//        }
+    }
 
     // Quand l'utilisateur clique sur une case vide
-    public void clickCaseVide(int x, int y) {
-        if (bateauBouge) {
-//            Navire.setPosition(x,y); // Déplace le bateau SET POSITION DU BATEAU
-//game.deplacebateau(army1,pos,newPos,portee)
-            bateauBouge = true;
-        }
-    }
-
-    public void clickAutreBateauPourTir(int x, int y) {
-        if (bateauTir) {
-//            game.tire(army1,pos,portee);
-            bateauTir = false;
-        }
-    }
-
-    // Quand l'utilisateur clique sur un bateau
-    public void clickBateau(int x, int y) {
-        bateauBouge = true;
-        bateauTir = true;
-    }
-    
-//    boolean hasclicked1=false;
-//
-//    public void mouseClicked(MouseEvent me) {
-//        if (!hasclicked1) { //click le bateau
-//            hasclicked1 = true;
-//            
-//            
-//        } else { //click la mer
-//            hasclicked1 = false;
-//            
+//    public void clickCaseVide(int x, int y) {
+//        if (bateauBouge) {
+////            Navire.setPosition(x,y); // Déplace le bateau SET POSITION DU BATEAU
+////game.deplacebateau(army1,pos,newPos,portee)
+//            bateauBouge = true;
 //        }
-//
 //    }
- }
+//
+//    public void clickAutreBateauPourTir(int x, int y) {
+//        if (bateauTir) {
+////            game.tire(army1,pos,portee);
+//            bateauTir = false;
+//        }
+//    }
+//
+//    // Quand l'utilisateur clique sur un bateau
+//    public void clickBateau(int x, int y) {
+//        bateauBouge = true;
+//        bateauTir = true;
+//    }
+}
