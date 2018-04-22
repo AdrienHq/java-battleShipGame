@@ -48,23 +48,21 @@ public class ControllerGraphique extends Application {
             //tire ::
             affG.choixBateauTireur(armyCourante);
             do {
-                System.out.println("on est la 1");
-
-//                do{pX = affG.getPositionClicked();
-//                }while(pX == null);
-                System.out.println("on est la 2");
+                pX = this.getPositionClicked();
+                System.out.println("on est la 0");
                 pos = game.getStringPosByPos(pX);
-                System.out.println("on est la 3");
+                System.out.println("on est la 1");
                 affG.afficherPosition(pos);
-                System.out.println("on est la 4");
-                entreeCorrecte = game.tire(armyCourante, pos, portee);   //tirer 
+                System.out.println("on est la 2");
+                entreeCorrecte = game.tire(armyCourante, pos, portee);   //tirer
+                game.setChangedAndNotify();
             } while (!entreeCorrecte);
             entreeCorrecte = false;
 
             //choixbateaudéplacement ::
             affG.choixBateauADeplacer(armyCourante);
             do {
-                pX = affG.getPositionClicked();
+                pX = getPositionClicked();
                 pos = game.getStringPosByPos(pX);
                 entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos, portee);
 
@@ -73,7 +71,7 @@ public class ControllerGraphique extends Application {
 
             //deplacement ::
             do {
-                pX = affG.getPositionClicked();
+                pX = getPositionClicked();
                 String newPos = game.getStringPosByPos(pX);
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos, portee);
             } while (!entreeCorrecte);
@@ -105,17 +103,24 @@ public class ControllerGraphique extends Application {
 //        System.out.println("partie finie"); //à deplacer
 //
 //    }
-    private AffichageGraphique affG;
+
+    private Position positionClicked;
+
+    public Position getPositionClicked() {
+        return this.positionClicked;
+    }
+
+    public void setPositionClicked(Position position) {
+        this.positionClicked = position;
+        //setChangedAndNotify();
+    }
 
     public void clickBateau(int x, int y, MouseEvent e) {
         if (choixPositionDeplacement) {
-            //fonction recupere pos
-            double tmp = e.getY() / 60;
-            x = (int) (e.getX() / 60);
-//            System.out.println(x);
-            y = (int) tmp;
-//            System.out.println(y);
-            affG.setPositionClicked(new Position(x, y));
+            //fonction recupere pos           
+            setPositionClicked(new Position(x, y));
+            System.out.println(x);
+            System.out.println(y);
             choixPositionDeplacement = false;
         }
         if (tirBateau) {
@@ -124,7 +129,7 @@ public class ControllerGraphique extends Application {
         }
     }
 
-    public void clickCaseVide(int x, int y, MouseEvent e, AffichageGraphique affG) {
+    public void clickCaseVide(int x, int y, MouseEvent e) {
         if (deplacementBateau) {
             //fonction deplacement
             deplacementBateau = false;

@@ -29,7 +29,6 @@ public class AffichageGraphique extends GridPane implements Observer {
 
     private final int COTE;
     private final ControllerGraphique ctrlG;
-    private Position positionClicked;
     int x = 0;
 
     public int getX() {
@@ -89,15 +88,6 @@ public class AffichageGraphique extends GridPane implements Observer {
 //
 //        });
 
-    }
-
-    public Position getPositionClicked() {
-        return this.positionClicked;
-    }
-
-    public void setPositionClicked(Position position) {
-        this.positionClicked = position;
-        //setChangedAndNotify();
     }
 
     private void afficherJeu(Observable o) {
@@ -268,10 +258,10 @@ public class AffichageGraphique extends GridPane implements Observer {
     // La vue d'une "case" vide
     private class EmptyBoxView extends BoxView {
 
-//case vide 
+        //case vide 
         public EmptyBoxView(int x, int y) {
             getStyleClass().add("mer");
-            setOnMouseClicked(e -> ctrlG.clickBateau(x, y, e));
+            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y, e));
         }
     }
 
@@ -280,7 +270,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
-            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y, e));
         }
     }
 
@@ -288,7 +278,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavireGrandEquipe2(int x, int y) {
             getStyleClass().add("bateauGrandEquipe2");
-            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y, e));
         }
     }
 
@@ -296,7 +286,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavirePetitEquipe1(int x, int y) {
             getStyleClass().add("bateauPetitEquipe1");
-            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y, e));
         }
     }
 
@@ -304,7 +294,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public NavirePetitEquipe2(int x, int y) {
             getStyleClass().add("bateauPetitEquipe2");
-            setOnMouseClicked(e -> ctrlG.clickBateau(x, y));
+            setOnMouseClicked(e -> ctrlG.clickBateau(x, y, e));
         }
     }
 
