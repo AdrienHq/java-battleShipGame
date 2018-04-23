@@ -13,6 +13,7 @@ public class ControllerGraphique extends Application {
     private Stage stage;
     private Game game;
     Boolean gameOver = false;
+    private AffichageGraphique affG;
 
     @Override
     public void start(Stage primaryStage) {
@@ -26,82 +27,32 @@ public class ControllerGraphique extends Application {
     }
 
     public void switchToMainWindow(String army1, String army2, int cote) {
-        AffichageGraphique affG = new AffichageGraphique(stage, cote, this);
+        affG = new AffichageGraphique(stage, cote, this);
         game = Game.setGame(army1, army2, cote);
         game.addObserver(affG);
         game.setChangedAndNotify(); // Provoque un 1er affichage
         jouer(affG, army1, army2);
     }
-
-    boolean deplacementBateau = true;
-    boolean tirBateau = true;
-    boolean choixPositionDeplacement = true;
+    private boolean joueur;
+    private boolean deplacementBateau;
+    private boolean tirBateau;
+    private String joueur1;
+    private String joueur2;
+    private boolean choixPositionDeplacement;
+    private String armyCourante;
+    private int portee;
+    private Position oldPos ;
 
     private void jouer(AffichageGraphique affG, String army1, String army2) {
-        Boolean entreeCorrecte = false;
-        String armyCourante = army1;
-        String pos = "";
-        Position pX = null;
-        int portee = 0;
-        do {
-            //tire ::
-            affG.choixBateauTireur(armyCourante);
-            do {
-                pX = this.getPositionClicked();
-                System.out.println("on est la 0");
-                pos = game.getStringPosByPos(pX);
-                System.out.println("on est la 1");
-                affG.afficherPosition(pos);
-                System.out.println("on est la 2");
-                entreeCorrecte = game.tire(armyCourante, pos, portee);   //tirer
-                game.setChangedAndNotify();
-            } while (!entreeCorrecte);
-            entreeCorrecte = false;
-
-            //choixbateaudéplacement ::
-            affG.choixBateauADeplacer(armyCourante);
-            do {
-                pX = getPositionClicked();
-                pos = game.getStringPosByPos(pX);
-                entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos, portee);
-
-            } while (!entreeCorrecte);
-            entreeCorrecte = false;
-
-            //deplacement ::
-            do {
-                pX = getPositionClicked();
-                String newPos = game.getStringPosByPos(pX);
-                entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos, portee);
-            } while (!entreeCorrecte);
-            choixPositionDeplacement = true;
-            tirBateau = true;
-            deplacementBateau = true;
-
-            //switch army
-            if (armyCourante == army1) {
-                armyCourante = army2;
-            } else {
-                armyCourante = army1;
-            }
-
-        } while (!gameOver);
-        //afficher victoire joueur
+        joueur = true;
+        choixPositionDeplacement = false;
+        deplacementBateau = false;
+        tirBateau = true;
+        joueur1 = army1;
+        joueur2 = army2;
+        affG.afficherTextAction(army1 ," à vous de tirer");
 
     }
-////            if(joueur1.listeVide()){ 
-////                affichage.showVictory(army1); 
-////                gameOver = true ;
-////            }
-////            if(joueur2.listeVide()){ 
-////                affichage.showVictory(army2);
-////                gameOver = true ;
-////            }
-//            //si joueur2.listeVide()){
-//        } while (!gameOver); 
-//        System.out.println("partie finie"); //à deplacer
-//
-//    }
 
     private Position positionClicked;
 
@@ -109,29 +60,48 @@ public class ControllerGraphique extends Application {
         return this.positionClicked;
     }
 
-    public void setPositionClicked(Position position) {
-        this.positionClicked = position;
-        //setChangedAndNotify();
-    }
+//    public void setPositionClicked(Position position) {
+//        this.positionClicked = position;
+//        //setChangedAndNotify();
+//    }
+    public void clickBateau(int x, int y) {
+        positionClicked = new Position(x, y);
 
-    public void clickBateau(int x, int y, MouseEvent e) {
-        if (choixPositionDeplacement) {
-            //fonction recupere pos           
-            setPositionClicked(new Position(x, y));
-            System.out.println(x);
-            System.out.println(y);
-            choixPositionDeplacement = false;
+        if (joueur) {
+            armyCourante = joueur1;
+        } else {
+            armyCourante = joueur2;
         }
         if (tirBateau) {
-            //fonction tir; 
-            tirBateau = false;
-        }
+            if (game.tirGraphique(armyCourante, positionClicked, portee)) {
+                tirBateau = false;
+                choixPositionDeplacement = true ;
+            } else {
+                affG.afficherTextDebug(armyCourante, "la case n'est pas valide,réessayer");
+            }
+        } 
+//        else if (choixPositionDeplacement) {
+//            affG.afficherTextAction(armyCourante ," ,sélectionner le bateau à déplacer ");
+//            if(game.choixBateauDeplacementGraphique(armyCourante, positionClicked)){
+//                choixPositionDeplacement = false ;
+//                deplacementBateau = true ;
+//                
+//                affG.afficherTextAction(armyCourante ," ,sélectionner la case où déplacer le bateau! ");
+//                oldPos = positionClicked ;
+//            }
+//           
+//        }
+
     }
 
-    public void clickCaseVide(int x, int y, MouseEvent e) {
+    public void clickCaseVide(int x, int y) {
+        positionClicked = new Position(x, y);
         if (deplacementBateau) {
+            if(game.deplaceBateauGraphique(armyCourante, oldPos, positionClicked)){
+                    
+                } 
             //fonction deplacement
-            deplacementBateau = false;
+            ;
         }
     }
 }

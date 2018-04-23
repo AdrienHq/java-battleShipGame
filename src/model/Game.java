@@ -132,7 +132,7 @@ public class Game extends Observable {
         return rand.nextBoolean();
     }
 
-    public boolean deplacebateau(String army1, String oldPos, String newPos, int portee) {
+    public boolean deplacebateau(String army1, String oldPos, String newPos) {
         Case c = board.getCaseInPos(oldPos);
         Case f = board.getCaseInPos(newPos);
         Position future = f.getPosition();
@@ -164,8 +164,40 @@ public class Game extends Observable {
         }
 
     }
+    
+    public boolean deplaceBateauGraphique(String armyCourante, Position oldPos, Position positionClicked) {
+        Case c = board.getCaseInPos(oldPos);
+        Case f = board.getCaseInPos(positionClicked);
+        Position future = f.getPosition();
+        if (f.choixPossible == true) {
+            Navire n = c.getNavire();
+            c.supprimerNavire();
+            if (f.getTypeFlottant() == "ATOMIQUE") {
+                n.degat(100);
 
-    public Boolean choixBateauDeplacement(String army, String pos, int portee) {
+            } else if (f.getTypeFlottant() == "NORMALE") {
+                n.degat(50);
+                f.supprimerFlottant();
+
+            }
+            if (n.pointVie > 0) {
+                f.setNavire(n);
+            }
+
+            n.setPosition(future);
+            n.setPopo(f.getName());
+            for (Position p : listPositionPossible) {
+                Case x = board.getCaseInPos(p);
+                x.switchChoixPossible();
+            }
+            setChangedAndNotify();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public Boolean choixBateauDeplacement(String army, String pos) {
         Case c = board.getCaseInPos(pos);
         Navire nav = null;
         int deplacement;
@@ -201,6 +233,41 @@ public class Game extends Observable {
         }
     }
 
+    public boolean choixBateauDeplacementGraphique(String armyCourante, Position positionClicked) {
+        Case c = board.getCaseInPos(positionClicked);
+        Navire nav = null;
+        int deplacement;
+        if (c.estNavire()) { //Regarde si la case est un Navire
+            nav = c.getNavire(); //Si oui, on conserve cette donnée 
+        } else {
+            return false; // aussinon on sort de la boucle
+        }
+        if (armyCourante == joueur1.getNom()) {
+            if (joueur1.estAmi(nav)) {
+                deplacement = nav.getDeplacementMax();
+                listPositionPossible = new ArrayList<>();
+                this.getCasePossible(deplacement, nav); //complete la liste des déplacements possible
+                //met les case concernée en choixDeplacement = true (créer cette variable)
+                //dans l'affichage console ,si case est choixdeplacement print un x orange ) 
+
+                setChangedAndNotify();
+                return true;
+            } else {
+                return false;
+            }
+        } else if (joueur2.estAmi(nav)) {
+            deplacement = nav.getDeplacementMax();
+            listPositionPossible = new ArrayList<>();
+            this.getCasePossible(deplacement, nav); //complete la liste des déplacements possible
+            //met les case concernée en choixDeplacement = true (créer cette variable)
+            //dans l'affichage console ,si case est choixdeplacement print un x orange ) 
+
+            setChangedAndNotify();
+            return true;
+        } else {
+            return false;
+        }
+    }
     private void getCasePossible(int deplacement, Navire n) {
         Position pos = n.getPosition();
         for (int i = -deplacement; i <= deplacement; i++) {
@@ -236,6 +303,39 @@ public class Game extends Observable {
             return false; // aussinon on sort de la boucle
         }
         if (army == joueur1.getNom()) {
+            if (joueur1.estAmi(nav)) {
+                portee = nav.getPorteeTir();
+                System.out.println("portée = " + portee);
+                if (portee != 0) {
+
+                    this.degatZone(joueur1, joueur2, nav, portee);
+                }
+                setChangedAndNotify();
+                return true;
+            }
+        } else if (joueur2.estAmi(nav)) {
+            portee = nav.getPorteeTir();
+            System.out.println("portée = " + portee);
+            if (portee != 0) {
+                this.degatZone(joueur2, joueur1, nav, portee);
+            }
+            setChangedAndNotify();
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean tirGraphique(String armyCourante, Position positionClicked, int portee) {
+        Case c = board.getCaseInPos(positionClicked);
+        Navire nav = null;
+
+        if (c.estNavire()) { //Regarde si la case est un Navire
+            nav = c.getNavire(); //Si oui, on conserve cette donnée 
+
+        } else {
+            return false; // aussinon on sort de la boucle
+        }
+        if (armyCourante == joueur1.getNom()) {
             if (joueur1.estAmi(nav)) {
                 portee = nav.getPorteeTir();
                 System.out.println("portée = " + portee);
@@ -303,4 +403,10 @@ public class Game extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    
+
+    
+
+   
 }

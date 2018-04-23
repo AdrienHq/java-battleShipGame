@@ -60,7 +60,7 @@ public class ControllerConsole {
                     affichage.choixBateauDeplacement(army1);
                     //clavier.nextLine();
                     pos = clavier.nextLine();
-                    entreeCorrecte = game.choixBateauDeplacement(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
+                    entreeCorrecte = game.choixBateauDeplacement(army1,pos) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);
                 entreeCorrecte = false ;
@@ -70,7 +70,7 @@ public class ControllerConsole {
                 do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                     affichage.choixCaseDeplacement();
                     newPos = clavier.nextLine();
-                    entreeCorrecte = game.deplacebateau(army1,pos,newPos,portee) ; //verifie la position ,tire et renvoie la portée
+                    entreeCorrecte = game.deplacebateau(army1,pos,newPos) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);
                 //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
@@ -100,7 +100,7 @@ public class ControllerConsole {
                     affichage.choixBateauDeplacement(army2);
                     //clavier.nextLine();
                     pos = clavier.nextLine();
-                    entreeCorrecte = game.choixBateauDeplacement(army2,pos,portee) ; //verifie la position ,tire et renvoie la portée
+                    entreeCorrecte = game.choixBateauDeplacement(army2,pos) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);
                 entreeCorrecte = false ;
@@ -110,7 +110,7 @@ public class ControllerConsole {
                 do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                     affichage.choixCaseDeplacement();
                     newPos = clavier.nextLine();
-                    entreeCorrecte = game.deplacebateau(army2,pos,newPos,portee) ; //verifie la position ,tire et renvoie la portée
+                    entreeCorrecte = game.deplacebateau(army2,pos,newPos) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);
                 //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
