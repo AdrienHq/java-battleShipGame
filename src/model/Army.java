@@ -42,12 +42,16 @@ public class Army {
 //            this.deleteNavire(n);
 //        }
     }
+    private ArrayList<Navire> listNavireToDelete = new ArrayList<>();
 
     public void deleteNavire() { //tir en 0 5 
         for (Navire x : listNavire) {
             if (x.pointVie == 0) {
-                listNavire.remove(x);
+                listNavireToDelete.add(x);
             }
+        }
+        for (Navire x : listNavireToDelete) {
+            listNavire.remove(x);
         }
     }
 

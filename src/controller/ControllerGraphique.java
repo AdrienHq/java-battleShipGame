@@ -42,7 +42,7 @@ public class ControllerGraphique extends Application {
     private String armyCourante;
     private int portee;
     private Position oldPos ;
-
+    
     private void jouer(AffichageGraphique affG, String army1, String army2) {
         joueur = true;
         choixPositionDeplacement = false;
@@ -80,17 +80,17 @@ public class ControllerGraphique extends Application {
                 affG.afficherTextDebug(armyCourante, "la case n'est pas valide,réessayer");
             }
         } 
-//        else if (choixPositionDeplacement) {
-//            affG.afficherTextAction(armyCourante ," ,sélectionner le bateau à déplacer ");
-//            if(game.choixBateauDeplacementGraphique(armyCourante, positionClicked)){
-//                choixPositionDeplacement = false ;
-//                deplacementBateau = true ;
-//                
-//                affG.afficherTextAction(armyCourante ," ,sélectionner la case où déplacer le bateau! ");
-//                oldPos = positionClicked ;
-//            }
-//           
-//        }
+        else if (choixPositionDeplacement) {
+            affG.afficherTextAction(armyCourante ," ,sélectionner le bateau à déplacer ");
+            if(game.choixBateauDeplacementGraphique(armyCourante, positionClicked)){
+                choixPositionDeplacement = false ;
+                deplacementBateau = true ;
+                
+                affG.afficherTextAction(armyCourante ," ,sélectionner la case où déplacer le bateau! ");
+                oldPos = positionClicked ;
+            }
+           
+        }
 
     }
 
@@ -98,6 +98,19 @@ public class ControllerGraphique extends Application {
         positionClicked = new Position(x, y);
         if (deplacementBateau) {
             if(game.deplaceBateauGraphique(armyCourante, oldPos, positionClicked)){
+                    deplacementBateau = false ; 
+                    
+                    tirBateau = true ;
+                    if(gameOver){
+                      affG.afficherTextAction(armyCourante ," Vous avez gagné!!") ;
+                    }else{
+                        if(joueur){
+                            armyCourante = joueur2 ;
+                        }else{
+                            armyCourante = joueur1 ;
+                        }
+                        affG.afficherTextAction(armyCourante ," à vous de tirer!");
+                    }
                     
                 } 
             //fonction deplacement
