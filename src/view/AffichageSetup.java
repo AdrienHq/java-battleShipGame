@@ -7,13 +7,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Game;
 
 public class AffichageSetup extends VBox {
 
-    private final ControllerGraphique control;;
+    private final ControllerGraphique control;
+
+    ;
 
     public AffichageSetup(Stage stage, ControllerGraphique ctrl) {
         control = ctrl;
@@ -43,8 +46,8 @@ public class AffichageSetup extends VBox {
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
-            if(switchBateau.isSelected()){
-                this.switchBat = true;        
+            if (switchBateau.isSelected()) {
+                this.switchBat = true;
             }
         });
         btReset.setOnAction(e -> {
@@ -58,8 +61,8 @@ public class AffichageSetup extends VBox {
         setPadding(new Insets(20));
         setSpacing(20);
     }
-    
-    public static boolean getCheckBox(){
+
+    public static boolean getCheckBox() {
         return AffichageSetup.switchBat;
     }
 
@@ -82,12 +85,11 @@ public class AffichageSetup extends VBox {
                     setText(oldValue);
                 }
             });
-//            setOnKeyPressed(ke -> {
-//                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
-//                    switchToMainWindow(String.copyValueOf(chars), String.copyValueOf(chars));
-////                            Integer.valueOf(getText()));
-//                }
-//            });
+            setOnKeyPressed(ke -> {
+                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
+                    switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
+                }
+            });
         }
     }
 
@@ -104,6 +106,11 @@ public class AffichageSetup extends VBox {
             textProperty().addListener((obs, oldValue, newValue) -> {
                 if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
                     setText(oldValue);
+                }
+            });
+            setOnKeyPressed(ke -> {
+                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
+                    switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
                 }
             });
         }
@@ -125,12 +132,11 @@ public class AffichageSetup extends VBox {
                     setText(oldValue);
                 }
             });
-//            // Capture du Enter pour valider saisie
-//            setOnKeyPressed(ke -> {
-//                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
-//                    switchToMainWindow(Integer.valueOf(getText()));
-//                }
-//            });
+            setOnKeyPressed(ke -> {
+                if (ke.getCode().equals(KeyCode.ENTER) && !getText().isEmpty()) {
+                    switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
+                }
+            });
 
         }
     }
