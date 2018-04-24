@@ -34,8 +34,6 @@ public class AffichageGraphique extends GridPane implements Observer {
     public int getX() {
         return x;
     }
-//    TableView etatArmee1 = new TableView();
-//    TableView etatArmee2 = new TableView();
     GridPane etatArmee1 = new GridPane();
     GridPane etatArmee2 = new GridPane();
 
@@ -47,8 +45,6 @@ public class AffichageGraphique extends GridPane implements Observer {
     public AffichageGraphique(Stage stage, int cote, ControllerGraphique ctrl) {
         ctrlG = ctrl;
         COTE = cote;
-
-        // nomArmee1.setPrefHeight(30);
         VBox centre = new VBox();
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
@@ -78,15 +74,6 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.setTitle("Bataille Navale");
         stage.setScene(scene);
         stage.show();
-//        merPane.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-//            double tmp = e.getY() / 60;
-//            x = (int) (e.getX() / 60);
-//            System.out.println(x);
-//            int y = (int) tmp;
-//            System.out.println(y);
-//            setPositionClicked(new Position(x, y));
-//
-//        });
 
     }
 
