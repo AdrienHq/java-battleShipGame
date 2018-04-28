@@ -119,7 +119,7 @@ public class AffichageSetup extends VBox {
     private class InputNumber extends TextField { //Pour la taille après
 
         InputNumber() {
-            super("Taille de la mer: ?");
+            super("5");
             setAlignment(Pos.CENTER);
             setMaxWidth(150);
             installListeners();

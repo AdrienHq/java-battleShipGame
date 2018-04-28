@@ -21,7 +21,7 @@ public class Game extends Observable {
 
     public ArrayList<Position> listPositionPossible = new ArrayList<>();
 
-    private Game(String joueur1, String joueur2, int cote) {
+    private Game(String joueur1, String joueur2, int cote ) {
         boolean switchBat = AffichageSetup.getCheckBox();
 
         this.joueur1 = new Army(joueur1);

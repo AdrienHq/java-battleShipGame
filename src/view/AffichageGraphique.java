@@ -67,9 +67,7 @@ public class AffichageGraphique extends GridPane implements Observer {
             RowConstraints row = new RowConstraints(60);
             merPane.getRowConstraints().add(row);
         }
-        //etatArmee1.getColumnConstraints()
-        //for
-
+       
         Scene scene = new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60));
         stage.setTitle("Bataille Navale");
         stage.setScene(scene);

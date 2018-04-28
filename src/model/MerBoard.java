@@ -121,7 +121,7 @@ public class MerBoard {
             x += ((int) (pos.charAt(2))) - 49;
         } else {
             x = ((int) (pos.charAt(1))) - 49;
-            x += 1 ;
+            
         }
 
         System.out.println(x + " " + y);

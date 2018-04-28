@@ -14,7 +14,17 @@ public class ControllerGraphique extends Application {
     private Game game;
     Boolean gameOver = false;
     private AffichageGraphique affG;
-
+    private boolean joueur;
+    private boolean deplacementBateau;
+    private boolean tirBateau;
+    private String joueur1;
+    private String joueur2;
+    private boolean choixPositionDeplacement;
+    private String armyCourante;
+    private int portee;
+    private Position oldPos ;
+    
+    
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -26,23 +36,14 @@ public class ControllerGraphique extends Application {
 
     }
 
-    public void switchToMainWindow(String army1, String army2, int cote) {
+    public void switchToMainWindow(String army1, String army2, int cote ) {
         affG = new AffichageGraphique(stage, cote, this);
         game = Game.setGame(army1, army2, cote);
         game.addObserver(affG);
         game.setChangedAndNotify(); // Provoque un 1er affichage
         jouer(affG, army1, army2);
     }
-    private boolean joueur;
-    private boolean deplacementBateau;
-    private boolean tirBateau;
-    private String joueur1;
-    private String joueur2;
-    private boolean choixPositionDeplacement;
-    private String armyCourante;
-    private int portee;
-    private Position oldPos ;
-    
+   
     private void jouer(AffichageGraphique affG, String army1, String army2) {
         joueur = true;
         choixPositionDeplacement = false;
@@ -60,10 +61,6 @@ public class ControllerGraphique extends Application {
         return this.positionClicked;
     }
 
-//    public void setPositionClicked(Position position) {
-//        this.positionClicked = position;
-//        //setChangedAndNotify();
-//    }
     public void clickBateau(int x, int y) {
         positionClicked = new Position(x, y);
 
@@ -76,13 +73,16 @@ public class ControllerGraphique extends Application {
             if (game.tirGraphique(armyCourante, positionClicked, portee)) {
                 tirBateau = false;
                 choixPositionDeplacement = true ;
+                affG.afficherTextDebug(armyCourante, "portee :" + portee);
+                affG.afficherTextAction(armyCourante ," ,sélectionner le bateau à déplacer ");
             } else {
                 affG.afficherTextDebug(armyCourante, "la case n'est pas valide,réessayer");
             }
         } 
         else if (choixPositionDeplacement) {
-            affG.afficherTextAction(armyCourante ," ,sélectionner le bateau à déplacer ");
+            
             if(game.choixBateauDeplacementGraphique(armyCourante, positionClicked)){
+                affG.afficherTextDebug(armyCourante, " ");
                 choixPositionDeplacement = false ;
                 deplacementBateau = true ;
                 
@@ -91,7 +91,10 @@ public class ControllerGraphique extends Application {
             }
            
         }
-
+        
+        if(gameOver){
+           affG.afficherTextAction(armyCourante ," Vous avez gagné!!") ;
+        }
     }
 
     public void clickCaseVide(int x, int y) {
@@ -102,18 +105,19 @@ public class ControllerGraphique extends Application {
                     
                     tirBateau = true ;
                     if(gameOver){
-                      affG.afficherTextAction(armyCourante ," Vous avez gagné!!") ;
+                      affG.afficherTextAction(armyCourante ," Vous avez perdu!!") ;
                     }else{
                         if(joueur){
+                            joueur = false ;
                             armyCourante = joueur2 ;
                         }else{
+                            joueur = true ;
                             armyCourante = joueur1 ;
                         }
                         affG.afficherTextAction(armyCourante ," à vous de tirer!");
                     }
                     
                 } 
-            //fonction deplacement
             ;
         }
     }

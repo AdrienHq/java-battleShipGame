@@ -16,7 +16,7 @@ public class AffichageConsole implements Observer {
         Case[][] mer = board.getTab();
         Case c = null;
         Position pos = null;
-        Boolean debug = true;
+        Boolean debug = false;
         int cote = game.getCote();
 
         printCol(cote);
