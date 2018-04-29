@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class MerBuilder extends Observable {
@@ -29,6 +30,10 @@ public class MerBuilder extends Observable {
         }
     }
 
+    public Case[][] getBuilder() {
+        return merBuilder;
+    }
+
     private void initMerBuilder() { //Création et initialisation du tableau de case.
         merBuilder = new Case[cote][cote];
 
@@ -47,12 +52,31 @@ public class MerBuilder extends Observable {
 
     }
 
-    public MerBuilder getBuilder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public void setChangedAndNotify() {
         setChanged();
         notifyObservers();
+    }
+    private Army joueur1; //army (nom / arrayList / color) 
+    private Army joueur2;
+
+    public boolean choixBateauPressed(String armyCourante, Position positionClicked) {
+        if (armyCourante == joueur1.getNom()) {
+            return true;
+        }else
+            return false;    
+    }
+    
+    public boolean deplaceBateauReleaseGrid(String armyCourante, Position positionClicked) {
+        Case c = board.getCaseInPos(positionClicked);
+        Position future = c.getPosition();
+        if (c.choixPossible == true) {
+            Navire n = c.getNavire();         
+            n.setPosition(future); //donne la postion au bateau
+            n.setPopo(c.getName());      
+            setChangedAndNotify();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

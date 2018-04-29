@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Case;
+import model.Game;
 import model.MerBoard;
 import model.MerBuilder;
 import model.Position;
@@ -65,20 +66,27 @@ public class AffichageBuilder extends GridPane implements Observer {
     public void update(Observable o, Object o1) {
         MerBuilder merBuilder = (MerBuilder) o;
 //        getChildren().clear();
-        //etatArmee(merBuilder.getJoueur1(), merBuilder.getJoueur2());
-        MerBoard board = null;
+        //etatArmee(merBuilder.getJoueur1(), merBuilder.getJoueur2());     
+        MerBoard board = board.getTab();
         Case[][] mer = board.getTab();
         Case c = null;
         Position pos = null;
+        Boolean debug = true;
+
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
                 merBuild.add(new AffichageBuilder.EmptyBoxView(x, y), x, y);
             }
         }
     }
-    
-        // La vue d'une "case"
+
+    public void afficherTextAction(String army, String msg) {
+        action.setText(army + " " + msg);
+    }
+
+    // La vue d'une "case"
     private abstract class BoxView extends Pane {
+
         public BoxView() {
             getStylesheets().add("view/Image.css");
         }
@@ -90,8 +98,47 @@ public class AffichageBuilder extends GridPane implements Observer {
         //case vide 
         public EmptyBoxView(int x, int y) {
             getStyleClass().add("mer");
-//            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
 
-}
+    // La vue d'un bateau
+    private class NavireGrandEquipe1 extends BoxView {
+
+        public NavireGrandEquipe1(int x, int y) {
+            getStyleClass().add("bateauGrandEquipe1");
+            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
+        }
+    }
+
+    private class NavireGrandEquipe2 extends BoxView {
+
+        public NavireGrandEquipe2(int x, int y) {
+            getStyleClass().add("bateauGrandEquipe2");
+            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
+        }
+    }
+
+    private class NavirePetitEquipe1 extends BoxView {
+
+        public NavirePetitEquipe1(int x, int y) {
+            getStyleClass().add("bateauPetitEquipe1");
+            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
+        }
+    }
+
+    private class NavirePetitEquipe2 extends BoxView {
+
+        public NavirePetitEquipe2(int x, int y) {
+            getStyleClass().add("bateauPetitEquipe2");
+            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
+        }
+
+    }
