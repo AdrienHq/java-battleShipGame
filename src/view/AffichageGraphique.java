@@ -31,9 +31,7 @@ public class AffichageGraphique extends GridPane implements Observer {
     private final ControllerGraphique ctrlG;
     int x = 0;
 
-    public int getX() {
-        return x;
-    }
+    
     GridPane etatArmee1 = new GridPane();
     GridPane etatArmee2 = new GridPane();
 
@@ -68,7 +66,9 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.show();
 
     }
-    
+    public int getX() {
+        return x;
+    }
     private void setSizeConstraints() {
         for (int i = 0; i < COTE; i++) {
             ColumnConstraints column = new ColumnConstraints(60);

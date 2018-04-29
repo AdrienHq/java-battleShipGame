@@ -42,13 +42,19 @@ public class AffichageSetup extends VBox {
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
             if (!tf.getText().isEmpty() && !tf2.getText().isEmpty() && !tf.getText().isEmpty()) {
-                switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
+                if (switchBateau.isSelected()) {
+                    this.switchBat = false;
+                    switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
+                }else{
+                    this.switchBat = true;
+                    switchtoBuilderWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
+                }
+                
+                
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
-            if (switchBateau.isSelected()) {
-                this.switchBat = true;
-            }
+            
         });
         btReset.setOnAction(e -> {
             tf.setText(null);
@@ -68,6 +74,10 @@ public class AffichageSetup extends VBox {
 
     private void switchToMainWindow(String joueur1, String joueur2, int taille) {
         control.switchToMainWindow(joueur1, joueur2, taille);
+    }
+
+    private void switchtoBuilderWindow(String joueur1, String joueur2, int taille) {
+        control.switchToBuilderWindow(joueur1, joueur2, taille);
     }
 
     private class InputText1 extends TextField {

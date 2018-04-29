@@ -28,7 +28,7 @@ public class Game extends Observable {
         this.joueur2 = new Army(joueur2);
         this.cote = cote;
         if (switchBat == true) {
-            this.boardBuilder = MerBuilder.getInstance(cote);
+            this.board = MerBoard.getInstance(cote);
         } else if (switchBat == false) {
             this.board = MerBoard.getInstance(cote);
 
