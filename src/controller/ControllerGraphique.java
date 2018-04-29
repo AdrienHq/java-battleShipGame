@@ -24,7 +24,6 @@ public class ControllerGraphique extends Application {
     private int portee;
     private Position oldPos ;
     
-    
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;

@@ -49,6 +49,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
         centre.getChildren().add(debugText);
+        
 
         Insets insets = new Insets(20);
 
@@ -60,22 +61,25 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.setAlignment(Pos.CENTER);
         bp.setRight(etatArmee2);
         bp.setMargin(etatArmee2, insets);
+        
+        setSizeConstraints();
+        stage.setScene(new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60)));
+        stage.setTitle("Bataille Navale");  
+        stage.show();
 
+    }
+    
+    private void setSizeConstraints() {
         for (int i = 0; i < COTE; i++) {
             ColumnConstraints column = new ColumnConstraints(60);
             merPane.getColumnConstraints().add(column);
             RowConstraints row = new RowConstraints(60);
             merPane.getRowConstraints().add(row);
         }
-       
-        Scene scene = new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60));
-        stage.setTitle("Bataille Navale");
-        stage.setScene(scene);
-        stage.show();
-
     }
 
-    private void afficherJeu(Observable o) {
+    @Override
+    public void update(Observable o, Object arg) {
         Game game = (Game) o;
         getChildren().clear();
         etatArmee(game.getJoueur1(), game.getJoueur2());
@@ -83,7 +87,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         Case[][] mer = board.getTab();
         Case c = null;
         Position pos = null;
-        Boolean debug = true;
+        Boolean debug = true;     
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
@@ -118,8 +122,8 @@ public class AffichageGraphique extends GridPane implements Observer {
                     merPane.add(new EmptyBoxView(x, y), x, y);
                 }
             }
-
         }
+
     }
 
     private void etatArmee(Army army1, Army army2) {
@@ -215,17 +219,12 @@ public class AffichageGraphique extends GridPane implements Observer {
 
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        afficherJeu(o);
+    public void afficherTextAction(String army, String pos) {
+        action.setText(army + " " + pos);
     }
 
-    public void afficherTextAction(String army ,String pos) {
-        action.setText(army + " " +pos);
-    }
-
-    public void afficherTextDebug(String army ,String pos) {
-        debugText.setText(army + " " +pos);
+    public void afficherTextDebug(String army, String pos) {
+        debugText.setText(army + " " + pos);
     }
 
     // La vue d'une "case"

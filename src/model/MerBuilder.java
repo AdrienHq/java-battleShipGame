@@ -41,6 +41,7 @@ public class MerBuilder {
     }
     
     public void ajouterBateau(){
+        //drag and drop des bateau vers le builder et association de leurs pos 
         
     }
     
