@@ -2,7 +2,7 @@ package model;
 
 import java.util.Observable;
 
-public class MerBuilder extends Observable{
+public class MerBuilder extends Observable {
 
     private static MerBuilder instance = null;
     private static int cote;
@@ -41,16 +41,18 @@ public class MerBuilder extends Observable{
             }
         }
     }
-    
-    public void ajouterBateau(){
+
+    public void ajouterBateau() {
         //drag and drop des bateau vers le builder et association de leurs pos 
-        
+
     }
 
     public MerBuilder getBuilder() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 
+    public void setChangedAndNotify() {
+        setChanged();
+        notifyObservers();
+    }
 }

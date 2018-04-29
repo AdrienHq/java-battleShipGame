@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Game;
+import model.MerBuilder;
 import model.Position;
 import view.AffichageBuilder;
 import view.AffichageGraphique;
@@ -13,6 +14,7 @@ public class ControllerGraphique extends Application {
 
     private Stage stage;
     private Game game;
+    private MerBuilder builder;
     Boolean gameOver = false;
     private AffichageGraphique affG;
     private AffichageBuilder affBuilder;
@@ -46,12 +48,11 @@ public class ControllerGraphique extends Application {
     }
     
     public void switchToBuilderWindow(String army1, String army2, int cote ) {
-        affBuilder = new AffichageBuilder(stage, cote, this);
-        
-        game = Game.setGame(army1, army2, cote);
-        game.addObserver(affG);
-        game.setChangedAndNotify(); // Provoque un 1er affichage
-        jouer(affG, army1, army2);
+        affBuilder = new AffichageBuilder(stage, cote, this);       
+        builder = builder.getInstance(cote);
+        builder.addObserver(affG);
+        builder.setChangedAndNotify(); // Provoque un 1er affichage
+
     }
    
     private void jouer(AffichageGraphique affG, String army1, String army2) {
