@@ -18,6 +18,7 @@ import model.Case;
 import model.Game;
 import model.MerBoard;
 import model.MerBuilder;
+import model.Navire;
 import model.Position;
 
 public class AffichageBuilder extends GridPane implements Observer {
@@ -67,7 +68,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         MerBuilder merBuilder = (MerBuilder) o;
 //        getChildren().clear();
         //etatArmee(merBuilder.getJoueur1(), merBuilder.getJoueur2());     
-        MerBoard board = board.getTab();
+        MerBoard board = merBuilder.getBoard();
         Case[][] mer = board.getTab();
         Case c = null;
         Position pos = null;
@@ -75,7 +76,29 @@ public class AffichageBuilder extends GridPane implements Observer {
 
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
-                merBuild.add(new AffichageBuilder.EmptyBoxView(x, y), x, y);
+                pos = new Position(x, y);
+                c = mer[x][y];
+                if (!c.estVide()) {//si contient qqch
+                    if (c.getTypeNavire() == "BIG") { //si grand navire 
+                        Navire n = c.getNavire();
+                        if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+
+                            merBuild.add(new AffichageBuilder.NavireGrandEquipe1(x, y), x, y);
+                        } else {
+                            merBuild.add(new AffichageBuilder.NavireGrandEquipe2(x, y), x, y);
+                        }
+
+                    } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
+                        Navire n = c.getNavire();
+                        if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+                            merBuild.add(new AffichageBuilder.NavirePetitEquipe1(x, y), x, y);
+                        } else {
+                            merBuild.add(new AffichageBuilder.NavirePetitEquipe2(x, y), x, y);
+                        }
+                    }
+                } else {
+                    merBuild.add(new AffichageBuilder.EmptyBoxView(x, y), x, y);
+                }
             }
         }
     }
@@ -83,6 +106,8 @@ public class AffichageBuilder extends GridPane implements Observer {
     public void afficherTextAction(String army, String msg) {
         action.setText(army + " " + msg);
     }
+    
+    
 
     // La vue d'une "case"
     private abstract class BoxView extends Pane {
@@ -142,3 +167,4 @@ public class AffichageBuilder extends GridPane implements Observer {
         }
 
     }
+}

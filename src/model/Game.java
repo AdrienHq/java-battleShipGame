@@ -29,6 +29,10 @@ public class Game extends Observable {
         this.cote = cote;
         if (switchBat == true) {
             this.board = MerBoard.getInstance(cote);
+            
+            //recuperer merbuilder
+            
+            placementFlottants();
         } else if (switchBat == false) {
             this.board = MerBoard.getInstance(cote);
 
@@ -51,6 +55,9 @@ public class Game extends Observable {
 
     public MerBoard getBoard() {
         return this.board;
+    }
+    public void setBoard(MerBoard mer){
+        this.board = mer ;
     }
     
     public MerBuilder getBuilder(){

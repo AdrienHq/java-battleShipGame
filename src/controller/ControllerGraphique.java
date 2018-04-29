@@ -49,8 +49,8 @@ public class ControllerGraphique extends Application {
 
     public void switchToBuilderWindow(String army1, String army2, int cote) {
         affBuilder = new AffichageBuilder(stage, cote, this);
-        builder = builder.getInstance(cote);
-        builder.addObserver(affG);
+        builder = builder.getInstance(army1,army2,cote);
+        builder.addObserver(affBuilder);
         builder.setChangedAndNotify(); // Provoque un 1er affichage
 
     }
