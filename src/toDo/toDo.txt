@@ -6,5 +6,7 @@ To do :
 	-javafx ABCDEF...
 	-javafx affichage caseDeplacement
 	-click builder
+        -switchbuildertoGame
+
         -déplacement bateau vers une mine possible (pas possible pour le moment)
         

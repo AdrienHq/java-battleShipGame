@@ -86,8 +86,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         MerBoard board = game.getBoard();
         Case[][] mer = board.getTab();
         Case c = null;
-        Position pos = null;
-        Boolean debug = true;     
+        Position pos = null ;
+        Boolean debug = true ;     
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
@@ -129,6 +129,8 @@ public class AffichageGraphique extends GridPane implements Observer {
     private void etatArmee(Army army1, Army army2) {
         //nomArmee1 = new Text(army.getNom());
 
+        etatArmee1.getChildren().clear();
+        etatArmee2.getChildren().clear();
         Label a1 = new Label(army1.getNom());
         a1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
         a1.setFont(Font.font("Verdana", 20));

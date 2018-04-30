@@ -128,7 +128,7 @@ public class ControllerGraphique extends Application {
                 }
 
             }
-            ;
+            
         }
     }
 

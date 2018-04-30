@@ -19,6 +19,9 @@ public class MerBuilder extends Observable {
 
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
+        this.army1 = new Army(joueur1);
+        this.army2 = new Army(joueur2);
+        
         this.cote = cote;
         
         this.board = MerBoard.getInstance(cote);
