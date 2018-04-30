@@ -2,11 +2,9 @@
 26/03 : 
 
 To do : 
-	-fin de jeux/victoire dÈfaite en console .
-	-javafx deplacement souris .
+	-fin de jeux/victoire dÔøΩfaite en console
 	-javafx ABCDEF...
-	-main qui choissis controleur console ou graphique ‡ corriger
-	-affichage setup input textfield foireux .
-	-2bateau explose en meme temps->maj listNavire
 	-javafx affichage caseDeplacement
-	
+	-click builder
+        -d√©placement bateau vers une mine possible (pas possible pour le moment)
+        

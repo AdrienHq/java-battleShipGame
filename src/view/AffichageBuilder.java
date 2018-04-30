@@ -6,14 +6,17 @@ import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Army;
 import model.Case;
 import model.Game;
 import model.MerBoard;
@@ -67,7 +70,7 @@ public class AffichageBuilder extends GridPane implements Observer {
     public void update(Observable o, Object o1) {
         MerBuilder merBuilder = (MerBuilder) o;
 //        getChildren().clear();
-        //etatArmee(merBuilder.getJoueur1(), merBuilder.getJoueur2());     
+        afficherBateau(merBuilder.getJoueur1(), merBuilder.getJoueur2());
         MerBoard board = merBuilder.getBoard();
         Case[][] mer = board.getTab();
         Case c = null;
@@ -103,15 +106,55 @@ public class AffichageBuilder extends GridPane implements Observer {
         }
     }
 
+    private void afficherBateau(Army army1, Army army2) {
+        Label a1 = new Label(army1.getNom());
+        a1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
+        a1.setFont(Font.font("Verdana", 20));
+        Label a2 = new Label(army2.getNom());
+        a2.setStyle("-fx-background-color: blue; -fx-padding: 10px;");
+        a2.setFont(Font.font("Verdana", 20));
+
+        bateauArmee1.setHgap(10);
+        bateauArmee1.setVgap(10);
+        bateauArmee1.add(a1, 1, 0, 1, 1);
+
+        bateauArmee2.setHgap(10);
+        bateauArmee2.setVgap(10);
+        bateauArmee2.add(a1, 1, 0, 1, 1);
+
+        int x = 0;
+        int y = 2;
+        Case c = null;
+        MerBuilder merBuilder = null;
+
+        for (Navire n : army1.getListeNavire()) {
+            if (!c.estVide()) {//si contient qqch
+                if (c.getTypeNavire() == "BIG") { //si grand navire 
+                    n = c.getNavire();
+                    if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+                        bateauArmee1.add(new NavireGrandEquipe1(x, y), x, y);
+                    } else {
+                        bateauArmee2.add(new NavireGrandEquipe2(x, y), x, y);
+                    }
+
+                } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
+                    n = c.getNavire();
+                    if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
+                        bateauArmee1.add(new NavirePetitEquipe1(x, y), x, y);
+                    } else {
+                        bateauArmee2.add(new NavirePetitEquipe2(x, y), x, y);
+                    }
+                }
+            }
+        }
+    }
+
     public void afficherTextAction(String army, String msg) {
         action.setText(army + " " + msg);
     }
-    
-    
 
     // La vue d'une "case"
     private abstract class BoxView extends Pane {
-
         public BoxView() {
             getStylesheets().add("view/Image.css");
         }

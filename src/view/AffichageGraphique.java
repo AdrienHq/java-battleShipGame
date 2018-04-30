@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -48,7 +47,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.getChildren().add(action);
         centre.getChildren().add(debugText);
         
-
+        //merPane.setStyle(string); ajout pour la bordure faire le css
+        
         Insets insets = new Insets(20);
 
         BorderPane bp = new BorderPane();
@@ -61,7 +61,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         bp.setMargin(etatArmee2, insets);
         
         setSizeConstraints();
-        stage.setScene(new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60)));
+        stage.setScene(new Scene(bp, 800 + (COTE * 60), 350 + (COTE * 60)));
         stage.setTitle("Bataille Navale");  
         stage.show();
 
@@ -214,7 +214,6 @@ public class AffichageGraphique extends GridPane implements Observer {
             etatArmee2.add(etatX2, x, y, 1, 1);
             x = 0;
             ++y;
-
         }
 
     }

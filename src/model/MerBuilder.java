@@ -10,6 +10,8 @@ public class MerBuilder extends Observable {
     private static int cote;
     String joueur1 ;
     String joueur2 ;
+    private Army army1; //army (nom / arrayList / color) 
+    private Army army2;
     private MerBoard board;
     
     private MerBuilder(String joueur1, String joueur2, int cote ) {
@@ -37,6 +39,14 @@ public class MerBuilder extends Observable {
 
     public String getNomJoueur2() {
         return this.joueur2;
+    }
+    
+    public Army getJoueur1() {
+        return army1;
+    }
+
+    public Army getJoueur2() {
+        return army2;
     }
     
     public MerBoard getBoard() {
