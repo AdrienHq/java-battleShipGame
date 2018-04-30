@@ -283,6 +283,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public Atomique(int x, int y) {
             getStyleClass().add("atomique");
+            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
 
@@ -290,6 +291,7 @@ public class AffichageGraphique extends GridPane implements Observer {
 
         public Normale(int x, int y) {
             getStyleClass().add("normale");
+            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
 }

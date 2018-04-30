@@ -181,6 +181,7 @@ public class Game extends Observable {
             c.supprimerNavire();
             if (f.getTypeFlottant() == "ATOMIQUE") {
                 n.degat(100);
+                
 
             } else if (f.getTypeFlottant() == "NORMALE") {
                 n.degat(50);
@@ -189,8 +190,12 @@ public class Game extends Observable {
             }
             if (n.pointVie > 0) {
                 f.setNavire(n);
+                
+            
+            }else{
+                joueur1.deleteNavire();
+                joueur2.deleteNavire();
             }
-
             n.setPosition(future);
             n.setPopo(f.getName());
             for (Position p : listPositionPossible) {

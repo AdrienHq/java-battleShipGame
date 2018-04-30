@@ -2,11 +2,10 @@
 26/03 : 
 
 To do : 
-	-fin de jeux/victoire d�faite en console
-	-javafx ABCDEF...
-	-javafx affichage caseDeplacement
+	
+        -javafx affichage caseDeplacement
 	-click builder
         -switchbuildertoGame
 
-        -déplacement bateau vers une mine possible (pas possible pour le moment)
+        
         
