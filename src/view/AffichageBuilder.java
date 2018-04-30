@@ -37,8 +37,6 @@ public class AffichageBuilder extends GridPane implements Observer {
     Text action = new Text("Action");
     Text armee1 = new Text("joueur1");
     Text armee2 = new Text("joueur2");
-    
-    
 
     public AffichageBuilder(Stage stage, int cote, ControllerGraphique ctrl) {
 
@@ -47,16 +45,16 @@ public class AffichageBuilder extends GridPane implements Observer {
         VBox centre = new VBox();
         VBox gauche = new VBox();
         VBox droite = new VBox();
-        
+
         centre.getChildren().add(merBuild);
         centre.getChildren().add(action);
-        
+
         gauche.getChildren().add(armee1);
         gauche.getChildren().add(bateauArmee1);
-        
+
         droite.getChildren().add(armee2);
         droite.getChildren().add(bateauArmee2);
-        
+
         Insets insets = new Insets(2);
         BorderPane bp = new BorderPane();
         bp.setLeft(gauche);
@@ -80,7 +78,7 @@ public class AffichageBuilder extends GridPane implements Observer {
             RowConstraints row = new RowConstraints(60);
             merBuild.getRowConstraints().add(row);
         }
-            
+
         for (int i = 0; i < 3; i++) {
             ColumnConstraints column = new ColumnConstraints(60);
             bateauArmee1.getColumnConstraints().add(column);
@@ -100,9 +98,16 @@ public class AffichageBuilder extends GridPane implements Observer {
     public void update(Observable o, Object o1) {
         MerBuilder merBuilder = (MerBuilder) o;
         getChildren().clear();
-        afficherBateau(merBuilder.getJoueur1(), merBuilder.getJoueur2());
+        bateauArmee1.getChildren().clear();
+        bateauArmee2.getChildren().clear();
+
         MerBoard board = merBuilder.getBoard();
         Case[][] mer = board.getTab();
+        Case[][] port = merBuilder.returnPort(true);
+        afficherBateau(port, merBuilder);
+        Case[][] port2 = merBuilder.returnPort(false);
+
+        afficherBateau(port2, merBuilder);
         Case c = null;
         Position pos = null;
         Boolean debug = true;
@@ -137,7 +142,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         }
     }
 
-    public void affichageNomJoueur(Army army1, Army army2){
+    public void affichageNomJoueur(Army army1, Army army2) {
         armee1.setText(army1.getNom());
         System.out.println(army1.getNom());
         armee1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
@@ -146,43 +151,34 @@ public class AffichageBuilder extends GridPane implements Observer {
         armee2.setStyle("-fx-background-color: blue; -fx-padding: 10px;");
         armee2.setFont(Font.font("Verdana", 20));
     }
-    
-    private void afficherBateau(Army army1, Army army2) {
-        
-        bateauArmee1.getChildren().clear();
-        bateauArmee2.getChildren().clear();
-        
-        affichageNomJoueur(army1,army2);
 
-        int x = 0;
-        int y = 1 ;
+    private void afficherBateau(Case[][] port, MerBuilder merBuilder) {
+
         Case c = null;
-        MerBuilder merBuilder = null;
-//        bateauArmee1.add(new NavireGrandEquipe1(3, 3), 3, 3);
+        int y = 0;
+        for (int x = 0; x < 3; x++) {
+            c = port[x][y];
+            if (c.getName() == merBuilder.getNomJoueur1()) {
+                if (c.getTypeNavire() == "BIG") { //si grand navire 
+                    bateauArmee1.add(new NavireGrandEquipe1(x, y), x, y);
 
-        for (Navire n : army1.getListeNavire()) {
-            
-            if (n.getType() == "BIG") { //si grand navire 
-                bateauArmee1.add(new NavireGrandEquipe1(x, y), x, y);
-                System.out.println("big " + x + " " + y);
-            } else if (n.getType() == "SMALL") {                  //si petit navire
-                bateauArmee1.add(new NavirePetitEquipe1(x, y), x, y);
-                System.out.println("petit " + x + " " + y);
+                } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
+                    bateauArmee1.add(new NavirePetitEquipe1(x, y), x, y);
+
+                }
+
+            } else if (c.getName() == merBuilder.getNomJoueur2()) {
+                if (c.getTypeNavire() == "BIG") { //si grand navire 
+
+                    bateauArmee2.add(new NavireGrandEquipe2(x, y), x, y);
+
+                } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
+                    bateauArmee2.add(new NavirePetitEquipe2(x, y), x, y);
+
+                }
             }
-            ++x;
-
         }
-        x = 0;
-        for (Navire n : army2.getListeNavire()) {
-            if (n.getType() == "BIG") { //si grand navire 
-                bateauArmee2.add(new NavireGrandEquipe2(x, y), x, y);
-            } else if (n.getType() == "SMALL") {                  //si petit navire
-                bateauArmee2.add(new NavirePetitEquipe2(x, y), x, y);
-            }
-            ++x;
-
-        }
-
+    
     }
 
     public void afficherTextAction(String army, String msg) {
@@ -211,9 +207,9 @@ public class AffichageBuilder extends GridPane implements Observer {
 
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
-//            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
-//            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
+            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+            setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
 

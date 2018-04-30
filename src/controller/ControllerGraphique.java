@@ -72,23 +72,33 @@ public class ControllerGraphique extends Application {
         return this.positionClicked;
     }
 
+    private String armyAdverse;    
     public void clickBateau(int x, int y) {
         positionClicked = new Position(x, y);
-
+        
         if (joueur) {
             armyCourante = joueur1;
+            armyAdverse = joueur2;
         } else {
             armyCourante = joueur2;
+            armyAdverse = joueur1;
         }
         if (tirBateau) {
             if (game.tirGraphique(armyCourante, positionClicked, portee)) {
                 tirBateau = false;
-                choixPositionDeplacement = true;
+                
                 affG.afficherTextDebug(armyCourante, "portee :" + portee);
                 affG.afficherTextAction(armyCourante, " ,sélectionner le bateau à déplacer ");
+                if (gameOver()) {
+                    affG.afficherTextAction(armyCourante, " Vous avez gagné!!");
+                }else{
+                   choixPositionDeplacement = true;     
+                }
             } else {
                 affG.afficherTextDebug(armyCourante, "la case n'est pas valide,réessayer");
             }
+            
+            
         } else if (choixPositionDeplacement) {
 
             if (game.choixBateauDeplacementGraphique(armyCourante, positionClicked)) {
@@ -101,10 +111,8 @@ public class ControllerGraphique extends Application {
             }
 
         }
-
-        if (gameOver) {
-            affG.afficherTextAction(armyCourante, " Vous avez gagné!!");
-        }
+        
+        
     }
 
     public void clickCaseVide(int x, int y) {
@@ -114,7 +122,7 @@ public class ControllerGraphique extends Application {
                 deplacementBateau = false;
 
                 tirBateau = true;
-                if (gameOver) {
+                if (gameOver()) {
                     affG.afficherTextAction(armyCourante, " Vous avez perdu!!");
                 } else {
                     if (joueur) {
@@ -130,6 +138,9 @@ public class ControllerGraphique extends Application {
             }
             
         }
+    }
+    private boolean gameOver(){
+        return (game.getJoueur1().listeVide()||game.getJoueur2().listeVide() );
     }
 
     private boolean isMoved = false;
