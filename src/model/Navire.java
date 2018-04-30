@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Navire implements Deplacement {
+public abstract class Navire{
 
     protected String nom ;
     protected final String typeNavire;

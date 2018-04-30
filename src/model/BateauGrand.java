@@ -12,11 +12,6 @@ public class BateauGrand extends Navire {
     }
 
     @Override
-    public void move(Position pos) {
-//        this.pos.déplacer(pos);
-    }
-
-    @Override
     public int getPorteeTir() {
         int portee = new Random().nextInt(array.length);
         return array[portee];
