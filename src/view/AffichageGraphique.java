@@ -245,6 +245,14 @@ public class AffichageGraphique extends GridPane implements Observer {
             setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
+    
+    private class MerVerte extends BoxView {
+        //case verte d'affichage 
+        public MerVerte(int x, int y) {
+            getStyleClass().add("merVerte");
+            setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
+        }
+    }
 
     // La vue d'un bateau
     private class NavireGrandEquipe1 extends BoxView {

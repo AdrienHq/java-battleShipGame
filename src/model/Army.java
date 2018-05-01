@@ -30,17 +30,6 @@ public class Army {
 
     public void tirDegat(Navire n) {
         n.degat(50);
-//        if(n.pointVie == 0){
-//            this.deleteNavire(n);
-//        }
-
-//        Navire temp = n ;
-//        this.deleteNavire(n);
-//        temp.tirDegat();
-//        listNavire.add(temp);
-//        if(n.pointVie == 0){
-//            this.deleteNavire(n);
-//        }
     }
     private ArrayList<Navire> listNavireToDelete = new ArrayList<>();
 

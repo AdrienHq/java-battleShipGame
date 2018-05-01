@@ -1,9 +1,6 @@
 package model;
 
 public class Case {
-
-   
-    
     private String name ;
     Position p ;
     
@@ -37,9 +34,6 @@ public class Case {
      public Position getPosition() {
         return p;
     } 
-//     public boolean getCas(String name){
-//     
-//     }
     public boolean estchoixPossible(){
         return choixPossible ;
     }
@@ -116,6 +110,4 @@ public class Case {
         return getNavire() != null ;
     }
 
-    
-     
 }
