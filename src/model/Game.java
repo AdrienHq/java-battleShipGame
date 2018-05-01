@@ -8,8 +8,6 @@ import view.AffichageSetup;
 
 public class Game extends Observable {
 
-    
-
     private Random rand = new Random();
     private int cote;
     private MerBoard board;
@@ -23,34 +21,33 @@ public class Game extends Observable {
 
     public ArrayList<Position> listPositionPossible = new ArrayList<>();
 
-    private Game(String joueur1, String joueur2, int cote ) {
+    private Game(String joueur1, String joueur2, int cote) {
         boolean switchBat = AffichageSetup.getCheckBox();
 
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
         this.cote = cote;
-        
-            this.board = MerBoard.getInstance(cote);
 
-            initialiserBateaux(getJoueur1());
-            initialiserBateaux(getJoueur2());
-            placementFlottants();
-        
+        this.board = MerBoard.getInstance(cote);
+
+        initialiserBateaux(getJoueur1());
+        initialiserBateaux(getJoueur2());
+        placementFlottants();
+
     }
-    
-    private Game(Army army1, Army army2,MerBoard mer, int cote) {
+
+    private Game(Army army1, Army army2, MerBoard mer, int cote) {
         boolean switchBat = AffichageSetup.getCheckBox();
 
-        this.joueur1 = army1 ;
-        this.joueur2 = army2 ;
+        this.joueur1 = army1;
+        this.joueur2 = army2;
         this.cote = cote;
-       
-            this.board = mer;
-            
-            //recuperer merbuilder
-            
-            placementFlottants();
-        
+
+        this.board = mer;
+
+        //recuperer merbuilder
+        placementFlottants();
+
     }
 
     public static Game setGame(String joueur1, String joueur2, int cote) {
@@ -59,10 +56,10 @@ public class Game extends Observable {
         }
         return instance;
     }
-    
+
     public static Game setGameFromBuilder(Army army1, Army army2, MerBoard mer, int cote) {
         if (instance == null) {
-            instance = new Game(army1,army2, mer,cote);
+            instance = new Game(army1, army2, mer, cote);
         }
         return instance;
     }
@@ -74,11 +71,12 @@ public class Game extends Observable {
     public MerBoard getBoard() {
         return this.board;
     }
-    public void setBoard(MerBoard mer){
-        this.board = mer ;
+
+    public void setBoard(MerBoard mer) {
+        this.board = mer;
     }
-    
-    public MerBuilder getBuilder(){
+
+    public MerBuilder getBuilder() {
         return this.boardBuilder;
     }
 
@@ -189,7 +187,7 @@ public class Game extends Observable {
         }
 
     }
-    
+
     public boolean deplaceBateauGraphique(String armyCourante, Position oldPos, Position positionClicked) {
         Case c = board.getCaseInPos(oldPos);
         Case f = board.getCaseInPos(positionClicked);
@@ -199,7 +197,6 @@ public class Game extends Observable {
             c.supprimerNavire();
             if (f.getTypeFlottant() == "ATOMIQUE") {
                 n.degat(100);
-                
 
             } else if (f.getTypeFlottant() == "NORMALE") {
                 n.degat(50);
@@ -208,9 +205,8 @@ public class Game extends Observable {
             }
             if (n.pointVie > 0) {
                 f.setNavire(n);
-                
-            
-            }else{
+
+            } else {
                 joueur1.deleteNavire();
                 joueur2.deleteNavire();
             }
@@ -298,6 +294,7 @@ public class Game extends Observable {
             return false;
         }
     }
+
     private void getCasePossible(int deplacement, Navire n) {
         Position pos = n.getPosition();
         for (int i = -deplacement; i <= deplacement; i++) {
@@ -354,7 +351,7 @@ public class Game extends Observable {
         }
         return false;
     }
-    
+
     public boolean tirGraphique(String armyCourante, Position positionClicked, int portee) {
         Case c = board.getCaseInPos(positionClicked);
         Navire nav = null;
@@ -390,6 +387,9 @@ public class Game extends Observable {
 
     private void degatZone(Army joueur, Army adverse, Navire n, int portee) {
         Position pos = n.getPosition();
+        Boolean tirUnique = (n.getType().equals("SMALL"));
+        int cpt = 0;
+
         for (int i = -portee; i <= portee; i++) {
             for (int j = -portee; j <= portee; j++) {
                 Position p = new Position(pos.getX() + i, pos.getY() + j);
@@ -397,10 +397,11 @@ public class Game extends Observable {
                 board.getRealPosition(p); //renvoie la position réelle de la case demandée (mer circulaire)
 
                 Case c = board.getCaseInPos(p); //récupere la case 
-                if (c.estNavire() && adverse.estAmi(c.getNavire())) {//si contient un bateau et qu'il appartien a l'armée enemie
+                if (c.estNavire() && adverse.estAmi(c.getNavire()) && (tirUnique && cpt < 1 || (!tirUnique))) {//si contient un bateau et qu'il appartien a l'armée enemie
                     System.out.println("position de bateau touchable" + p);//debug à retirer
                     Navire ennemy = c.getNavire();
                     ennemy.degat(50);
+                    ++cpt;
 
                     if (ennemy.getPointVie() == 0) {
 
@@ -410,6 +411,7 @@ public class Game extends Observable {
                 }
             }
         }
+
         adverse.deleteNavire();
     }
 
@@ -433,5 +435,5 @@ public class Game extends Observable {
         setChanged();
         notifyObservers();
     }
-  
+
 }
