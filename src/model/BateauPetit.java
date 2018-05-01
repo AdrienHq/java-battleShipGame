@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class BateauPetit extends Navire {
 
-   private static int porteeTir; 
+    private static int porteeTir;
     private static int[] array = {0, 0, 0, 0, 0, 1, 1, 1, 2, 2};
 
     public BateauPetit(String nom) {
-        super(nom, "SMALL", 50,2);
+        super(nom, "SMALL", 50, 2);
     }
 
     @Override
@@ -17,4 +17,3 @@ public class BateauPetit extends Navire {
         return array[portee];
     }
 }
-

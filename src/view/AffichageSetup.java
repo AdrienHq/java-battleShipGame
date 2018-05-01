@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Game;
 
 public class AffichageSetup extends VBox {
 
@@ -26,18 +25,13 @@ public class AffichageSetup extends VBox {
         stage.show();
     }
 
-    TextField tf = new InputText1();
-    TextField tf2 = new InputText2();
-    TextField tfTaille = new InputNumber();
-    CheckBox switchBateau = new CheckBox("Placement aléatoire");
+    private TextField tf = new InputText1();
+    private TextField tf2 = new InputText2();
+    private TextField tfTaille = new InputNumber();
+    private CheckBox switchBateau = new CheckBox("Placement aléatoire");
     private static boolean switchBat = false;
 
     private void setup() {
-//        FlowPane root = new FlowPane();
-//        Label labelJ1 = new Label("Joueur1");
-//        Label labelJ2 = new Label("Joueur2");
-//        Label labelTaille = new Label("Taille");
-
         Button btOk = new Button("Accepter");
         Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
@@ -45,16 +39,13 @@ public class AffichageSetup extends VBox {
                 if (switchBateau.isSelected()) {
                     this.switchBat = false;
                     switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
-                }else{
+                } else {
                     this.switchBat = true;
                     switchtoBuilderWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
                 }
-                
-                
             } else {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
-            
         });
         btReset.setOnAction(e -> {
             tf.setText(null);
@@ -62,7 +53,6 @@ public class AffichageSetup extends VBox {
             tfTaille.setText(null);
         });
         getChildren().addAll(tf, tf2, tfTaille, btOk, btReset, switchBateau);
-
         setAlignment(Pos.CENTER);
         setPadding(new Insets(20));
         setSpacing(20);
@@ -147,7 +137,6 @@ public class AffichageSetup extends VBox {
                     switchToMainWindow(tf.getText(), tf2.getText(), Integer.valueOf(tfTaille.getText()));
                 }
             });
-
         }
     }
 }

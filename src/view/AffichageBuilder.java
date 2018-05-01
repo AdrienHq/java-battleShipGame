@@ -6,20 +6,17 @@ import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Army;
 import model.Case;
-import model.Game;
 import model.MerBoard;
 import model.MerBuilder;
 import model.Navire;
@@ -29,32 +26,25 @@ public class AffichageBuilder extends GridPane implements Observer {
 
     private final int COTE;
     private final ControllerGraphique ctrlG;
-    GridPane bateauArmee1 = new GridPane();
-    GridPane bateauArmee2 = new GridPane();
-
+    private GridPane bateauArmee1 = new GridPane();
+    private GridPane bateauArmee2 = new GridPane();
     private static GridPane merBuild = new GridPane();
-
-    Text action = new Text("Action");
-    Text armee1 = new Text("joueur1");
-    Text armee2 = new Text("joueur2");
+    private Text action = new Text("Action");
+    private Text armee1 = new Text("joueur1");
+    private Text armee2 = new Text("joueur2");
 
     public AffichageBuilder(Stage stage, int cote, ControllerGraphique ctrl) {
-
         ctrlG = ctrl;
         COTE = cote;
         VBox centre = new VBox();
         VBox gauche = new VBox();
         VBox droite = new VBox();
-
         centre.getChildren().add(merBuild);
         centre.getChildren().add(action);
-
         gauche.getChildren().add(armee1);
         gauche.getChildren().add(bateauArmee1);
-
         droite.getChildren().add(armee2);
         droite.getChildren().add(bateauArmee2);
-
         Insets insets = new Insets(2);
         BorderPane bp = new BorderPane();
         bp.setLeft(gauche);
@@ -68,7 +58,6 @@ public class AffichageBuilder extends GridPane implements Observer {
         stage.setScene(new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60)));
         stage.setTitle("Builder");
         stage.show();
-
     }
 
     private void setSizeConstraints() {
@@ -100,13 +89,11 @@ public class AffichageBuilder extends GridPane implements Observer {
         getChildren().clear();
         bateauArmee1.getChildren().clear();
         bateauArmee2.getChildren().clear();
-
         MerBoard board = merBuilder.getBoard();
         Case[][] mer = board.getTab();
         Case[][] port1 = merBuilder.returnPort(true);
         afficherBateau(port1, merBuilder);
         Case[][] port2 = merBuilder.returnPort(false);
-
         afficherBateau(port2, merBuilder);
         Case c = null;
         Position pos = null;
@@ -121,12 +108,10 @@ public class AffichageBuilder extends GridPane implements Observer {
                     if (c.getTypeNavire() == "BIG") { //si grand navire 
                         Navire n = c.getNavire();
                         if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
-
                             merBuild.add(new AffichageBuilder.NavireGrandEquipe1(x, y), x, y);
                         } else {
                             merBuild.add(new AffichageBuilder.NavireGrandEquipe2(x, y), x, y);
                         }
-
                     } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
                         Navire n = c.getNavire();
                         if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
@@ -153,7 +138,6 @@ public class AffichageBuilder extends GridPane implements Observer {
     }
 
     private void afficherBateau(Case[][] port, MerBuilder merBuilder) {
-
         Case c = null;
         int y = 0;
         for (int x = 0; x < 3; x++) {
@@ -161,24 +145,17 @@ public class AffichageBuilder extends GridPane implements Observer {
             if (c.getName() == merBuilder.getNomJoueur1()) {
                 if (c.getTypeNavire() == "BIG") { //si grand navire 
                     bateauArmee1.add(new NavireGrandEquipe1(x, y), x, y);
-
                 } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
                     bateauArmee1.add(new NavirePetitEquipe1(x, y), x, y);
-
                 }
-
             } else if (c.getName() == merBuilder.getNomJoueur2()) {
                 if (c.getTypeNavire() == "BIG") { //si grand navire 
-
                     bateauArmee2.add(new NavireGrandEquipe2(x, y), x, y);
-
                 } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
                     bateauArmee2.add(new NavirePetitEquipe2(x, y), x, y);
-
                 }
             }
         }
-    
     }
 
     public void afficherTextAction(String army, String msg) {
@@ -209,7 +186,6 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -219,7 +195,6 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavireGrandEquipe2(int x, int y) {
             getStyleClass().add("bateauGrandEquipe2");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -229,7 +204,6 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavirePetitEquipe1(int x, int y) {
             getStyleClass().add("bateauPetitEquipe1");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -239,7 +213,6 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavirePetitEquipe2(int x, int y) {
             getStyleClass().add("bateauPetitEquipe2");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
 

@@ -8,7 +8,7 @@ public class BateauGrand extends Navire {
     private static int[] array = {0, 0, 1, 1, 1, 2, 2, 2, 2, 2};
 
     public BateauGrand(String nom) {
-        super(nom, "BIG", 100,1);
+        super(nom, "BIG", 100, 1);
     }
 
     @Override
@@ -16,5 +16,4 @@ public class BateauGrand extends Navire {
         int portee = new Random().nextInt(array.length);
         return array[portee];
     }
-
 }

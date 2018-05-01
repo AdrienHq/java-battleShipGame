@@ -18,7 +18,7 @@ public class ControllerGraphique extends Application {
     private Stage stage;
     private Game game;
     private MerBuilder builder;
-    Boolean gameOver = false;
+    private Boolean gameOver = false;
     private AffichageGraphique affG;
     private AffichageBuilder affBuilder;
     private boolean joueur;
@@ -31,8 +31,11 @@ public class ControllerGraphique extends Application {
     private int portee;
     private Position oldPos;
     private boolean isMoved;
-    private int cpt ;
-    private int cote ;
+    private String armyAdverse;
+    private Position positionClicked;
+    private int cpt;
+    private int cote;
+
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -41,11 +44,10 @@ public class ControllerGraphique extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
 
     public void switchToMainWindow(String army1, String army2, int cote) {
-        this.cote = cote ;
+        this.cote = cote;
         affG = new AffichageGraphique(stage, cote, this);
         game = Game.setGame(army1, army2, cote);
         game.addObserver(affG);
@@ -54,7 +56,7 @@ public class ControllerGraphique extends Application {
     }
 
     public void switchToBuilderWindow(String army1, String army2, int cote) {
-        this.cote = cote ;
+        this.cote = cote;
         affBuilder = new AffichageBuilder(stage, cote, this);
         builder = builder.getInstance(army1, army2, cote);
         builder.addObserver(affBuilder);
@@ -68,7 +70,7 @@ public class ControllerGraphique extends Application {
         joueur1 = army1;
         joueur2 = army2;
         isMoved = false;
-        cpt = 0 ;
+        cpt = 0;
         affBuilder.afficherTextAction(army1, " placez un bateau");
     }
 
@@ -83,13 +85,9 @@ public class ControllerGraphique extends Application {
 
     }
 
-    private Position positionClicked;
-
     public Position getPositionClicked() {
         return this.positionClicked;
     }
-
-    private String armyAdverse;
 
     public void clickBateau(int x, int y) {
         positionClicked = new Position(x, y);
@@ -126,9 +124,7 @@ public class ControllerGraphique extends Application {
                 affG.afficherTextAction(armyCourante, " ,sélectionner la case où déplacer le bateau! ");
                 oldPos = positionClicked;
             }
-
         }
-
     }
 
     public void clickCaseVide(int x, int y) {
@@ -150,9 +146,7 @@ public class ControllerGraphique extends Application {
                     }
                     affG.afficherTextAction(armyCourante, " à vous de tirer!");
                 }
-
             }
-
         }
     }
 
@@ -175,7 +169,7 @@ public class ControllerGraphique extends Application {
             //Récupère le position du bateau a déplacer
             if (builder.choixBateauPressed(armyCourante, oldPos, joueur)) {
                 System.out.println(armyCourante + " " + joueur);
-               
+
                 isMoved = true;
                 affBuilder.afficherTextAction(armyCourante, " ,bateau sélectionné.");
 
@@ -187,7 +181,7 @@ public class ControllerGraphique extends Application {
 
     public void clickReleased(int x, int y) {
         positionClicked = new Position(x, y);
-        System.out.println(positionClicked.getX() +" " + positionClicked.getY());
+        System.out.println(positionClicked.getX() + " " + positionClicked.getY());
         if (isMoved = true) {
             //récupère la position de la case dans la mer et pose le bateau
             if (joueur) {
@@ -198,10 +192,9 @@ public class ControllerGraphique extends Application {
             if (builder.deplaceBateauReleaseGrid(oldPos, positionClicked, joueur)) {
                 isMoved = false;
 
-                
-                ++cpt ;
+                ++cpt;
                 if (cpt == 6) {
-                    switchToMainWindow2(builder.getArmy(true),builder.getArmy(false),builder.getBoard());
+                    switchToMainWindow2(builder.getArmy(true), builder.getArmy(false), builder.getBoard());
                 } else {
                     if (joueur) {
                         joueur = false;
@@ -216,12 +209,11 @@ public class ControllerGraphique extends Application {
                 affBuilder.afficherTextAction(armyCourante, " ,la case n'est pas valide !");
             }
         }
-
     }
-    
-    public void switchToMainWindow2(Army army1, Army army2,MerBoard mer) {
+
+    public void switchToMainWindow2(Army army1, Army army2, MerBoard mer) {
         affG = new AffichageGraphique(stage, cote, this);
-        game = Game.setGameFromBuilder(army1, army2,mer, cote);
+        game = Game.setGameFromBuilder(army1, army2, mer, cote);
         game.addObserver(affG);
         game.setChangedAndNotify(); // Provoque un 1er affichage
         jouer(affG, army1.getNom(), army2.getNom());
@@ -229,9 +221,6 @@ public class ControllerGraphique extends Application {
 
     public void clickDragged(int x, int y) {
         if (isMoved = true) {
-            //déplace l'image du bateau
-
         }
     }
-
 }

@@ -1,36 +1,34 @@
 package model;
 
-public abstract class Navire{
+public abstract class Navire {
 
-    protected String nom ;
+    protected String nom;
     protected final String typeNavire;
     protected Position pos = null;
     protected int pointVie; //50 pour les petits et 100 pour les grands (simple et double résistance au tir / mine)
     protected Army army = null;
-//    protected int portee = 0;
-    protected String popo = "" ;
-    protected int deplacementMax ;
-   
+    protected String popo = "";
+    protected int deplacementMax;
 
-    
-
-    protected Navire(String nom,String type, int pv,int deplacementMax) {
+    protected Navire(String nom, String type, int pv, int deplacementMax) {
         this.nom = nom;
-        
+
         this.typeNavire = type;
         this.pointVie = pv;
-        this.deplacementMax = deplacementMax ;
+        this.deplacementMax = deplacementMax;
 
     }
+
     public int getDeplacementMax() {
         return deplacementMax;
     }
-    
-    public void setPopo(String popo){
+
+    public void setPopo(String popo) {
         this.popo = popo;
     }
-    public String getPopo(){
-        return this.popo ;
+
+    public String getPopo() {
+        return this.popo;
     }
 
     public Position getPosition() {
@@ -56,19 +54,17 @@ public abstract class Navire{
     public int getPointVie() {
         return pointVie;
     }
-    
-    public String getNom(){
+
+    public String getNom() {
         return this.nom;
     }
 
     public void degat(int degat) {
         this.pointVie -= degat;
-        if(this.pointVie < 0){ // Pv à zero minimum
-            this.pointVie = 0 ;    
+        if (this.pointVie < 0) { // Pv à zero minimum
+            this.pointVie = 0;
         }
     }
-    
+
     public abstract int getPorteeTir();
 }
-
-

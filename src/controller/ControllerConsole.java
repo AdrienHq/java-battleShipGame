@@ -3,8 +3,6 @@ package controller;
 import java.util.Scanner;
 import model.Army;
 import model.Game;
-import model.MerBoard;
-import model.Position;
 import view.AffichageConsole;
 
 public class ControllerConsole {
@@ -12,7 +10,6 @@ public class ControllerConsole {
     public static void main(String[] args) {
         AffichageConsole affichage = new AffichageConsole();
         boolean gameOver = false;
-        Army joueur1 = null; Army joueur2 = null; 
         String army1 = null, army2 = null;
         int cote = 5;
         Scanner clavier = new Scanner(System.in);
@@ -20,7 +17,7 @@ public class ControllerConsole {
         if (clavier.hasNext()) {
             army1 = clavier.nextLine();
 
-        } else; // ??
+        } else; 
         affichage.askName2();
         if (clavier.hasNext()) {
             army2 = clavier.nextLine();
@@ -28,7 +25,7 @@ public class ControllerConsole {
         } else ;
         affichage.askTailleCote();
         if (clavier.hasNext()) {
-            cote = clavier.nextInt();                                     //ICI CHANGEMENT A CONTINUER 
+            cote = clavier.nextInt();                                     
         } else ;
         Game game = Game.setGame(army1, army2,cote);
         affichage.afficherGame(); // affiche le jeu 
@@ -64,9 +61,7 @@ public class ControllerConsole {
                 }
                 while(!entreeCorrecte);
                 entreeCorrecte = false ;
-                //pos = "";
-                String newPos = "";
-                
+                String newPos = "";               
                 do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                     affichage.choixCaseDeplacement();
                     newPos = clavier.nextLine();
@@ -74,8 +69,7 @@ public class ControllerConsole {
                 }
                 while(!entreeCorrecte);
                 //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
-                //appliquer le déplacement(maj board et reprint auto
-                
+                //appliquer le déplacement(maj board et reprint auto                
                 Joueur=false ; // On donne la main à l'autre joueur   
             
             }else{      //si c'est au tour du joueur 2
@@ -94,8 +88,7 @@ public class ControllerConsole {
                 while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
                 System.out.println("");//affichage.portee(portee); //print la portee
                 entreeCorrecte = false ;
-                pos = "";
-                
+                pos = "";               
                 do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                     affichage.choixBateauDeplacement(army2);
                     //clavier.nextLine();
@@ -103,8 +96,7 @@ public class ControllerConsole {
                     entreeCorrecte = game.choixBateauDeplacement(army2,pos) ; //verifie la position ,tire et renvoie la portée
                 }
                 while(!entreeCorrecte);
-                entreeCorrecte = false ;
-                //pos = "";
+                entreeCorrecte = false;
                 String newPos = "";
                 
                 do{         //demande l'entrée de choix du bateau tant que l'entrée est invalide
@@ -114,26 +106,12 @@ public class ControllerConsole {
                 }
                 while(!entreeCorrecte);
                 //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
-                //appliquer le déplacement(maj board et reprint auto
-                
-                Joueur=true ; // On donne la main à l'autre joueur   
-            
+                //appliquer le déplacement(maj board et reprint auto                
+                Joueur=true ; // On donne la main à l'autre joueur              
                 //meme chose que joueur1 à copier 
-            }
-//            if(joueur1.listeVide()){ 
-//                affichage.showVictory(army1); 
-//                gameOver = true ;
-//            }
-//            if(joueur2.listeVide()){ 
-//                affichage.showVictory(army2);
-//                gameOver = true ;
-//            }
-            //si joueur2.listeVide()){
-                
+            }             
         } while (!gameOver); 
-        System.out.println("partie finie"); //à deplacer
-
-    
+        System.out.println("partie finie"); //à deplacer  
     }
 
     public static int toucheClavier() {
@@ -144,7 +122,5 @@ public class ControllerConsole {
             System.out.println("Problème lors de la saisie");
         }
         return clavier;
-    }
-
-   
+    }  
 }

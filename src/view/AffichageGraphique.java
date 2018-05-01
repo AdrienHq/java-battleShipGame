@@ -28,16 +28,12 @@ public class AffichageGraphique extends GridPane implements Observer {
 
     private final int COTE;
     private final ControllerGraphique ctrlG;
-    int x = 0;
-
-    
-    GridPane etatArmee1 = new GridPane();
-    GridPane etatArmee2 = new GridPane();
-
+    private int x = 0;
+    private GridPane etatArmee1 = new GridPane();
+    private GridPane etatArmee2 = new GridPane();
     private static GridPane merPane = new GridPane();
-
-    Text action = new Text("Action");
-    Text debugText = new Text("Debug");
+    private Text action = new Text("Action");
+    private Text debugText = new Text("Debug");
 
     public AffichageGraphique(Stage stage, int cote, ControllerGraphique ctrl) {
         ctrlG = ctrl;
@@ -46,11 +42,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
         centre.getChildren().add(debugText);
-        
-        //merPane.setStyle(string); ajout pour la bordure faire le css
-        
         Insets insets = new Insets(20);
-
         BorderPane bp = new BorderPane();
         bp.setLeft(etatArmee1);
         bp.setMargin(etatArmee1, insets);
@@ -59,16 +51,17 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.setAlignment(Pos.CENTER);
         bp.setRight(etatArmee2);
         bp.setMargin(etatArmee2, insets);
-        
         setSizeConstraints();
         stage.setScene(new Scene(bp, 800 + (COTE * 60), 350 + (COTE * 60)));
-        stage.setTitle("Bataille Navale");  
+        stage.setTitle("Bataille Navale");
         stage.show();
 
     }
+
     public int getX() {
         return x;
     }
+
     private void setSizeConstraints() {
         for (int i = 0; i < COTE; i++) {
             ColumnConstraints column = new ColumnConstraints(60);
@@ -86,8 +79,8 @@ public class AffichageGraphique extends GridPane implements Observer {
         MerBoard board = game.getBoard();
         Case[][] mer = board.getTab();
         Case c = null;
-        Position pos = null ;
-        Boolean debug = true ;     
+        Position pos = null;
+        Boolean debug = true;
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);
@@ -96,12 +89,10 @@ public class AffichageGraphique extends GridPane implements Observer {
                     if (c.getTypeNavire() == "BIG") { //si grand navire 
                         Navire n = c.getNavire();
                         if (game.getNomJoueur1() == n.getNom()) {       //si nom bateau =
-
                             merPane.add(new NavireGrandEquipe1(x, y), x, y);
                         } else {
                             merPane.add(new NavireGrandEquipe2(x, y), x, y);
                         }
-
                     } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
                         Navire n = c.getNavire();
                         if (game.getNomJoueur1() == n.getNom()) {       //si nom bateau =
@@ -127,8 +118,6 @@ public class AffichageGraphique extends GridPane implements Observer {
     }
 
     private void etatArmee(Army army1, Army army2) {
-        //nomArmee1 = new Text(army.getNom());
-
         etatArmee1.getChildren().clear();
         etatArmee2.getChildren().clear();
         Label a1 = new Label(army1.getNom());
@@ -137,7 +126,6 @@ public class AffichageGraphique extends GridPane implements Observer {
         Label a2 = new Label(army2.getNom());
         a2.setStyle("-fx-background-color: blue; -fx-padding: 10px;");
         a2.setFont(Font.font("Verdana", 20));
-
         Text pos = new Text("Position");
         Text type = new Text("Type");
         Text etat = new Text("Etat");
@@ -147,14 +135,12 @@ public class AffichageGraphique extends GridPane implements Observer {
         type.setFill(Color.RED);
         etat.setFont(Font.font("Verdana", 20));
         etat.setFill(Color.RED);
-
         etatArmee1.setHgap(10);
         etatArmee1.setVgap(10);
         etatArmee1.add(a1, 1, 0, 1, 1);
         etatArmee1.add(pos, 0, 1, 1, 1);
         etatArmee1.add(type, 1, 1, 1, 1);
         etatArmee1.add(etat, 2, 1, 1, 1);
-
         Text pos2 = new Text("Position");
         Text type2 = new Text("Type");
         Text etat2 = new Text("Etat");
@@ -164,23 +150,18 @@ public class AffichageGraphique extends GridPane implements Observer {
         type2.setFill(Color.BLUE);
         etat2.setFont(Font.font("Verdana", 20));
         etat2.setFill(Color.BLUE);
-
         etatArmee2.setHgap(10);
         etatArmee2.setVgap(10);
         etatArmee2.add(a2, 1, 0, 1, 1);
         etatArmee2.add(pos2, 0, 1, 1, 1);
         etatArmee2.add(type2, 1, 1, 1, 1);
         etatArmee2.add(etat2, 2, 1, 1, 1);
-
         int x = 0;
         int y = 2;
         for (Navire n : army1.getListeNavire()) {
-
-            // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
             Text posX = new Text(n.getPopo());
             posX.setFont(Font.font("Verdana", 20));
             posX.setFill(Color.RED);
-
             etatArmee1.add(posX, x, y, 1, 1);
             ++x;
             Text typeX = new Text(n.getType());
@@ -198,8 +179,6 @@ public class AffichageGraphique extends GridPane implements Observer {
         x = 0;
         y = 2;
         for (Navire n2 : army2.getListeNavire()) {
-
-            // + "        " + n.getType() + "      " + n.getPointVie() + "       " + army1.getNom());
             Text posX2 = new Text(n2.getPopo());
             posX2.setFont(Font.font("Verdana", 20));
             posX2.setFill(Color.BLUE);
@@ -217,7 +196,6 @@ public class AffichageGraphique extends GridPane implements Observer {
             x = 0;
             ++y;
         }
-
     }
 
     public void afficherTextAction(String army, String pos) {
@@ -245,8 +223,9 @@ public class AffichageGraphique extends GridPane implements Observer {
             setOnMouseClicked(e -> ctrlG.clickCaseVide(x, y));
         }
     }
-    
+
     private class MerVerte extends BoxView {
+
         //case verte d'affichage 
         public MerVerte(int x, int y) {
             getStyleClass().add("merVerte");
