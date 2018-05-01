@@ -111,7 +111,7 @@ public class AffichageGraphique extends GridPane implements Observer {
                         }
                     }
                 } else if (c.estchoixPossible()) {
-                    add(new EmptyBoxView(x, y), x, y);   //mettre image eau verte .
+                    merPane.add(new MerVerte(x, y), x, y);   //mettre image eau verte .
                 } else if (c.estFlottant() && debug == true) {
                     if (c.getTypeFlottant() == "ATOMIQUE") {
                         merPane.add(new Atomique(x, y), x, y);
