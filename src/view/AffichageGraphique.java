@@ -42,7 +42,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
         centre.getChildren().add(debugText);
-        Insets insets = new Insets(20);
+        Insets insets = new Insets(10);
         BorderPane bp = new BorderPane();
         bp.setLeft(etatArmee1);
         bp.setMargin(etatArmee1, insets);
@@ -52,7 +52,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         bp.setRight(etatArmee2);
         bp.setMargin(etatArmee2, insets);
         setSizeConstraints();
-        stage.setScene(new Scene(bp, 800 + (COTE * 60), 350 + (COTE * 60)));
+        stage.setScene(new Scene(bp, 740 + (COTE * 60), 300 + (COTE * 60)));
         stage.setTitle("Bataille Navale");
         stage.show();
 

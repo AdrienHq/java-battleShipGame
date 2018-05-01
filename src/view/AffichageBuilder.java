@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -30,8 +31,10 @@ public class AffichageBuilder extends GridPane implements Observer {
     private GridPane bateauArmee2 = new GridPane();
     private static GridPane merBuild = new GridPane();
     private Text action = new Text("Action");
-    private Text armee1 = new Text("joueur1");
-    private Text armee2 = new Text("joueur2");
+    private Text armee1 = new Text("Joueur1");
+    private Text armee2 = new Text("Joueur2");
+    
+    
 
     public AffichageBuilder(Stage stage, int cote, ControllerGraphique ctrl) {
         ctrlG = ctrl;
@@ -55,7 +58,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         bp.setRight(droite);
         bp.setMargin(droite, insets);
         setSizeConstraints();
-        stage.setScene(new Scene(bp, 600 + (COTE * 60), 350 + (COTE * 60)));
+        stage.setScene(new Scene(bp, 400 + (COTE * 60), 350 + (COTE * 60)));
         stage.setTitle("Builder");
         stage.show();
     }
@@ -156,6 +159,10 @@ public class AffichageBuilder extends GridPane implements Observer {
                 }
             }
         }
+        armee1.setFont(Font.font("Verdana", 20));
+        armee1.setFill(Color.RED);
+        armee2.setFont(Font.font("Verdana", 20));
+        armee2.setFill(Color.BLUE);
     }
 
     public void afficherTextAction(String army, String msg) {
