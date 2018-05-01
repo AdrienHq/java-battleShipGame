@@ -8,6 +8,8 @@ import view.AffichageSetup;
 
 public class Game extends Observable {
 
+    
+
     private Random rand = new Random();
     private int cote;
     private MerBoard board;
@@ -27,24 +29,40 @@ public class Game extends Observable {
         this.joueur1 = new Army(joueur1);
         this.joueur2 = new Army(joueur2);
         this.cote = cote;
-        if (switchBat == true) {
-            this.board = MerBoard.getInstance(cote);
-            
-            //recuperer merbuilder
-            
-            placementFlottants();
-        } else if (switchBat == false) {
+        
             this.board = MerBoard.getInstance(cote);
 
             initialiserBateaux(getJoueur1());
             initialiserBateaux(getJoueur2());
             placementFlottants();
-        }
+        
+    }
+    
+    private Game(Army army1, Army army2,MerBoard mer, int cote) {
+        boolean switchBat = AffichageSetup.getCheckBox();
+
+        this.joueur1 = army1 ;
+        this.joueur2 = army2 ;
+        this.cote = cote;
+       
+            this.board = mer;
+            
+            //recuperer merbuilder
+            
+            placementFlottants();
+        
     }
 
     public static Game setGame(String joueur1, String joueur2, int cote) {
         if (instance == null) {
             instance = new Game(joueur1, joueur2, cote);
+        }
+        return instance;
+    }
+    
+    public static Game setGameFromBuilder(Army army1, Army army2, MerBoard mer, int cote) {
+        if (instance == null) {
+            instance = new Game(army1,army2, mer,cote);
         }
         return instance;
     }

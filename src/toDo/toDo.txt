@@ -5,7 +5,7 @@ To do :
 	
         -javafx affichage caseDeplacement
 	
-        -switchbuildertoGame
+        
 
         
         

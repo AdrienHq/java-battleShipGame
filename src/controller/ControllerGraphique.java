@@ -3,7 +3,10 @@ package controller;
 import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.Army;
+import model.Case;
 import model.Game;
+import model.MerBoard;
 import model.MerBuilder;
 import model.Position;
 import view.AffichageBuilder;
@@ -29,7 +32,7 @@ public class ControllerGraphique extends Application {
     private Position oldPos;
     private boolean isMoved;
     private int cpt ;
-    
+    private int cote ;
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -42,6 +45,7 @@ public class ControllerGraphique extends Application {
     }
 
     public void switchToMainWindow(String army1, String army2, int cote) {
+        this.cote = cote ;
         affG = new AffichageGraphique(stage, cote, this);
         game = Game.setGame(army1, army2, cote);
         game.addObserver(affG);
@@ -50,6 +54,7 @@ public class ControllerGraphique extends Application {
     }
 
     public void switchToBuilderWindow(String army1, String army2, int cote) {
+        this.cote = cote ;
         affBuilder = new AffichageBuilder(stage, cote, this);
         builder = builder.getInstance(army1, army2, cote);
         builder.addObserver(affBuilder);
@@ -193,8 +198,10 @@ public class ControllerGraphique extends Application {
             if (builder.deplaceBateauReleaseGrid(oldPos, positionClicked, joueur)) {
                 isMoved = false;
 
+                
+                ++cpt ;
                 if (cpt == 6) {
-                    //lancer le jeu
+                    switchToMainWindow2(builder.getArmy(true),builder.getArmy(false),builder.getBoard());
                 } else {
                     if (joueur) {
                         joueur = false;
@@ -205,12 +212,19 @@ public class ControllerGraphique extends Application {
                     }
                     affBuilder.afficherTextAction(armyCourante, " ,a vous de placer un bateau !");
                 }
-                ++cpt ;
             } else {
                 affBuilder.afficherTextAction(armyCourante, " ,la case n'est pas valide !");
             }
         }
 
+    }
+    
+    public void switchToMainWindow2(Army army1, Army army2,MerBoard mer) {
+        affG = new AffichageGraphique(stage, cote, this);
+        game = Game.setGameFromBuilder(army1, army2,mer, cote);
+        game.addObserver(affG);
+        game.setChangedAndNotify(); // Provoque un 1er affichage
+        jouer(affG, army1.getNom(), army2.getNom());
     }
 
     public void clickDragged(int x, int y) {

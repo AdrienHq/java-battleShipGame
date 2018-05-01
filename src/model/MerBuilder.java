@@ -35,6 +35,13 @@ public class MerBuilder extends Observable {
         this.port2 = initPort(false);
     }
 
+    public Army getArmy(Boolean Army){
+        if(Army){
+            return army1 ;
+        }else{
+            return army2 ;
+        }
+    }
     public Case[][] returnPort(boolean armee) {
 
         if (armee) {

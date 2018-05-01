@@ -35,6 +35,9 @@ public class MerBoard {
     public Case[][] getTab() {
         return mer;
     }
+    public void setMer(Case[][] mer){
+        this.mer = mer ;
+    }
 
     public boolean positionVide(Position pos) {
         int x = pos.getX();
