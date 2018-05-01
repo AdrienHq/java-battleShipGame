@@ -13,13 +13,12 @@ public class Game extends Observable {
     private MerBoard board;
     private MerBuilder boardBuilder;
     private static Game instance = null;
-    private Army joueur1; //army (nom / arrayList / color) 
+    private Army joueur1;
     private Army joueur2;
     private Random random = new Random();
     private boolean switchBateau = false;
-    List<Navire> bateauEnMer = new ArrayList<>();
-
-    public ArrayList<Position> listPositionPossible = new ArrayList<>();
+    private List<Navire> bateauEnMer = new ArrayList<>();
+    private ArrayList<Position> listPositionPossible = new ArrayList<>();
 
     private Game(String joueur1, String joueur2, int cote) {
         boolean switchBat = AffichageSetup.getCheckBox();
@@ -138,7 +137,7 @@ public class Game extends Observable {
     public String getStringPosByPos(Position pX) {
         System.out.println(pX.getX());
         System.out.println(pX.getY());
-        String x = String.valueOf(pX.getX()); //chiffre 
+        String x = String.valueOf(pX.getX());
         char y = getAZfromNumber(pX.getY());
         String posString = y + x;
         return posString;
@@ -159,7 +158,7 @@ public class Game extends Observable {
         Case c = board.getCaseInPos(oldPos);
         Case f = board.getCaseInPos(newPos);
         Position future = f.getPosition();
-        if (f.choixPossible == true) {
+        if (f.getChoixPossible() == true) {
             Navire n = c.getNavire();
             c.supprimerNavire();
             if (f.getTypeFlottant() == "ATOMIQUE") {
@@ -192,7 +191,7 @@ public class Game extends Observable {
         Case c = board.getCaseInPos(oldPos);
         Case f = board.getCaseInPos(positionClicked);
         Position future = f.getPosition();
-        if (f.choixPossible == true) {
+        if (f.getChoixPossible() == true) {
             Navire n = c.getNavire();
             c.supprimerNavire();
             if (f.getTypeFlottant() == "ATOMIQUE") {
@@ -416,11 +415,11 @@ public class Game extends Observable {
     }
 
     public String getNomJoueur1() {
-        return this.joueur1.nom;
+        return this.joueur1.getNom();
     }
 
     public String getNomJoueur2() {
-        return this.joueur2.nom;
+        return this.joueur2.getNom();
     }
 
     public Army getJoueur1() {

@@ -5,17 +5,7 @@ import java.util.Random;
 public class MerBoard {
 
     private static int cote;
-
-    public static int getCote() {
-        return cote; //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public static void setCote(int cote) {
-        MerBoard.cote = cote;
-    }
-
     private Case[][] mer;
-
     private Random random = new Random();
     private static MerBoard instance = null;
 
@@ -32,11 +22,20 @@ public class MerBoard {
         }
     }
 
+    public static int getCote() {
+        return cote; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static void setCote(int cote) {
+        MerBoard.cote = cote;
+    }
+
     public Case[][] getTab() {
         return mer;
     }
-    public void setMer(Case[][] mer){
-        this.mer = mer ;
+
+    public void setMer(Case[][] mer) {
+        this.mer = mer;
     }
 
     public boolean positionVide(Position pos) {
@@ -48,7 +47,7 @@ public class MerBoard {
         return false;
     }
 
-    void placerNavire(Position pos, Navire n) {
+    public void placerNavire(Position pos, Navire n) {
         int x = pos.getX();
         int y = pos.getY();
         mer[x][y].setNavire(n);
@@ -59,7 +58,7 @@ public class MerBoard {
         n.setPopo(popo);
     }
 
-    void placerFlottant(Position pos, Flottant f) {
+    public void placerFlottant(Position pos, Flottant f) {
         int x = pos.getX();
         int y = pos.getY();
         mer[x][y].setFlottant(f);
@@ -92,7 +91,7 @@ public class MerBoard {
         this.mer[x][y].supprimerNavire();
     }
 
-    void mettreCaseEnDeplacementPossible(Position pos) {
+    public void mettreCaseEnDeplacementPossible(Position pos) {
         int x = pos.getX();
         int y = pos.getY();
         this.mer[x][y].switchChoixPossible();
@@ -107,13 +106,13 @@ public class MerBoard {
         return n;
     }
 
-    Case getCaseInPos(Position p) {
+    public Case getCaseInPos(Position p) {
         int x = p.getX();
         int y = p.getY();
         return mer[x][y];
     }
 
-    Case getCaseInPos(String pos) { //x et y à inverser ,reinverser toute les autres insertions ds tableau
+    public Case getCaseInPos(String pos) { //x et y à inverser ,reinverser toute les autres insertions ds tableau
 
         int y = (int) getNumberFromAZ(pos.charAt(0)); //la lettre
         int x;
@@ -124,7 +123,7 @@ public class MerBoard {
             x += ((int) (pos.charAt(2))) - 49;
         } else {
             x = ((int) (pos.charAt(1))) - 49;
-            
+
         }
 
         System.out.println(x + " " + y);
@@ -132,7 +131,7 @@ public class MerBoard {
 
     }
 
-    void getRealPosition(Position p) {
+    public void getRealPosition(Position p) {
         int x = p.getX();
         int y = p.getY();
         if (x >= cote) {

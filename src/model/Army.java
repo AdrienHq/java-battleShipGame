@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 public class Army {
 
-    public String nom;
-    public ArrayList<Navire> listNavire = new ArrayList<>();
-
+    private final String nom;
+    private ArrayList<Navire> listNavire = new ArrayList<>();
+    private ArrayList<Navire> listNavireToDelete = new ArrayList<>();
+    
     public Army(String nom) {
         this.nom = nom;
         this.listNavire = fillNavires();
@@ -31,9 +32,8 @@ public class Army {
     public void tirDegat(Navire n) {
         n.degat(50);
     }
-    private ArrayList<Navire> listNavireToDelete = new ArrayList<>();
-
-    public void deleteNavire() { //tir en 0 5 
+    
+    public void deleteNavire() { 
         for (Navire x : listNavire) {
             if (x.pointVie == 0) {
                 listNavireToDelete.add(x);
@@ -51,7 +51,7 @@ public class Army {
         return false;
     }
 
-    public int sizeListe() {
+    private int sizeListe() {
         return listNavire.size();
     }
 

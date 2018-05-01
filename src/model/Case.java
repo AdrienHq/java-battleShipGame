@@ -1,16 +1,15 @@
 package model;
 
 public class Case {
-    private String name ;
-    Position p ;
-    
+
+    private String name;
+    private Position p;
     private Navire navire;
     private Flottant flottant;
-    
-    Boolean choixPossible = false ;
-    Boolean radioActif = false;
-    Boolean estVide = true;
-    
+    private Boolean choixPossible = false;
+    private Boolean radioActif = false;
+    private Boolean estVide = true;
+
     public Case(Navire n) {
         this.navire = n;
     }
@@ -19,28 +18,33 @@ public class Case {
         this.flottant = f;
     }
 
-    public Case(String name,Position p) {
-        this.name = name ;
+    public Case(String name, Position p) {
+        this.name = name;
         this.p = p;
         this.navire = null;
         this.flottant = null;
     }
-    
-    
-     public String getName() {
+
+    public String getName() {
         return name;
     }
-     
-     public Position getPosition() {
-        return p;
-    } 
-    public boolean estchoixPossible(){
+    public Boolean getChoixPossible(){
         return choixPossible ;
     }
-    public void switchChoixPossible(){
-        
+
+    public Position getPosition() {
+        return p;
+    }
+
+    public boolean estchoixPossible() {
+        return choixPossible;
+    }
+
+    public void switchChoixPossible() {
+
         this.choixPossible = this.choixPossible != true;
     }
+
     public boolean estRadioactif() {
         return radioActif;
     }
@@ -49,27 +53,28 @@ public class Case {
         return estVide;
     }
 
-    public void switchVide() {
+    private void switchVide() {
         this.estVide = this.estVide == false;
     }
 
     public void switchRadioactif() {
         this.radioActif = this.radioActif == false;
-    } 
+    }
+
     public void setNavire(Navire n) {
-        this.navire= n ;
+        this.navire = n;
         this.switchVide();
     }
 
     public Navire getNavire() {
         return this.navire;
     }
-    
+
     void setFlottant(Flottant f) {
-        this.flottant = f ;
+        this.flottant = f;
         //this.switchVide();
     }
-    
+
     public Flottant getFlottant() {
         return this.flottant;
     }
@@ -97,17 +102,13 @@ public class Case {
         }
         return null;
     }
-    public boolean estFlottant(){
-        return this.getFlottant() != null ;
+
+    public boolean estFlottant() {
+        return this.getFlottant() != null;
     }
 
-    
-    //    public void setRadioActif(boolean radioActif){
-//        this.radioActif = radioActif;
-//    }
-
     boolean estNavire() {
-        return getNavire() != null ;
+        return getNavire() != null;
     }
 
 }
