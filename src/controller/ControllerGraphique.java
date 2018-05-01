@@ -27,7 +27,9 @@ public class ControllerGraphique extends Application {
     private String armyCourante;
     private int portee;
     private Position oldPos;
-
+    private boolean isMoved;
+    private int cpt ;
+    
     @Override
     public void start(Stage primaryStage) {
         stage = primaryStage;
@@ -49,10 +51,20 @@ public class ControllerGraphique extends Application {
 
     public void switchToBuilderWindow(String army1, String army2, int cote) {
         affBuilder = new AffichageBuilder(stage, cote, this);
-        builder = builder.getInstance(army1,army2,cote);
+        builder = builder.getInstance(army1, army2, cote);
         builder.addObserver(affBuilder);
         builder.setChangedAndNotify(); // Provoque un 1er affichage
+        build(affBuilder, army1, army2);
 
+    }
+
+    private void build(AffichageBuilder affBuilder, String army1, String army2) {
+        joueur = true;
+        joueur1 = army1;
+        joueur2 = army2;
+        isMoved = false;
+        cpt = 0 ;
+        affBuilder.afficherTextAction(army1, " placez un bateau");
     }
 
     private void jouer(AffichageGraphique affG, String army1, String army2) {
@@ -72,10 +84,11 @@ public class ControllerGraphique extends Application {
         return this.positionClicked;
     }
 
-    private String armyAdverse;    
+    private String armyAdverse;
+
     public void clickBateau(int x, int y) {
         positionClicked = new Position(x, y);
-        
+
         if (joueur) {
             armyCourante = joueur1;
             armyAdverse = joueur2;
@@ -86,19 +99,18 @@ public class ControllerGraphique extends Application {
         if (tirBateau) {
             if (game.tirGraphique(armyCourante, positionClicked, portee)) {
                 tirBateau = false;
-                
+
                 affG.afficherTextDebug(armyCourante, "portee :" + portee);
                 affG.afficherTextAction(armyCourante, " ,sélectionner le bateau à déplacer ");
                 if (gameOver()) {
                     affG.afficherTextAction(armyCourante, " Vous avez gagné!!");
-                }else{
-                   choixPositionDeplacement = true;     
+                } else {
+                    choixPositionDeplacement = true;
                 }
             } else {
                 affG.afficherTextDebug(armyCourante, "la case n'est pas valide,réessayer");
             }
-            
-            
+
         } else if (choixPositionDeplacement) {
 
             if (game.choixBateauDeplacementGraphique(armyCourante, positionClicked)) {
@@ -111,8 +123,7 @@ public class ControllerGraphique extends Application {
             }
 
         }
-        
-        
+
     }
 
     public void clickCaseVide(int x, int y) {
@@ -136,22 +147,33 @@ public class ControllerGraphique extends Application {
                 }
 
             }
-            
+
         }
     }
-    private boolean gameOver(){
-        return (game.getJoueur1().listeVide()||game.getJoueur2().listeVide() );
+
+    private boolean gameOver() {
+        return (game.getJoueur1().listeVide() || game.getJoueur2().listeVide());
     }
 
-    private boolean isMoved = false;
-
     public void clickPressed(int x, int y) {
+        oldPos = new Position(x, y);
+        System.out.println(oldPos);
+        if (joueur) {
+            armyCourante = joueur1;
+            armyAdverse = joueur2;
+        } else {
+            armyCourante = joueur2;
+            armyAdverse = joueur1;
+        }
+
         if (isMoved = false) {
             //Récupère le position du bateau a déplacer
-            if (builder.choixBateauPressed(armyCourante, positionClicked)) {
-                positionClicked = new Position(x, y);
+            if (builder.choixBateauPressed(armyCourante, oldPos, joueur)) {
+                System.out.println(armyCourante + " " + joueur);
+               
                 isMoved = true;
                 affBuilder.afficherTextAction(armyCourante, " ,bateau sélectionné.");
+
             } else {
                 affBuilder.afficherTextAction(armyCourante, " ,ce n'est pas votre bateau.");
             }
@@ -160,17 +182,30 @@ public class ControllerGraphique extends Application {
 
     public void clickReleased(int x, int y) {
         positionClicked = new Position(x, y);
+        System.out.println(positionClicked.getX() +" " + positionClicked.getY());
         if (isMoved = true) {
             //récupère la position de la case dans la mer et pose le bateau
-            if (builder.deplaceBateauReleaseGrid(armyCourante, positionClicked)) {
+            if (joueur) {
+                armyCourante = joueur1;
+            } else {
+                armyCourante = joueur2;
+            }
+            if (builder.deplaceBateauReleaseGrid(oldPos, positionClicked, joueur)) {
                 isMoved = false;
-                if (joueur) {
-                    armyCourante = joueur1;
-                } else {
-                    armyCourante = joueur2;
-                }
-                affBuilder.afficherTextAction(armyCourante, " ,a vous de placer un bateau !");
 
+                if (cpt == 6) {
+                    //lancer le jeu
+                } else {
+                    if (joueur) {
+                        joueur = false;
+                        armyCourante = joueur2;
+                    } else {
+                        joueur = true;
+                        armyCourante = joueur1;
+                    }
+                    affBuilder.afficherTextAction(armyCourante, " ,a vous de placer un bateau !");
+                }
+                ++cpt ;
             } else {
                 affBuilder.afficherTextAction(armyCourante, " ,la case n'est pas valide !");
             }

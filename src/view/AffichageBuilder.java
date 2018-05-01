@@ -103,8 +103,8 @@ public class AffichageBuilder extends GridPane implements Observer {
 
         MerBoard board = merBuilder.getBoard();
         Case[][] mer = board.getTab();
-        Case[][] port = merBuilder.returnPort(true);
-        afficherBateau(port, merBuilder);
+        Case[][] port1 = merBuilder.returnPort(true);
+        afficherBateau(port1, merBuilder);
         Case[][] port2 = merBuilder.returnPort(false);
 
         afficherBateau(port2, merBuilder);
@@ -199,6 +199,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         //case vide 
         public EmptyBoxView2(int x, int y) {
             getStyleClass().add("mer");
+            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
         }
     }
 
@@ -208,7 +209,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -218,7 +219,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavireGrandEquipe2(int x, int y) {
             getStyleClass().add("bateauGrandEquipe2");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -228,7 +229,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavirePetitEquipe1(int x, int y) {
             getStyleClass().add("bateauPetitEquipe1");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -238,7 +239,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         public NavirePetitEquipe2(int x, int y) {
             getStyleClass().add("bateauPetitEquipe2");
             setOnMousePressed(e -> ctrlG.clickPressed(x, y));
-            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
+//            setOnMouseReleased(e -> ctrlG.clickReleased(x, y));
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
 
