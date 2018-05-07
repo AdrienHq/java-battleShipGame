@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import model.Game;
 import javafx.stage.Stage;
 import model.Army;
@@ -55,6 +57,11 @@ public class AffichageGraphique extends GridPane implements Observer {
         stage.setScene(new Scene(bp, 740 + (COTE * 60), 300 + (COTE * 60)));
         stage.setTitle("Bataille Navale");
         stage.show();
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2); 
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);  
+        
 
     }
 

@@ -3,6 +3,7 @@ package view;
 import controller.ControllerGraphique;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -10,13 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class AffichageSetup extends VBox {
 
     private final ControllerGraphique control;
-
-    ;
 
     public AffichageSetup(Stage stage, ControllerGraphique ctrl) {
         control = ctrl;
@@ -24,6 +24,10 @@ public class AffichageSetup extends VBox {
         stage.setTitle("Initialisation");
         stage.setScene(new Scene(this, 300, 350));
         stage.show();
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2); 
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);  
     }
     private Label nameLabel = new Label("Nom du joueur 1 : ");
     private Label nameLabe2 = new Label("Nom du joueur 2 : ");
