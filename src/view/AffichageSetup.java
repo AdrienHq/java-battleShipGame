@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
@@ -24,7 +25,9 @@ public class AffichageSetup extends VBox {
         stage.setScene(new Scene(this, 300, 350));
         stage.show();
     }
-
+    private Label nameLabel = new Label("Nom du joueur 1 : ");
+    private Label nameLabe2 = new Label("Nom du joueur 2 : ");
+    private Label tailleBoard = new Label("Taille du plateau : ");
     private TextField tf = new InputText1();
     private TextField tf2 = new InputText2();
     private TextField tfTaille = new InputNumber();
@@ -46,7 +49,7 @@ public class AffichageSetup extends VBox {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
         });
-        getChildren().addAll(tf, tf2, tfTaille, btOk, switchBateau);
+        getChildren().addAll(nameLabel, tf, nameLabe2, tf2, tailleBoard, tfTaille, btOk, switchBateau);
         setAlignment(Pos.CENTER);
         setPadding(new Insets(20));
         setSpacing(20);
@@ -67,7 +70,7 @@ public class AffichageSetup extends VBox {
     private class InputText1 extends TextField {
 
         InputText1() {
-            super("Nom du Joueur 1");
+            super("Adrien");
             setAlignment(Pos.TOP_CENTER);
             setMaxWidth(150);
             installListeners();
@@ -90,7 +93,7 @@ public class AffichageSetup extends VBox {
     private class InputText2 extends TextField {
 
         InputText2() {
-            super("Nom du Joueur 2");
+            super("Julien");
             setAlignment(Pos.TOP_CENTER);
             setMaxWidth(150);
             installListeners();
