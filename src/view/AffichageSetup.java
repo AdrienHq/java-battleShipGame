@@ -33,7 +33,6 @@ public class AffichageSetup extends VBox {
 
     private void setup() {
         Button btOk = new Button("Accepter");
-        Button btReset = new Button("Reset");
         btOk.setOnAction(e -> {
             if (!tf.getText().isEmpty() && !tf2.getText().isEmpty() && !tf.getText().isEmpty()) {
                 if (switchBateau.isSelected()) {
@@ -47,12 +46,7 @@ public class AffichageSetup extends VBox {
                 tf.requestFocus(); // Laisse le focus au TextField
             }
         });
-        btReset.setOnAction(e -> {
-            tf.setText(null);
-            tf2.setText(null);
-            tfTaille.setText(null);
-        });
-        getChildren().addAll(tf, tf2, tfTaille, btOk, btReset, switchBateau);
+        getChildren().addAll(tf, tf2, tfTaille, btOk, switchBateau);
         setAlignment(Pos.CENTER);
         setPadding(new Insets(20));
         setSpacing(20);
