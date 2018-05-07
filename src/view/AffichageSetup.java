@@ -75,8 +75,8 @@ public class AffichageSetup extends VBox {
 
         private void installListeners() {
             textProperty().addListener((obs, oldValue, newValue) -> {
-                if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
-                    setText(oldValue);
+                if (!newValue.matches("\\sa-zA-Z*")) {
+                    setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
                 }
             });
             setOnKeyPressed(ke -> {
@@ -98,8 +98,8 @@ public class AffichageSetup extends VBox {
 
         private void installListeners() {
             textProperty().addListener((obs, oldValue, newValue) -> {
-                if (!newValue.matches("^[a-zA-Z]+$")) { //regex pour que seulement des lettres soient acceptée
-                    setText(oldValue);
+                if (!newValue.matches("\\sa-zA-Z*")) {
+                    setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
                 }
             });
             setOnKeyPressed(ke -> {
