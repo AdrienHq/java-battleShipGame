@@ -54,14 +54,17 @@ public class AffichageGraphique extends GridPane implements Observer {
         bp.setRight(etatArmee2);
         bp.setMargin(etatArmee2, insets);
         setSizeConstraints();
-        stage.setScene(new Scene(bp, 740 + (COTE * 60), 300 + (COTE * 60)));
+        if (COTE < 6) {
+            stage.setScene(new Scene(bp, 800, 380));
+        } else {
+            stage.setScene(new Scene(bp, 740 + (COTE * 40), 300 + (COTE * 60)));
+        }
         stage.setTitle("Bataille Navale");
         stage.show();
-        
+
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2); 
-        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);  
-        
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 4);
 
     }
 

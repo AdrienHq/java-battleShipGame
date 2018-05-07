@@ -48,7 +48,7 @@ public class AffichageBuilder extends GridPane implements Observer {
         gauche.getChildren().add(bateauArmee1);
         droite.getChildren().add(armee2);
         droite.getChildren().add(bateauArmee2);
-        Insets insets = new Insets(2);
+        Insets insets = new Insets(4);
         BorderPane bp = new BorderPane();
         bp.setLeft(gauche);
         bp.setMargin(gauche, insets);
@@ -58,7 +58,11 @@ public class AffichageBuilder extends GridPane implements Observer {
         bp.setRight(droite);
         bp.setMargin(droite, insets);
         setSizeConstraints();
-        stage.setScene(new Scene(bp, 400 + (COTE * 60), 350 + (COTE * 60)));
+        if (COTE < 6) {
+            stage.setScene(new Scene(bp, 700  ,380));
+        } else {
+            stage.setScene(new Scene(bp, 740 + (COTE * 25), 300 + (COTE * 40)));
+        }   
         stage.setTitle("Builder");
         stage.show();
 
