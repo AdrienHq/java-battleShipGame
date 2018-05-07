@@ -38,7 +38,7 @@ public class ControllerConsole {
                  
                 Boolean entreeCorrecte = false ;
                 String pos = "" ;
-                int portee = 0;
+                int portee = 4;
                 do{
                     affichage.choixBateauTireur(army1)  ;
                     if (clavier.hasNext()) {
@@ -46,9 +46,12 @@ public class ControllerConsole {
                         pos = clavier.nextLine();
                     } else;
                     System.out.println("entrée ok = "+pos);
-                    entreeCorrecte = game.tire(army1,pos,portee) ; //verifie la position ,tire et renvoie la portée
+                    portee = game.tire(army1,pos); //verifie la position ,tire et renvoie la portée
+                    if (portee >= 0 && portee < 4){
+                    System.out.println("portee = " + portee);
+                    }
                 }
-                while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
+                while(portee == 4);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
                 System.out.println("");//affichage.portee(portee); //print la portee
                 entreeCorrecte = false ;
                 pos = "";
@@ -75,7 +78,7 @@ public class ControllerConsole {
             }else{      //si c'est au tour du joueur 2
                 Boolean entreeCorrecte = false ;
                 String pos = "" ;
-                int portee = 0;
+                int portee = 4;
                 do{
                     affichage.choixBateauTireur(army2)  ;
                     if (clavier.hasNext()) {
@@ -83,9 +86,9 @@ public class ControllerConsole {
                         pos = clavier.nextLine();
                     } else;
                     System.out.println("entrée ok = "+pos);
-                    entreeCorrecte = game.tire(army2,pos,portee) ; //verifie la position ,tire et renvoie la portée
+                    portee = game.tire(army2,pos) ; //verifie la position ,tire et renvoie la portée
                 }
-                while(!entreeCorrecte);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
+                while(portee ==4);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
                 System.out.println("");//affichage.portee(portee); //print la portee
                 entreeCorrecte = false ;
                 pos = "";               

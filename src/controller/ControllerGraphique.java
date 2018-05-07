@@ -100,7 +100,8 @@ public class ControllerGraphique extends Application {
             armyAdverse = joueur1;
         }
         if (tirBateau) {
-            if (game.tirGraphique(armyCourante, positionClicked, portee)) {
+            portee  = game.tirGraphique(armyCourante, positionClicked);
+            if (portee != 4) {
                 tirBateau = false;
 
                 affG.afficherTextDebug(armyCourante, "portee :" + portee);

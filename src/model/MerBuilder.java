@@ -45,22 +45,46 @@ public class MerBuilder extends Observable {
 
     public Case[][] initPort(boolean armee) {
         Army armyCourante = null;
+        Case[][] port = null;
         if (armee) {
             armyCourante = army1;
+            port = new Case[6][1];
+            int x = 0, y = 0;
+            for (Navire n : armyCourante.getListeNavire()) {
+                System.out.println("");
+                Position pos = new Position(x, y); //pos prends x = random contenu dans un carré de cote * cote
+                n.setPosition(pos);
+                port[x][y] = new Case(armyCourante.getNom(), pos);
+                port[x][y].setNavire(n);
+                ++x;
+            }
+
+            for (int z = 3; z < 6; z++) {
+                Position pos = new Position(z, y);
+                port[z][y] = new Case("vide", pos);
+            }
+            return port;
         } else {
             armyCourante = army2;
+            port = new Case[6][1];
+            int x = 3, y = 0;
+            for (int z = 0; z < 3; z++) {
+                Position pos = new Position(z, y);
+                port[z][y] = new Case("vide", pos);
+            }
+            
+            for (Navire n : armyCourante.getListeNavire()) {
+                System.out.println("");
+                Position pos = new Position(x, y); //pos prends x = random contenu dans un carré de cote * cote
+                n.setPosition(pos);
+                port[x][y] = new Case(armyCourante.getNom(), pos);
+                port[x][y].setNavire(n);
+                ++x;
+            }
+            
+            return port;    
         }
-        Case[][] port = new Case[3][1];
-        int x = 0, y = 0;
-        for (Navire n : armyCourante.getListeNavire()) {
-            System.out.println("");
-            Position pos = new Position(x, y); //pos prends x = random contenu dans un carré de cote * cote
-            n.setPosition(pos);
-            port[x][y] = new Case(armyCourante.getNom(), pos);
-            port[x][y].setNavire(n);
-            ++x;
-        }
-        return port;
+        
     }
 
     public static MerBuilder getInstance(String joueur1, String joueur2, int cote) {
@@ -104,7 +128,7 @@ public class MerBuilder extends Observable {
 
         }
         Case c = this.getCaseInPos(positionClicked, joueur);
-        if (c.estNavire()) { //Regarde si la case est un Navire
+        if (c.estNavire() && c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
         } else {
             return false; // aussinon on sort de la boucle
@@ -128,6 +152,10 @@ public class MerBuilder extends Observable {
     }
 
     public boolean deplaceBateauReleaseGrid(Position oldPos, Position positionClicked, Boolean joueur) {
+        if((joueur && oldPos.getX()>3 )||(!joueur && oldPos.getX()<3 ) ){
+            return false ;
+        }
+        
         Case c = this.getCaseInPos(oldPos, joueur);
         Case f = board.getCaseInPos(positionClicked);
         Navire n = c.getNavire();

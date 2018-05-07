@@ -78,7 +78,12 @@ public class AffichageBuilder extends GridPane implements Observer {
             bateauArmee1.getRowConstraints().add(row);
         }
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
+            ColumnConstraints column = new ColumnConstraints(0);
+            bateauArmee2.getColumnConstraints().add(column);
+            
+        }
+        for (int i = 0; i < 3; i++) {
             ColumnConstraints column = new ColumnConstraints(60);
             bateauArmee2.getColumnConstraints().add(column);
             RowConstraints row = new RowConstraints(60);
@@ -113,6 +118,7 @@ public class AffichageBuilder extends GridPane implements Observer {
                         if (merBuilder.getNomJoueur1() == n.getNom()) {       //si nom bateau =
                             merBuild.add(new AffichageBuilder.NavireGrandEquipe1(x, y), x, y);
                         } else {
+                            
                             merBuild.add(new AffichageBuilder.NavireGrandEquipe2(x, y), x, y);
                         }
                     } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire
@@ -143,9 +149,11 @@ public class AffichageBuilder extends GridPane implements Observer {
     private void afficherBateau(Case[][] port, MerBuilder merBuilder) {
         Case c = null;
         int y = 0;
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < 6; x++) {
             c = port[x][y];
+            
             if (c.getName() == merBuilder.getNomJoueur1()) {
+                
                 if (c.getTypeNavire() == "BIG") { //si grand navire 
                     bateauArmee1.add(new NavireGrandEquipe1(x, y), x, y);
                 } else if (c.getTypeNavire() == "SMALL") {                  //si petit navire

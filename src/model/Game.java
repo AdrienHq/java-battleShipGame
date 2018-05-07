@@ -318,7 +318,8 @@ public class Game extends Observable {
         //->cette case.setchoixDeplacement = true 
     }
 
-    public boolean tire(String army, String pos, int portee) {
+    public int tire(String army, String pos) {
+         int portee = 4 ;
         Case c = board.getCaseInPos(pos);
         Navire nav = null;
 
@@ -326,7 +327,7 @@ public class Game extends Observable {
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
 
         } else {
-            return false; // aussinon on sort de la boucle
+            return portee; // aussinon on sort de la boucle
         }
         if (army == joueur1.getNom()) {
             if (joueur1.estAmi(nav)) {
@@ -337,7 +338,7 @@ public class Game extends Observable {
                     this.degatZone(joueur1, joueur2, nav, portee);
                 }
                 setChangedAndNotify();
-                return true;
+                return portee;
             }
         } else if (joueur2.estAmi(nav)) {
             portee = nav.getPorteeTir();
@@ -346,12 +347,13 @@ public class Game extends Observable {
                 this.degatZone(joueur2, joueur1, nav, portee);
             }
             setChangedAndNotify();
-            return true;
+            return portee;
         }
-        return false;
+        return portee;
     }
 
-    public boolean tirGraphique(String armyCourante, Position positionClicked, int portee) {
+    public int tirGraphique(String armyCourante, Position positionClicked) {
+        int portee = 4 ;
         Case c = board.getCaseInPos(positionClicked);
         Navire nav = null;
 
@@ -359,7 +361,7 @@ public class Game extends Observable {
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
 
         } else {
-            return false; // aussinon on sort de la boucle
+            return portee ; // chiffre out of range de portee admise
         }
         if (armyCourante == joueur1.getNom()) {
             if (joueur1.estAmi(nav)) {
@@ -370,7 +372,7 @@ public class Game extends Observable {
                     this.degatZone(joueur1, joueur2, nav, portee);
                 }
                 setChangedAndNotify();
-                return true;
+                return portee;
             }
         } else if (joueur2.estAmi(nav)) {
             portee = nav.getPorteeTir();
@@ -379,9 +381,9 @@ public class Game extends Observable {
                 this.degatZone(joueur2, joueur1, nav, portee);
             }
             setChangedAndNotify();
-            return true;
+            return portee;
         }
-        return false;
+        return portee;
     }
 
     private void degatZone(Army joueur, Army adverse, Navire n, int portee) {

@@ -2,7 +2,7 @@ package model;
 
 public class Case {
 
-    private String name;
+    private String name = null;
     private Position p;
     private Navire navire;
     private Flottant flottant;

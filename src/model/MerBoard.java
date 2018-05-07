@@ -148,8 +148,14 @@ public class MerBoard {
     }
 
     private int getNumberFromAZ(char charAt) {
-        int x = (int) (charAt - 65);
-        return x;
+        int x ;
+        if(charAt >96){
+            x = (int) (charAt - 97);
+        }else{
+            x =  (int) (charAt - 65);
+        }
+        
+        return x ;
     }
 
 }
