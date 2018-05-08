@@ -43,10 +43,10 @@ public class AffichageGraphique extends GridPane implements Observer {
         VBox centre = new VBox();
         action.setFont(Font.font("Verdana", 20));
         debugText.setFont(Font.font("Verdana", 20));
-
+        debugText.setFill(Color.RED);
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
-        centre.getChildren().add(debugText);
+        centre.getChildren().add(debugText);  
         Insets insets = new Insets(10);
         BorderPane bp = new BorderPane();
         bp.setLeft(etatArmee1);
@@ -60,9 +60,9 @@ public class AffichageGraphique extends GridPane implements Observer {
         etatArmee2.setStyle("-fx-border-color:black;-fx-border-style:solid;");
         setSizeConstraints();
         if (COTE < 6) {
-            stage.setScene(new Scene(bp, 1000, 380));
+            stage.setScene(new Scene(bp, 1000, 380,Color.DARKGREY));
         } else {
-            stage.setScene(new Scene(bp, 740 + (COTE * 40), 300 + (COTE * 60)));
+            stage.setScene(new Scene(bp, 740 + (COTE * 40), 300 + (COTE * 60),Color.DARKGREY));
         }
         stage.setTitle("Bataille Navale");
         stage.show();

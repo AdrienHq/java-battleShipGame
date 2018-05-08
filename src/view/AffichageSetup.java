@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -22,7 +23,7 @@ public class AffichageSetup extends VBox {
         control = ctrl;
         setup();
         stage.setTitle("Initialisation");
-        stage.setScene(new Scene(this, 300, 350));
+        stage.setScene(new Scene(this, 300, 350, Color.DARKGREY));
         stage.show();
         
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();

@@ -59,10 +59,10 @@ public class AffichageBuilder extends GridPane implements Observer {
         bp.setMargin(droite, insets);
         setSizeConstraints();
         if (COTE < 6) {
-            stage.setScene(new Scene(bp, 700  ,380));
+            stage.setScene(new Scene(bp, 900, 380, Color.DARKGREY));
         } else {
-            stage.setScene(new Scene(bp, 740 + (COTE * 25), 300 + (COTE * 40)));
-        }   
+            stage.setScene(new Scene(bp, 740 + (COTE * 25), 300 + (COTE * 40), Color.DARKGREY));
+        }
         stage.setTitle("Builder");
         stage.show();
 
@@ -182,6 +182,7 @@ public class AffichageBuilder extends GridPane implements Observer {
     }
 
     public void afficherTextAction(String army, String msg) {
+        action.setFont(Font.font("Verdana", 20));
         action.setText(army + " " + msg);
     }
 
