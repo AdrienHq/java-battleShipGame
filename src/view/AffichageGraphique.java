@@ -41,6 +41,9 @@ public class AffichageGraphique extends GridPane implements Observer {
         ctrlG = ctrl;
         COTE = cote;
         VBox centre = new VBox();
+        action.setFont(Font.font("Verdana", 20));
+        debugText.setFont(Font.font("Verdana", 20));
+
         centre.getChildren().add(merPane);
         centre.getChildren().add(action);
         centre.getChildren().add(debugText);
@@ -48,14 +51,16 @@ public class AffichageGraphique extends GridPane implements Observer {
         BorderPane bp = new BorderPane();
         bp.setLeft(etatArmee1);
         bp.setMargin(etatArmee1, insets);
+        etatArmee1.setStyle("-fx-border-color:black;-fx-border-style:solid;");
         bp.setCenter(centre);
         bp.setMargin(centre, insets);
         centre.setAlignment(Pos.CENTER);
         bp.setRight(etatArmee2);
         bp.setMargin(etatArmee2, insets);
+        etatArmee2.setStyle("-fx-border-color:black;-fx-border-style:solid;");
         setSizeConstraints();
         if (COTE < 6) {
-            stage.setScene(new Scene(bp, 800, 380));
+            stage.setScene(new Scene(bp, 1000, 380));
         } else {
             stage.setScene(new Scene(bp, 740 + (COTE * 40), 300 + (COTE * 60)));
         }
@@ -131,10 +136,12 @@ public class AffichageGraphique extends GridPane implements Observer {
         etatArmee1.getChildren().clear();
         etatArmee2.getChildren().clear();
         Label a1 = new Label(army1.getNom());
-        a1.setStyle("-fx-background-color: red; -fx-padding: 10px;");
+        a1.setStyle("-fx-border-color:black;-fx-border-style:solid;-fx-padding:5px;");
+        a1.setTextFill(Color.web("#FF0000"));
         a1.setFont(Font.font("Verdana", 20));
         Label a2 = new Label(army2.getNom());
-        a2.setStyle("-fx-background-color: blue; -fx-padding: 10px;");
+        a2.setStyle("-fx-border-color:black;-fx-border-style:solid; -fx-padding:5px");
+        a2.setTextFill(Color.web("#0000FF"));
         a2.setFont(Font.font("Verdana", 20));
         Text pos = new Text("Position");
         Text type = new Text("Type");

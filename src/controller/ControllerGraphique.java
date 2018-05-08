@@ -71,7 +71,7 @@ public class ControllerGraphique extends Application {
         joueur2 = army2;
         isMoved = false;
         cpt = 0;
-        affBuilder.afficherTextAction(army1, " placez un bateau");
+        affBuilder.afficherTextAction(army1, "placez un bateau");
     }
 
     private void jouer(AffichageGraphique affG, String army1, String army2) {
@@ -81,7 +81,7 @@ public class ControllerGraphique extends Application {
         tirBateau = true;
         joueur1 = army1;
         joueur2 = army2;
-        affG.afficherTextAction(army1, " à vous de tirer");
+        affG.afficherTextAction(army1, "à vous de tirer");
 
     }
 
@@ -104,8 +104,8 @@ public class ControllerGraphique extends Application {
             if (portee != 4) {
                 tirBateau = false;
 
-                affG.afficherTextDebug(armyCourante, "portee :" + portee);
-                affG.afficherTextAction(armyCourante, " ,sélectionner le bateau à déplacer ");
+                affG.afficherTextDebug(armyCourante, "Portee de tir :" + portee);
+                affG.afficherTextAction(armyCourante, ", sélectionner le bateau à déplacer ");
                 if (gameOver()) {
                     affG.afficherTextAction(armyCourante, " Vous avez gagné!!");
                 } else {
@@ -118,11 +118,11 @@ public class ControllerGraphique extends Application {
         } else if (choixPositionDeplacement) {
 
             if (game.choixBateauDeplacementGraphique(armyCourante, positionClicked)) {
-                affG.afficherTextDebug(armyCourante, " ");
+                affG.afficherTextDebug(armyCourante, "");
                 choixPositionDeplacement = false;
                 deplacementBateau = true;
 
-                affG.afficherTextAction(armyCourante, " ,sélectionner la case où déplacer le bateau! ");
+                affG.afficherTextAction(armyCourante, ", sélectionner la case où déplacer le bateau! ");
                 oldPos = positionClicked;
             }
         }
@@ -145,7 +145,7 @@ public class ControllerGraphique extends Application {
                         joueur = true;
                         armyCourante = joueur1;
                     }
-                    affG.afficherTextAction(armyCourante, " à vous de tirer!");
+                    affG.afficherTextAction(armyCourante, "à vous de tirer!");
                 }
             }
         }
@@ -172,10 +172,10 @@ public class ControllerGraphique extends Application {
                 System.out.println(armyCourante + " " + joueur);
 
                 isMoved = true;
-                affBuilder.afficherTextAction(armyCourante, " ,bateau sélectionné.");
+                affBuilder.afficherTextAction(armyCourante, ", bateau sélectionné.");
 
             } else {
-                affBuilder.afficherTextAction(armyCourante, " ,ce n'est pas votre bateau.");
+                affBuilder.afficherTextAction(armyCourante, ", ce n'est pas votre bateau.");
             }
         }
     }
@@ -204,10 +204,10 @@ public class ControllerGraphique extends Application {
                         joueur = true;
                         armyCourante = joueur1;
                     }
-                    affBuilder.afficherTextAction(armyCourante, " ,a vous de placer un bateau !");
+                    affBuilder.afficherTextAction(armyCourante, ", a vous de placer un bateau !");
                 }
             } else {
-                affBuilder.afficherTextAction(armyCourante, " ,la case n'est pas valide !");
+                affBuilder.afficherTextAction(armyCourante, ", la case n'est pas valide !");
             }
         }
     }
