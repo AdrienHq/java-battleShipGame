@@ -23,10 +23,16 @@ public class ControllerConsole {
             army2 = clavier.nextLine();
 
         } else ;
-        affichage.askTailleCote();
-        if (clavier.hasNext()) {
-            cote = clavier.nextInt();                                     
-        } else ;
+        
+        do {
+            affichage.askTailleCote();
+            while (!clavier.hasNextInt()) {
+                String input = clavier.next();
+                System.out.printf("\"%s\" n'est pas une taille de côté valide !\n", input);
+                affichage.askTailleCote();
+            }
+            cote = clavier.nextInt();
+        } while (cote < 0);
         Game game = Game.setGame(army1, army2,cote);
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 

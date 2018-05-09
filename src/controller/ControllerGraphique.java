@@ -1,10 +1,8 @@
 package controller;
 
 import javafx.application.Application;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.Army;
-import model.Case;
 import model.Game;
 import model.MerBoard;
 import model.MerBuilder;
