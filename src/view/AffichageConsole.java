@@ -112,7 +112,24 @@ public class AffichageConsole implements Observer {
             return code;
         }
     }
+    
+    @Override
+    public void update(Observable o, Object o1) {
+        showGame();
+    }
 
+    public void showGame() {
+        afficherGame();
+    }
+    
+    public void afficherTexteConsole(String text){
+        System.out.println(text);
+    }
+    
+    public void afficherPorteeConsole(int portee){
+        System.out.println(portee);
+    }
+    
     public void askName1() {
         System.out.println("Entrer nom Joueur1 suivit de Enter ");
     }
@@ -146,12 +163,5 @@ public class AffichageConsole implements Observer {
         System.out.println("L'armée de " + army + "est victorieuse");
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
-        showGame();
-    }
-
-    public void showGame() {
-        afficherGame();
-    }
+    
 }
