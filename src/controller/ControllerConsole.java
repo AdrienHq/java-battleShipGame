@@ -12,12 +12,13 @@ public class ControllerConsole {
         boolean gameOver = false;
         String army1 = null, army2 = null, armyCourante = null;
         int cote = 5;
+        //===========================================================================SETUP==============================================================================
         Scanner clavier = new Scanner(System.in);
         affichage.askName1();
         if (clavier.hasNext()) {
             army1 = clavier.nextLine();
 
-        } else;
+        } else;     
         affichage.askName2();
         if (clavier.hasNext()) {
             army2 = clavier.nextLine();
@@ -35,7 +36,7 @@ public class ControllerConsole {
         Game game = Game.setGame(army1, army2, cote);
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
-
+        //===========================================================================JOUER==============================================================================
         Boolean Joueur = true;
         clavier.nextLine();
         do {
@@ -81,7 +82,7 @@ public class ControllerConsole {
                 Joueur = true; // On donne la main à l'autre joueur   
             }
         } while (!gameOver);
-        System.out.println("partie finie"); //à deplacer 
+        System.out.println("Partie finie"); //à deplacer 
     }
 
     public static int toucheClavier() {
