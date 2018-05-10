@@ -140,28 +140,5 @@ public class AffichageConsole implements Observer {
 
     public void askTailleCote() {
         System.out.println("De quelle taille voulez vous votre plateau de jeu (taille du côté) ? ");
-    }
-
-    public void choixBateauTireur(String army) {
-        System.out.println(army + ", à vous de tirer .Selectionnez position du bateau tireur([A-Z][1-26]) : ");
-    }
-
-    public void portee(int portee) {
-        System.out.println("Portée du tir : " + portee);
-
-    }
-
-    public void choixBateauDeplacement(String army) {
-        System.out.println(army + ", sélectionnez bateau à déplacer ([A-Z][1-26]) : ");
-    }
-
-    public void choixCaseDeplacement() {
-        System.out.println("Choix case où se déplacer (saisir case actuelle pour y rester) : "); //ou rajouter la saisie de enter pour passer outre le dépacement
-    }
-
-    public void showVictory(String army) {
-        System.out.println("L'armée de " + army + "est victorieuse");
-    }
-
-    
+    }   
 }

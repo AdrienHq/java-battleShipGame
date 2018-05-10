@@ -49,7 +49,7 @@ public class ControllerConsole {
             String pos = "";
             int portee = 4;
             do {
-                affichage.choixBateauTireur(armyCourante);
+                affichage.afficherTexteConsole(armyCourante + ", à vous de tirer .Selectionnez position du bateau tireur([A-Z][1-26]) : ");
                 if (clavier.hasNext()) {
                     pos = clavier.nextLine();
                 } else;
@@ -63,14 +63,14 @@ public class ControllerConsole {
             pos = "";
 
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.choixBateauDeplacement(armyCourante);
+                affichage.afficherTexteConsole(armyCourante + ", sélectionnez bateau à déplacer ([A-Z][1-26]) : ");
                 pos = clavier.nextLine();
                 entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
             entreeCorrecte = false;
             String newPos = "";
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.choixCaseDeplacement();
+                affichage.afficherTexteConsole("Choisissez la case où vous déplacer (saisir la case actuelle pour y rester) : ");
                 newPos = clavier.nextLine();
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
