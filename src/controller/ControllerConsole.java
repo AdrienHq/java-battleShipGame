@@ -1,7 +1,6 @@
 package controller;
 
 import java.util.Scanner;
-import model.Army;
 import model.Game;
 import view.AffichageConsole;
 
@@ -18,7 +17,7 @@ public class ControllerConsole {
         if (clavier.hasNext()) {
             army1 = clavier.nextLine();
 
-        } else;     
+        } else;
         affichage.askName2();
         if (clavier.hasNext()) {
             army2 = clavier.nextLine();
@@ -26,7 +25,7 @@ public class ControllerConsole {
         } else ;
         do {
             affichage.askTailleCote();
-            while (!clavier.hasNextInt()) {
+            while (!clavier.hasNextInt() || cote < 3) {
                 String input = clavier.next();
                 System.out.printf("\"%s\" n'est pas une taille de côté valide !\n", input);
                 affichage.askTailleCote();
@@ -49,10 +48,21 @@ public class ControllerConsole {
             String pos = "";
             int portee = 4;
             do {
-                affichage.afficherTexteConsole(armyCourante + ", à vous de tirer .Selectionnez position du bateau tireur([A-Z][1-26]) : ");
                 if (clavier.hasNext()) {
-                    pos = clavier.nextLine();
+                    do {
+                        affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
+                        while (!clavier.hasNext()) {
+                            String input = clavier.next();
+                            System.out.printf("\"%s\" n'est pas une taille de côté valide !\n", input);
+                            affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
+                        }
+                        pos = clavier.next();
+                    } while (!Character.isLetter(pos.charAt(0)) || !Character.isDigit(pos.charAt(1)));
                 } else;
+//                affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
+//                if (clavier.hasNext()) {
+//                    pos = clavier.nextLine();
+//                } else;
                 portee = game.tire(armyCourante, pos); //verifie la position ,tire et renvoie la portée
                 if (portee >= 0 && portee < 4) {
                     System.out.println("Portée = " + portee);
@@ -63,14 +73,14 @@ public class ControllerConsole {
             pos = "";
 
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.afficherTexteConsole(armyCourante + ", sélectionnez bateau à déplacer ([A-Z][1-26]) : ");
+                affichage.afficherTexteConsole(armyCourante + ", sélectionnez le bateau à déplacer ([A-Z][1-26]) : ");
                 pos = clavier.nextLine();
                 entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
             entreeCorrecte = false;
             String newPos = "";
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.afficherTexteConsole("Choisissez la case où vous déplacer (saisir la case actuelle pour y rester) : ");
+                affichage.afficherTexteConsole("Choisissez la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
                 newPos = clavier.nextLine();
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
