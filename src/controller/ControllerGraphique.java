@@ -123,6 +123,24 @@ public class ControllerGraphique extends Application {
                 affG.afficherTextAction(armyCourante, ", sélectionner la case où déplacer le bateau! ");
                 oldPos = positionClicked;
             }
+        } else if (deplacementBateau) {
+            if (game.deplaceBateauGraphique(armyCourante, oldPos, positionClicked)) {
+                deplacementBateau = false;
+
+                tirBateau = true;
+                if (gameOver()) {
+                    affG.afficherTextAction(armyCourante, " Vous avez perdu!!");
+                } else {
+                    if (joueur) {
+                        joueur = false;
+                        armyCourante = joueur2;
+                    } else {
+                        joueur = true;
+                        armyCourante = joueur1;
+                    }
+                    affG.afficherTextAction(armyCourante, "à vous de tirer!");
+                }
+            }
         }
     }
 

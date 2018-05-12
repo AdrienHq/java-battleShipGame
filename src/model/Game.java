@@ -292,6 +292,8 @@ public class Game extends Observable {
 
     private void getCasePossible(int deplacement, Navire n) {
         Position pos = n.getPosition();
+        this.listPositionPossible.add(pos);
+        board.mettreCaseEnDeplacementPossible(pos);
         for (int i = -deplacement; i <= deplacement; i++) {
             for (int j = -deplacement; j <= deplacement; j++) {
                 Position p = new Position(pos.getX() + i, pos.getY() + j);
