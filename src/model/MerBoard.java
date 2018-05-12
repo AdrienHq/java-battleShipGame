@@ -126,7 +126,7 @@ public class MerBoard {
 
         }
 
-        System.out.println(x + " " + y);
+        System.out.println("Position x: " + x + " et Y: " + y);
         return mer[x][y];
 
     }

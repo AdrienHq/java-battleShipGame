@@ -328,7 +328,6 @@ public class Game extends Observable {
         if (army == joueur1.getNom()) {
             if (joueur1.estAmi(nav)) {
                 portee = nav.getPorteeTir();
-                System.out.println("portée = " + portee);
                 if (portee != 0) {
 
                     this.degatZone(joueur1, joueur2, nav, portee);
@@ -338,7 +337,6 @@ public class Game extends Observable {
             }
         } else if (joueur2.estAmi(nav)) {
             portee = nav.getPorteeTir();
-            System.out.println("portée = " + portee);
             if (portee != 0) {
                 this.degatZone(joueur2, joueur1, nav, portee);
             }
