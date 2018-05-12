@@ -16,28 +16,19 @@ public class ControllerConsole {
         affichage.askName1();
         if (clavier.hasNext()) {
             army1 = clavier.nextLine();
-
         } else;
         affichage.askName2();
         if (clavier.hasNext()) {
             army2 = clavier.nextLine();
-
         } else ;
         do {
-            affichage.askTailleCote();
-            while (!clavier.hasNextInt() || cote < 3) {
-                String input = clavier.next();
-                System.out.printf("\"%s\" n'est pas une taille de côté valide !\n", input);
-                affichage.askTailleCote();
-            }
-            cote = clavier.nextInt();
+            cote = Integer.parseInt(getInput(clavier, "Rentrez une taille de côté: "));
         } while (cote < 3);
         Game game = Game.setGame(army1, army2, cote);
         affichage.afficherGame(); // affiche le jeu 
         game.addObserver(affichage);//Ajoute l'observer 
         //===========================================================================JOUER==============================================================================
         Boolean Joueur = true;
-        clavier.nextLine();
         do {
             if (Joueur) { //si c'est au tour du joueur 1
                 armyCourante = army1;
@@ -45,47 +36,31 @@ public class ControllerConsole {
                 armyCourante = army2;
             }
             Boolean entreeCorrecte = false;
-            String pos = "";
             int portee = 4;
+            String pos = "";
+            affichage.afficherTexteConsole(armyCourante + ", à vous de tirer.");
             do {
-                if (clavier.hasNext()) {
-                    do {
-                        affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
-                        while (!clavier.hasNext()) {
-                            String input = clavier.next();
-                            System.out.printf("\"%s\" n'est pas une taille de côté valide !\n", input);
-                            affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
-                        }
-                        pos = clavier.next();
-                    } while (!Character.isLetter(pos.charAt(0)) || !Character.isDigit(pos.charAt(1)));
-                } else;
-//                affichage.afficherTexteConsole(armyCourante + ", à vous de tirer. Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
-//                if (clavier.hasNext()) {
-//                    pos = clavier.nextLine();
-//                } else;
+                pos = getString(clavier, "Selectionnez la position du bateau tireur([A-Z][1-26]) : ");
                 portee = game.tire(armyCourante, pos); //verifie la position ,tire et renvoie la portée
                 if (portee >= 0 && portee < 4) {
                     System.out.println("Portée = " + portee);
                 }
-            } while (portee == 4);  // tant que choix invalide demander la saisie du bateau ( String nom de la case ) .
-            System.out.println("");//affichage.portee(portee); //print la portee
+            } while (portee == 4);
+            System.out.println("");
+
             entreeCorrecte = false;
             pos = "";
-
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                 affichage.afficherTexteConsole(armyCourante + ", sélectionnez le bateau à déplacer ([A-Z][1-26]) : ");
-                pos = clavier.nextLine();
+                pos = getString(clavier, "Selectionnez la position du bateau à déplacer([A-Z][1-26]) : ");
                 entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
             entreeCorrecte = false;
             String newPos = "";
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.afficherTexteConsole("Choisissez la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
-                newPos = clavier.nextLine();
+                newPos = getString(clavier, "Choisissez la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
-            //tant que choix invalide demander   la saisie bateau( String nom de la case ) 
-            //appliquer le déplacement(maj board et reprint auto
             if (Joueur) {
                 Joueur = false;
             } else {
@@ -93,6 +68,45 @@ public class ControllerConsole {
             }
         } while (!gameOver);
         System.out.println("Partie finie"); //à deplacer 
+    }
+
+    public static String getInput(Scanner clavier, String textAnnonce) {
+        System.out.print(textAnnonce); //Demande l'int
+        String cote = "";
+        while (true) { // continue de bouclé tant que ce n'est pas un int
+            cote = clavier.nextLine(); // prends l'input dans l'attribut
+            if (isInteger(cote)) // regarde si c'est un int
+            {
+                break;
+            }
+            System.out.print("Taille de côté non valide !  " + textAnnonce); // Non valide, redemande
+        }
+        return cote; // Return la valeur
+    }
+
+    public static String getString(Scanner clavier, String textAnnonce) {
+        System.out.print(textAnnonce); //Demande l'int
+        String pos = "";
+        while (true) { // continue de bouclé tant que ce n'est pas un int
+            pos = clavier.nextLine(); // prends l'input dans l'attribut
+            if (pos.length() > 1) {
+                if (pos.substring(0, 1).matches("[a-zA-Z]") && pos.substring(1, 2).matches("\\d")) {
+                    break;
+                }
+                System.out.println("Seulement 1 lettre et un nombre SVP");
+            }
+            System.out.print("Position non valide !  " + textAnnonce); // Non valide, redemande
+        }
+        return pos; // Return la valeur
+    }
+
+    private static boolean isInteger(String str) { // Check si c'est un integer ou non
+        try {
+            Integer.parseInt(str); // Si ça passe, c'est un integer
+            return true;
+        } catch (NumberFormatException e) {
+            return false; // N'est pas un integer
+        }
     }
 
     public static int toucheClavier() {
