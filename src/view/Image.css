@@ -30,14 +30,14 @@
     -fx-background-position: center;
     -fx-background-size: stretch;
     -fx-border-color: black;
-    -fx-background-image: url("file:src/image/atomique.png");
+    -fx-background-image: url("file:src/image/Atomique_Mieux.jpg");
 }
 
 .normale {
     -fx-background-position: center;
     -fx-background-size: stretch;
     -fx-border-color: black;
-    -fx-background-image: url("file:src/image/normale.png");
+    -fx-background-image: url("file:src/image/Normal_Mieux.jpg");
 }
 
 .mer{
