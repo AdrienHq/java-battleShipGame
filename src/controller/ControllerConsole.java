@@ -13,16 +13,10 @@ public class ControllerConsole {
         int cote = 5;
         //===========================================================================SETUP==============================================================================
         Scanner clavier = new Scanner(System.in);
-        affichage.askName1();
-        if (clavier.hasNext()) {
-            army1 = clavier.nextLine();
-        } else;
-        affichage.askName2();
-        if (clavier.hasNext()) {
-            army2 = clavier.nextLine();
-        } else ;
+        army1 = getStringNom(clavier, "Entrer le nom du Joueur 1: ");
+        army2 = getStringNom(clavier, "Entrer le nom du Joueur 2: ");
         do {
-            cote = Integer.parseInt(getInput(clavier, "Rentrez une taille de côté: "));
+            cote = Integer.parseInt(getInput(clavier, "Rentrer une taille de côté: "));
         } while (cote < 3);
         Game game = Game.setGame(army1, army2, cote);
         affichage.afficherGame(); // affiche le jeu 
@@ -40,7 +34,7 @@ public class ControllerConsole {
             String pos = "";
             affichage.afficherTexteConsole(armyCourante + ", à vous de tirer.");
             do {
-                pos = getString(clavier, "Sélectionnez la position du bateau tireur([A-Z][1-26]) : ");
+                pos = getString(clavier, "Sélectionner la position du bateau tireur([A-Z][1-26]) : ");
                 portee = game.tire(armyCourante, pos); //verifie la position ,tire et renvoie la portée
                 if (portee >= 0 && portee < 4) {
                     System.out.println("");
@@ -52,13 +46,13 @@ public class ControllerConsole {
             pos = "";
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
                 affichage.afficherTexteConsole(armyCourante + ", sélectionnez le bateau à déplacer ([A-Z][1-26]) : ");
-                pos = getString(clavier, "Sélectionnez la position du bateau à déplacer([A-Z][1-26]) : ");
+                pos = getString(clavier, "Sélectionner la position du bateau à déplacer([A-Z][1-26]) : ");
                 entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
             entreeCorrecte = false;
             String newPos = "";
             do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                newPos = getString(clavier, "Choisissez la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
+                newPos = getString(clavier, "Choisisser la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
                 entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
             } while (!entreeCorrecte);
             if (Joueur) {
@@ -98,6 +92,13 @@ public class ControllerConsole {
             System.out.print("Position non valide !  " + textAnnonce); // Non valide, redemande
         }
         return pos; // Return la valeur
+    }
+
+    public static String getStringNom(Scanner clavier, String textAnnonce) {
+        System.out.print(textAnnonce);
+        String nom = "";
+        nom = clavier.nextLine();
+        return nom; // Return la valeur
     }
 
     private static boolean isInteger(String str) { // Check si c'est un integer ou non

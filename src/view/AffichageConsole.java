@@ -130,14 +130,6 @@ public class AffichageConsole implements Observer {
         System.out.println(portee);
     }
     
-    public void askName1() {
-        System.out.println("Entrer nom Joueur1 suivit de Enter ");
-    }
-
-    public void askName2() {
-        System.out.println("Entrer nom Joueur2 suivit de Enter ");
-    }
-
     public void askTailleCote() {
         System.out.println("De quelle taille voulez vous votre plateau de jeu (taille du côté) ? ");
     }   
