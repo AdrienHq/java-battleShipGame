@@ -28,7 +28,7 @@ public class ControllerGraphique extends Application {
     private String armyCourante;
     private int portee;
     private Position oldPos;
-    private boolean isMoved;
+    private boolean isMoved = false;
     private String armyAdverse;
     private Position positionClicked;
     private int cpt;
@@ -178,7 +178,7 @@ public class ControllerGraphique extends Application {
             armyAdverse = joueur1;
         }
 
-        if (isMoved = false) {
+        if (isMoved == false) {
             //Récupère le position du bateau a déplacer
             if (builder.choixBateauPressed(armyCourante, oldPos, joueur)) {
                 System.out.println(armyCourante + " " + joueur);
@@ -195,7 +195,7 @@ public class ControllerGraphique extends Application {
     public void clickReleased(int x, int y) {
         positionClicked = new Position(x, y);
         System.out.println(positionClicked.getX() + " " + positionClicked.getY());
-        if (isMoved = true) {
+        if (isMoved == true) {
             //récupère la position de la case dans la mer et pose le bateau
             if (joueur) {
                 armyCourante = joueur1;
