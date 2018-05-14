@@ -98,7 +98,7 @@ public class ControllerGraphique extends Application {
             armyAdverse = joueur1;
         }
         if (tirBateau) {
-            portee  = game.tirGraphique(armyCourante, positionClicked);
+            portee = game.tirGraphique(armyCourante, positionClicked);
             if (portee != 4) {
                 tirBateau = false;
 
@@ -165,10 +165,6 @@ public class ControllerGraphique extends Application {
                 }
             }
         }
-    }
-
-    private boolean gameOver() {
-        return (game.getJoueur1().listeVide() || game.getJoueur2().listeVide());
     }
 
     public void clickPressed(int x, int y) {
@@ -239,5 +235,9 @@ public class ControllerGraphique extends Application {
     public void clickDragged(int x, int y) {
         if (isMoved = true) {
         }
+    }
+
+    private boolean gameOver() {
+        return (game.getJoueur1().listeVide() || game.getJoueur2().listeVide());
     }
 }

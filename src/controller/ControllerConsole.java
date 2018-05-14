@@ -24,6 +24,8 @@ public class ControllerConsole {
         //===========================================================================JOUER==============================================================================
         Boolean Joueur = true;
         do {
+            System.out.println("Joueur 1 :   " + game.getJoueur1().listeVide());
+            System.out.println("Joueur 2 :    " + game.getJoueur2().listeVide());
             if (Joueur) { //si c'est au tour du joueur 1
                 armyCourante = army1;
             } else {
@@ -41,33 +43,39 @@ public class ControllerConsole {
                     System.out.println("Portée = " + portee);
                 }
             } while (portee == 4);
-            System.out.println("");
-            entreeCorrecte = false;
-            pos = "";
-            do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                affichage.afficherTexteConsole(armyCourante + ", sélectionnez le bateau à déplacer ([A-Z][1-26]) : ");
-                pos = getString(clavier, "Sélectionner la position du bateau à déplacer([A-Z][1-26]) : ");
-                entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
-            } while (!entreeCorrecte);
-            entreeCorrecte = false;
-            String newPos = "";
-            do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
-                newPos = getString(clavier, "Choisisser la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
-                entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
-            } while (!entreeCorrecte);
-            if (Joueur) {
-                Joueur = false;
-            } else {
-                Joueur = true; // On donne la main à l'autre joueur   
+            if (!game.getJoueur1().listeVide() && !game.getJoueur2().listeVide()) {
+                System.out.println("");
+                entreeCorrecte = false;
+                pos = "";
+                do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
+                    affichage.afficherTexteConsole(armyCourante + ", sélectionnez le bateau à déplacer ([A-Z][1-26]) : ");
+                    pos = getString(clavier, "Sélectionner la position du bateau à déplacer([A-Z][1-26]) : ");
+                    entreeCorrecte = game.choixBateauDeplacement(armyCourante, pos); //verifie la position ,tire et renvoie la portée
+                } while (!entreeCorrecte);
+                entreeCorrecte = false;
+                String newPos = "";
+                do {         //demande l'entrée de choix du bateau tant que l'entrée est invalide
+                    newPos = getString(clavier, "Choisisser la case où vous voulez vous déplacer (saisir la case actuelle pour y rester) : ");
+                    entreeCorrecte = game.deplacebateau(armyCourante, pos, newPos); //verifie la position ,tire et renvoie la portée
+                } while (!entreeCorrecte);
+                if (Joueur) {
+                    Joueur = false;
+                } else {
+                    Joueur = true; // On donne la main à l'autre joueur   
+                }
             }
-        } while (!gameOver);
-        System.out.println("Partie finie"); //à deplacer 
+        } while (!game.getJoueur1().listeVide() && !game.getJoueur2().listeVide());
+        if ((game.getJoueur1().listeVide())) {
+            System.out.println(army2 + " Vous avez gagné !");
+        } else {
+            System.out.println(army1 + " Vous avez gagné !"); //à deplacer 
+        }
     }
 
     public static String getInput(Scanner clavier, String textAnnonce) {
         System.out.print(textAnnonce); //Demande l'int
         String cote = "";
-        while (true) { // continue de bouclé tant que ce n'est pas un int
+        while (true) { // continue de boucler tant que ce n'est pas un int
             cote = clavier.nextLine(); // prends l'input dans l'attribut
             if (isInteger(cote)) // regarde si c'est un int
             {
@@ -81,7 +89,7 @@ public class ControllerConsole {
     public static String getString(Scanner clavier, String textAnnonce) {
         System.out.print(textAnnonce); //Demande l'int
         String pos = "";
-        while (true) { // continue de bouclé tant que ce n'est pas un int
+        while (true) { // continue de boucler tant que ce n'est pas un int
             pos = clavier.nextLine(); // prends l'input dans l'attribut
             if (pos.length() > 1) {
                 if (pos.substring(0, 1).matches("[a-zA-Z]") && pos.substring(1, 2).matches("\\d")) {
