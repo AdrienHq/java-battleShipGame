@@ -246,17 +246,4 @@ public class AffichageBuilder extends GridPane implements Observer {
         }
 
     }
-
-//    private boolean contenuPort() {
-//        GridPane port;
-//        Navire nav;
-//        Case c = null;
-//        if (c.getName() == merBuilder.getNomJoueur1()) {
-//            port = (GridPane)bateauArmee1.getChildren().get(1);
-//            return port.getChildren().contains(nav);
-//        }
-//        else (c.getName() == merBuilder.getNomJoueur2()) {
-//            port = (GridPane)bateauArmee2.getChildren().get(1);
-//        }
-//    }
 }

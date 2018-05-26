@@ -129,29 +129,85 @@ public class MerBuilder extends Observable {
         }
 
         Case c = this.getCaseInPos(positionClicked, joueur);
-        if (c.estNavire() && c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
-
-//        Case c = board.getCaseInPos(positionClicked);
-//        if (c.estNavire()) {
-//            Navire n = c.getNavire();
-//            if (n.getEstPlace()) {
-//                return false;
-//            }
-       }
-            if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
-                nav = c.getNavire(); //Si oui, on conserve cette donnée 
-            } else {
-                return false; // aussinon on sort de la boucle
-            }
-            if (armyCourante == nav.getNom()) {
-                return true;
-            } else {
+        if (c.estNavire()) {
+            Navire n = c.getNavire();
+            if (n.getEstPlace()) {
                 return false;
             }
         }
+        if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+            nav = c.getNavire(); //Si oui, on conserve cette donnée 
+            nav.switchEstPlace();
+        } else {
+            return false; // aussinon on sort de la boucle
+        }
+        if (armyCourante == nav.getNom()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    
-
+//    public boolean choixBateauPressed(String armyCourante, Position positionClicked, boolean joueur) {
+//        Navire nav = null;
+//        int x = positionClicked.getX();
+//        int y = positionClicked.getY();
+//        if (joueur) {
+//            armyCourante = army1.getNom();
+//        } else {
+//            armyCourante = army2.getNom();
+//        }
+//        if (port1[x][y].estNavire()) {
+//            Case c = this.getCaseInPos(positionClicked, joueur);
+//            System.out.println("ICI 0");
+//            System.out.println(port1[x][y].estNavire());            
+//            if (c.estNavire()) {
+//                Navire n = c.getNavire();
+//                if (n.getEstPlace()) {
+//                    System.out.println("ICI 1");
+//                    return false;
+//                }
+//                if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+//                    nav = c.getNavire(); //Si oui, on conserve cette donnée 
+//                    n.switchEstPlace();
+//                    System.out.println("ICI 2");
+//                    System.out.println(n.estPlace + "PLACE");
+//                } else {
+//                    System.out.println("ICI 3");
+//                    return false; // aussinon on sort de la boucle
+//                }
+//            }
+//            if (armyCourante == nav.getNom()) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        }
+//        else if (port2[x][y].estNavire()) {
+//            Case c = this.getCaseInPos(positionClicked, joueur);
+//            if (c.estNavire()) {
+//                Navire n = c.getNavire();
+//                if (n.getEstPlace()) {
+//                    System.out.println("ICI 1");
+//                    return false;
+//                }
+//                if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+//                    nav = c.getNavire(); //Si oui, on conserve cette donnée 
+//                    n.switchEstPlace();
+//                    System.out.println("ICI 2");
+//                } else {
+//                    System.out.println("ICI 3");
+//                    return false; // aussinon on sort de la boucle
+//                }
+//            }
+//            if (armyCourante == nav.getNom()) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
     public Case getCaseInPos(Position p, Boolean joueur) {
         int x = p.getX();
         int y = p.getY();

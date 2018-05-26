@@ -27,7 +27,7 @@ public abstract class Navire {
     }
     
     public void switchEstPlace(){
-        this.estPlace = this.estPlace = false;
+        this.estPlace = this.estPlace = true;
     }
 
     public void setPopo(String popo) {
