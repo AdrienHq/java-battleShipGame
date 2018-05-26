@@ -128,24 +128,29 @@ public class MerBuilder extends Observable {
 
         }
 
-        Case c = board.getCaseInPos(positionClicked);
-        if (c.estNavire()) {
-            Navire n = c.getNavire();
-            if (n.getEstPlace()) {
+        Case c = this.getCaseInPos(positionClicked, joueur);
+        if (c.estNavire() && c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+
+//        Case c = board.getCaseInPos(positionClicked);
+//        if (c.estNavire()) {
+//            Navire n = c.getNavire();
+//            if (n.getEstPlace()) {
+//                return false;
+//            }
+       }
+            if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+                nav = c.getNavire(); //Si oui, on conserve cette donnée 
+            } else {
+                return false; // aussinon on sort de la boucle
+            }
+            if (armyCourante == nav.getNom()) {
+                return true;
+            } else {
                 return false;
             }
         }
-        if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
-            nav = c.getNavire(); //Si oui, on conserve cette donnée 
-        } else {
-            return false; // aussinon on sort de la boucle
-        }
-        if (armyCourante == nav.getNom()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+
+    
 
     public Case getCaseInPos(Position p, Boolean joueur) {
         int x = p.getX();
