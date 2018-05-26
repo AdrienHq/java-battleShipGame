@@ -28,6 +28,7 @@ public class Case {
     public String getName() {
         return name;
     }
+
     public Boolean getChoixPossible(){
         return choixPossible ;
     }
@@ -109,6 +110,5 @@ public class Case {
 
     boolean estNavire() {
         return getNavire() != null;
-    }
-
+    }   
 }

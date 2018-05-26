@@ -72,7 +72,7 @@ public class MerBuilder extends Observable {
                 Position pos = new Position(z, y);
                 port[z][y] = new Case("vide", pos);
             }
-            
+
             for (Navire n : armyCourante.getListeNavire()) {
                 System.out.println("");
                 Position pos = new Position(x, y); //pos prends x = random contenu dans un carré de cote * cote
@@ -81,10 +81,10 @@ public class MerBuilder extends Observable {
                 port[x][y].setNavire(n);
                 ++x;
             }
-            
-            return port;    
+
+            return port;
         }
-        
+
     }
 
     public static MerBuilder getInstance(String joueur1, String joueur2, int cote) {
@@ -127,8 +127,15 @@ public class MerBuilder extends Observable {
             armyCourante = army2.getNom();
 
         }
-        Case c = this.getCaseInPos(positionClicked, joueur);
-        if (c.estNavire() && c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
+
+        Case c = board.getCaseInPos(positionClicked);
+        if (c.estNavire()) {
+            Navire n = c.getNavire();
+            if (n.getEstPlace()) {
+                return false;
+            }
+        }
+        if (c.getName().equals(armyCourante)) { //Regarde si la case est un Navire
             nav = c.getNavire(); //Si oui, on conserve cette donnée 
         } else {
             return false; // aussinon on sort de la boucle
@@ -148,14 +155,12 @@ public class MerBuilder extends Observable {
         } else {
             return port2[x][y];
         }
-
     }
 
     public boolean deplaceBateauReleaseGrid(Position oldPos, Position positionClicked, Boolean joueur) {
-        if((joueur && oldPos.getX()>3 )||(!joueur && oldPos.getX()<3 ) ){
-            return false ;
+        if ((joueur && oldPos.getX() > 3) || (!joueur && oldPos.getX() < 3)) {
+            return false;
         }
-        
         Case c = this.getCaseInPos(oldPos, joueur);
         Case f = board.getCaseInPos(positionClicked);
         Navire n = c.getNavire();
@@ -165,6 +170,7 @@ public class MerBuilder extends Observable {
             n.setPosition(positionClicked); //donne la postion au bateau
             n.setPopo(f.getName());
             setChangedAndNotify();
+            n.switchEstPlace();
             return true;
         }
         return false;

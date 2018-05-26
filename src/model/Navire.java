@@ -9,18 +9,25 @@ public abstract class Navire {
     protected Army army = null;
     protected String popo = "";
     protected int deplacementMax;
+    protected boolean estPlace = false;
 
     protected Navire(String nom, String type, int pv, int deplacementMax) {
         this.nom = nom;
-
         this.typeNavire = type;
         this.pointVie = pv;
         this.deplacementMax = deplacementMax;
-
     }
 
     public int getDeplacementMax() {
         return deplacementMax;
+    }
+    
+    public boolean getEstPlace(){
+        return this.estPlace;
+    }
+    
+    public void switchEstPlace(){
+        this.estPlace = this.estPlace = false;
     }
 
     public void setPopo(String popo) {

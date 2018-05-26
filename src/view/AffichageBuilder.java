@@ -206,10 +206,15 @@ public class AffichageBuilder extends GridPane implements Observer {
 
     // La vue d'un bateau
     private class NavireGrandEquipe1 extends BoxView2 {
-
+//        Case c = null;
+//        Navire nav;
         public NavireGrandEquipe1(int x, int y) {
             getStyleClass().add("bateauGrandEquipe1");
-            setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+//            nav = c.getNavire();
+//            if(nav.getEstPlace()){
+                setOnMousePressed(e -> ctrlG.clickPressed(x, y));
+//                nav.switchEstPlace();
+//            }          
             setOnMouseDragged(e -> ctrlG.clickDragged(x, y));
         }
     }
@@ -241,4 +246,17 @@ public class AffichageBuilder extends GridPane implements Observer {
         }
 
     }
+
+//    private boolean contenuPort() {
+//        GridPane port;
+//        Navire nav;
+//        Case c = null;
+//        if (c.getName() == merBuilder.getNomJoueur1()) {
+//            port = (GridPane)bateauArmee1.getChildren().get(1);
+//            return port.getChildren().contains(nav);
+//        }
+//        else (c.getName() == merBuilder.getNomJoueur2()) {
+//            port = (GridPane)bateauArmee2.getChildren().get(1);
+//        }
+//    }
 }
