@@ -95,7 +95,7 @@ public class AffichageGraphique extends GridPane implements Observer {
         Case[][] mer = board.getTab();
         Case c = null;
         Position pos = null;
-        Boolean debug = true;
+        Boolean debug = false;
         for (int x = 0; x < COTE; x++) {
             for (int y = 0; y < COTE; y++) {
                 pos = new Position(x, y);

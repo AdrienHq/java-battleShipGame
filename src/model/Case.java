@@ -66,7 +66,7 @@ public class Case {
         this.navire = n;
         this.switchVide();
     }
-
+    
     public Navire getNavire() {
         return this.navire;
     }

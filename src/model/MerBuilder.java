@@ -147,7 +147,6 @@ public class MerBuilder extends Observable {
             return false;
         }
     }
-
 //    public boolean choixBateauPressed(String armyCourante, Position positionClicked, boolean joueur) {
 //        Navire nav = null;
 //        int x = positionClicked.getX();
@@ -160,7 +159,7 @@ public class MerBuilder extends Observable {
 //        if (port1[x][y].estNavire()) {
 //            Case c = this.getCaseInPos(positionClicked, joueur);
 //            System.out.println("ICI 0");
-//            System.out.println(port1[x][y].estNavire());            
+//            System.out.println(port1[x][y].estNavire());
 //            if (c.estNavire()) {
 //                Navire n = c.getNavire();
 //                if (n.getEstPlace()) {
@@ -171,6 +170,7 @@ public class MerBuilder extends Observable {
 //                    nav = c.getNavire(); //Si oui, on conserve cette donnée 
 //                    n.switchEstPlace();
 //                    System.out.println("ICI 2");
+//                    System.out.println("POSTIION " + x + " " + y);
 //                    System.out.println(n.estPlace + "PLACE");
 //                } else {
 //                    System.out.println("ICI 3");
@@ -182,8 +182,7 @@ public class MerBuilder extends Observable {
 //            } else {
 //                return false;
 //            }
-//        }
-//        else if (port2[x][y].estNavire()) {
+//        } else if (port2[x][y].estNavire()) {
 //            Case c = this.getCaseInPos(positionClicked, joueur);
 //            if (c.estNavire()) {
 //                Navire n = c.getNavire();
@@ -208,6 +207,7 @@ public class MerBuilder extends Observable {
 //        }
 //        return false;
 //    }
+
     public Case getCaseInPos(Position p, Boolean joueur) {
         int x = p.getX();
         int y = p.getY();
